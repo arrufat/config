@@ -1,0 +1,291 @@
+# User preferences
+# ────────────────
+set-option global makecmd 'ninja -C build/Release'
+set-option global grepcmd 'rg --column --sort path'
+# set-option global grepcmd 'ugrep --column-number --line-number --ignore-binary --sort'
+set-option global ui_options terminal_assistant=none terminal_status_on_top=true
+
+# Appearance
+# ──────────
+colorscheme gruvbox-dark
+# add extra font names for better semantic highlighting with kak-lsp
+set-face global parameter rgb:83a598+b  # ${blue}+b
+set-face global function_declaration rgb:ebdbb2+b  # ${fg}+b
+set-face global method rgb:ebdbb2+i  # ${fg}+i
+set-face global method_declaration rgb:ebdbb2+ib  # ${fg}+ib
+set-face global property rgb:83a598+i  # ${blue}+i
+set-face global property_declaration rgb:83a598+ib  # ${blue}+i
+set-face global type_declaration rgb:fabd2f+b  # ${yellow}+b
+set-face global value_declaration rgb:d3869b+b  # ${purple}+b
+set-face global meta_member rgb:8ec07c+i  # ${aqua}+i
+set-face global type_parameter rgb:fabd2f+b  # ${yellow}+b
+set-face global concept rgb:fabd2f+i  # ${yellow}+i
+
+# Highlighters
+# ────────────
+add-highlighter global/ show-matching
+add-highlighter global/todos regex '(//|#|/\*)\h*(TODO|WARNING|FIXME):[^\n]*' 2:+bu
+add-highlighter global/trailing regex '\h+$' 0:rgb:928374+u  # highlight trailing spaces
+hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:+u }
+hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -hlcursor }
+
+
+# Enable editor config
+# ────────────────────
+hook global WinCreate ^[^*]+$ %{ editorconfig-load }
+
+
+# Improved windowing with tmux
+# ────────────────────────────
+define-command new-right -docstring "create a new kakone client on the right " -params .. %{
+    tmux-terminal-horizontal kak -c %val{session} -e "%arg{@}"}
+alias global nr new-right
+complete-command new-right -menu command
+
+define-command new-below -docstring "create a new kakone client below" -params .. %{
+    tmux-terminal-vertical kak -c %val{session} -e "%arg{@}"}
+alias global nb new-below
+complete-command new-below -menu command
+
+# File management
+# ───────────────
+define-command nnn -docstring "open nnn" %{
+    tmux-terminal-horizontal "NNN_OPENER=~/.config/nnn/plugins/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn"
+}
+
+define-command broot -docstring "open broot" %{
+    tmux-terminal-vertical "EDITOR=~/.config/nnn/plugins/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br"
+}
+alias global br broot
+
+# IDE
+# ───
+
+define-command ide %{
+    rename-client main
+    tmux-terminal-horizontal "EDITOR=~/.config/nnn/plugins/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn"
+    nop %sh{tmux swap-pane -s 0 -t 1}
+    tmux-terminal-horizontal kak -c %val{session} -e "rename-client docs"
+    tmux-focus main
+    tmux-terminal-vertical kak -c %val{session} -e "rename-client tools"
+    tmux-focus main
+    set global docsclient docs
+    set global toolsclient tools
+    set global jumpclient main
+    nop %sh{
+        tmux resize-pane -t 0 -x 48
+        tmux resize-pane -t 3 -x 80
+        tmux resize-pane -t 2 -y 16
+        tmux select-pane -t 0
+    }
+    lsp-auto-hover-disable
+    lsp-auto-hover-enable docs
+}
+
+# Fuzzy finders
+# ─────────────
+define-command find -docstring "find files" -params 1 %{ edit %arg{1} }
+complete-command find shell-script-candidates %{ find . -type f }
+alias global f find
+
+define-command git-edit -docstring "open files in git" -params 1 %{ edit %arg{1} }
+complete-command git-edit shell-script-candidates %{ git ls-files }
+
+define-command sh -docstring "run a command" -params .. %{ echo %sh{echo "command: ${@}" 1>&2; ${@} 1>&2} }
+complete-command sh shell
+
+define-command qalc -docstring "compute equation with Qalculate!" -params .. %{echo %sh{qalc ${@}}}
+complete-command qalc shell-script-candidates %{
+    { echo $(qalc +u8 --list-functions | head -n -3);
+      echo $(qalc +u8 --list-variables | head -n -3); } | tr ' ' '\n' | sort -u
+}
+
+# Various mappings
+# ────────────────
+map global normal '#' ': comment-line<ret>'
+map global normal '<a-#>' ': comment-block<ret>'
+# map global normal = ': prompt math: %{exec "a%val{text}<lt>esc>|{ cat; echo; }|bc<lt>ret>"}<ret>'
+map global normal = ': prompt qalc: %{exec "a%val{text}<lt>esc>|qalc -t -u8 -f -<lt>ret>"}<ret>'
+map -docstring "xml tag object" global object t %{c<lt>([\w.]+)\b[^>]*?(?<lt>!/)>,<lt>/([\w.]+)\b[^>]*?(?<lt>!/)><ret>}
+map global goto m '<esc>m;' -docstring 'matching char'
+
+define-command clean-whitespace-sel -hidden -docstring 'Remove trailing whitespace and replace tabs with spaces' %{ try %{
+    execute-keys -draft @s\h+$<ret>d
+} }
+define-command clean-whitespace-all -hidden -docstring 'Remove trailing whitespace and replace tabs with spaces' %{ try %{
+    execute-keys -draft \%@s\h+$<ret>d
+} }
+
+# clear search highlighter
+define-command nohlsearch -docstring 'clear the search register' %{ set-register slash '' }
+alias global nohl nohlsearch
+
+declare-user-mode git
+map global git -docstring 'update diff' u ': git update-diff<ret>'
+map global git -docstring 'show diff' d ': git show-diff<ret>'
+map global git -docstring 'hide diff' D ': git hide-diff<ret>'
+map global git -docstring 'show blame' b ': git blame<ret>'
+map global git -docstring 'hide blame' B ': git hide-blame<ret>'
+map global git -docstring 'next hunk' n ':  git next-hunk<ret>'
+map global git -docstring 'prev hunk' p ':  git prev-hunk<ret>'
+
+declare-user-mode repl
+map global repl -docstring 'evaluate' e ': repl-send-text<ret>'
+map global repl -docstring 'bash' b ': repl-new bash<ret>'
+map global repl -docstring 'julia' j ': repl-new julia<ret>'
+map global repl -docstring 'ipython' p ': repl-new ipython<ret>'
+map global repl -docstring 'qalc' q ': repl-new qalc<ret>'
+
+declare-user-mode zenity
+map global zenity -docstring 'open file' o ': edit %sh{cd $(dirname $kak_buffile); zenity --file-selection}<ret>'
+
+declare-user-mode spell
+map global spell -docstring 'spelling' s ': spell<ret>'
+map global spell -docstring 'add' a ': spell-add<ret>'
+map global spell -docstring 'next' n ': spell-next<ret>'
+map global spell -docstring 'clear' c ': spell-clear<ret>'
+
+declare-user-mode qalc
+map global qalc -docstring 'exact mode' e ': try %{ nop %sh{qalc -set exact}}<ret>'
+map global qalc -docstring 'approximate mode' a ': try %{ nop %sh{qalc -set approx}}<ret>'
+map global qalc -docstring 'update exchange rates' x ': try %{ nop %sh{qalc -exrates}}<ret>'
+
+map global user -docstring 'enable autocomplete' a ': set-option -add buffer autocomplete insert<ret>'
+map global user -docstring 'disable autocomplete' <a-a> ': set-option -remove buffer autocomplete insert<ret>'
+map global user -docstring 'edit kakrc' e ': e ~/.config/kak/kakrc<ret>'
+# map global user -docstring 'open fuzzy finder' f ': edit %sh{fzf-tmux --preview "cat {}" -}<ret>'
+map global user -docstring 'open fuzzy finder' f ': edit %sh{fzf-tmux --preview "bat --theme=gruvbox-dark --style=numbers,changes --color always {}" -}<ret>'
+map global user -docstring 'clean trailing whitespace on selection' c ': clean-whitespace-sel<ret>'
+map global user -docstring 'clean trailing whitespace on buffer' C ': clean-whitespace-all<ret>'
+map global user -docstring 'save file' w ': w<ret>'
+map global user -docstring 'git mode' g ': enter-user-mode git<ret>'
+map global user -docstring 'qalc mode' q ': enter-user-mode qalc<ret>'
+map global user -docstring 'repl mode' r ': enter-user-mode repl<ret>'
+map global user -docstring 'spell mode' s ': enter-user-mode spell<ret>'
+map global user -docstring 'zenity mode' z ': enter-user-mode zenity<ret>'
+
+# Bring back <c-a> and <c-x> from Vim to increment/decrement the number under the cursor
+define-command -hidden -params 2 inc %{ try %{
+    evaluate-commands %sh{
+        if [ "$1" = 0 ]
+        then
+            count=1
+        else
+            count="$1"
+        fi
+        printf '%s%s' 'exec h"_/\d<ret><a-i>na' "$2($count)<esc>|( cat\; echo )|bc<ret>"
+    }
+} catch %{
+    execute-keys l
+}}
+map global normal <c-a> ': inc %val{count} +<ret>'
+map global normal <c-x> ': inc %val{count} -<ret>'
+
+# use tab for indentation in insert mode
+# Smart Tab
+# ---------
+hook global InsertChar \t %{ try %{
+     execute-keys -draft "h<a-h><a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
+}}
+
+hook global InsertDelete ' ' %{ try %{
+    execute-keys -draft 'h<a-h><a-k>\A\h+\z<ret>i<space><esc><lt>'
+}}
+
+# hook global ModuleLoaded clang %{ set-option global clang_options -std=c++17 }
+# hook global WinSetOption filetype=(c|cpp) %{
+#     set-option global makecmd 'ninja -C build/Release'
+#     # set-option -add global clang_options ' -stdlib=libstdc++'
+#     set-option -add global clang_options ' -I/usr/include/opencv4'
+#     set-option -add global clang_options ' -I/opt/cuda/include'
+#     set-option -add global clang_options ' -Isrc -Iexternal/dlib'
+#     set-option -add global clang_options ' -Wall -Wextra -Weverything'
+#     set-option -add global clang_options ' -Wno-c++98-compat'
+#     clang-enable-autocomplete
+#     clang-enable-diagnostics
+#     alias window lint clang-parse
+#     alias window lint-next-error clang-diagnostics-next
+# }
+
+# kak-lsp configuration
+# ─────────────────────
+
+evaluate-commands %sh{kak-lsp --kakoune -s $kak_session}
+# set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
+hook global WinSetOption filetype=(c|cpp|cmake|go|julia|latex|python|rust|sh|vala|zig) %{
+    map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
+    lsp-enable-window
+    lsp-auto-signature-help-enable
+    lsp-auto-hover-insert-mode-disable
+    set-option global lsp_hover_max_lines 20
+}
+
+hook global WinSetOption filetype=(c|cpp) %{
+    set-option window formatcmd 'clang-format'
+    set-option window lsp_auto_highlight_references true
+    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+    hook -once -always window WinSetOption filetype=.* %{
+        remove-hooks window semantic-tokens
+    }
+}
+
+hook global WinSetOption filetype=python %{
+    set-option window formatcmd 'black -q -'
+    set-option global lsp_server_configuration pylsp.configurationSources=["flake8"]
+    set-option -add global lsp_server_configuration pylsp.plugins.pycodestyle.ignore=["E203,W503"]
+    set-option -add global lsp_server_configuration pylsp.plugins.pycodestyle.maxLineLength=90
+}
+
+hook global WinSetOption filetype=rust %{
+    set-option window formatcmd 'rustfmt'
+    set-option window lsp_auto_highlight_references true
+    set-option global lsp_hover_max_lines 20
+    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+    hook -once -always window WinSetOption filetype=.* %{
+        remove-hooks window semantic-tokens
+    }
+}
+
+hook global WinSetOption filetype=zig %{
+    set-option buffer formatcmd 'zig fmt'
+    set-option window lsp_auto_highlight_references true
+    hook buffer -group format BufWritePre .* lsp-formatting-sync
+
+    set-option global lsp_server_configuration zls.zig_lib_path="/usr/lib/zig"
+    set-option -add global lsp_server_configuration zls.warn_style=true
+    set-option -add global lsp_server_configuration zls.enable_semantic_tokens=true
+    set-option -add global lsp_server_configuration zls.operator_completions=true
+    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+    hook -once -always window WinSetOption filetype=.* %{
+        remove-hooks window semantic-tokens
+    }
+}
+
+hook global WinSetOption filetype=go %{
+    set-option buffer formatcmd 'go fmt'
+    hook buffer -group format BufWritePre .* lsp-formatting-sync
+    set-option buffer lsp_auto_highlight_references true
+    set-option buffer lintcmd "run() { golint $1; go vet $1 2> | sed -e 's/: /: error /'; } && run"
+    lint
+    hook buffer -group lint BufWritePost *. lint
+}
+
+hook global WinSetOption filetype=cmake %{
+    set-option window formatcmd 'cmake-format-i -'
+    lsp-auto-hover-disable
+    hook buffer -group lint BufWritePost *. lint
+}
+
+# clear trailing whitespace before saving
+# hook global BufWritePre .* %{exec -draft '%s\h+$<ret>d'}
+# hook global BufWritePre .* %{ try %{ execute-keys -draft \%s\h+$<ret>d } }
+
+# source ~/.config/kak/rc/gnome.kak
+# source ~/.config/kak/rc/tilix.kak
+
