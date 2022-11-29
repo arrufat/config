@@ -1,10 +1,7 @@
 #!/usr/bin/env sh
 
 # nnn sends the file name and the parent directory path
-if [[ $# -lt 2 ]]; then
-    FILE_PATH=$1
-else
-    FILE_PATH=$2/$1
-fi
+FILE_PATH=$1
+[ $# -eq 2 ] || FILE_PATH=$2/$1
 
 echo "evaluate-commands -client $KAK_CLIENT edit $FILE_PATH" | kak -p $KAK_SESSION
