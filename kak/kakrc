@@ -37,11 +37,10 @@ hook global WinCreate ^[^*]+$ %{ editorconfig-load }
 
 # Improved windowing with tmux
 # ────────────────────────────
-define-command new-right -docstring "create a new kakone client on the right " -params .. %{
+define-command new-right -docstring "create a new kakone client on the right" -params .. %{
     tmux-terminal-horizontal kak -c %val{session} -e "%arg{@}"}
 alias global nr new-right
 complete-command new-right -menu command
-
 define-command new-below -docstring "create a new kakone client below" -params .. %{
     tmux-terminal-vertical kak -c %val{session} -e "%arg{@}"}
 alias global nb new-below
@@ -54,7 +53,7 @@ define-command nnn -docstring "open nnn" %{
 }
 
 define-command broot -docstring "open broot" %{
-    tmux-terminal-vertical "EDITOR=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br"
+    terminal "EDITOR=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br"
 }
 alias global br broot
 
