@@ -48,21 +48,18 @@ complete-command new-below -menu command
 
 # File management
 # ───────────────
-define-command nnn -docstring "open nnn" %{
-    terminal "NNN_OPENER=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn"
+# wrap nnn inside a shell to be able to run in separate terminals, not just tmux
+define-command nnn -docstring "open nnn"  -params .. %{
+    terminal sh -c "NNN_OPENER=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn %arg{@}"
 }
-
-define-command broot -docstring "open broot" %{
-    terminal "EDITOR=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br"
-}
-alias global br broot
+complete-command nnn file
 
 # IDE
 # ───
 
 define-command ide %{
     rename-client main
-    tmux-terminal-horizontal "EDITOR=~/.config/nnn/plugins/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn"
+    nnn
     nop %sh{tmux swap-pane -s 0 -t 1}
     tmux-terminal-horizontal kak -c %val{session} -e "rename-client docs"
     tmux-focus main
