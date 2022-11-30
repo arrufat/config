@@ -163,12 +163,7 @@ map global user -docstring 'zenity mode' z ': enter-user-mode zenity<ret>'
 # Bring back <c-a> and <c-x> from Vim to increment/decrement the number under the cursor
 define-command -hidden -params 2 inc %{ try %{
     evaluate-commands %sh{
-        if [ "$1" = 0 ]
-        then
-            count=1
-        else
-            count="$1"
-        fi
+        [ "$1" -eq 0 ] && count=1 || count="$1"
         printf '%s%s' 'exec h"_/\d<ret><a-i>na' "$2($count)<esc>|( cat\; echo )|bc<ret>"
     }
 } catch %{
