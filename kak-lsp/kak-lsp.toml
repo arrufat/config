@@ -33,7 +33,7 @@ faces = [
 [language.c_cpp]
 filetypes = ["c", "cpp"]
 roots = ["compile_flags.txt", "compile_commands.json", "meson.build", "CMakeLists.txt", ".git"]
-command = "clangd-12"
+command = "clangd"
 args = ["--clang-tidy", "--compile-commands-dir=build", "--suggest-missing-includes", "--background-index", "--completion-style=detailed"]
 offset_encoding = "utf-8"
 
