@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 
-# nnn sends the file name and the parent directory path
-[ $# -lt 2 ] || FILE_PATH=$1 && FILE_PATH=$2/$1
-echo "evaluate-commands -client $KAK_CLIENT edit $FILE_PATH" | kak -p $KAK_SESSION
+# one parameter, which corresponds to the file name
+[ $# -eq 1 ] && echo "evaluate-commands -client $KAK_CLIENT edit $1" | kak -p $KAK_SESSION
+# two parameters, which correspond to the +line number and the file name
+if [ $# -eq 2 ]
+then
+    [ $1 -eq '+0' ] && LINE=1 || LINE=$1
+    echo "evaluate-commands -client $KAK_CLIENT edit $2" | kak -p $KAK_SESSION && \
+    echo "execute-keys -client $KAK_CLIENT ${LINE}g" | kak -p $KAK_SESSION
+fi

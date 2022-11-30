@@ -54,6 +54,12 @@ define-command nnn -docstring "open nnn"  -params .. %{
 }
 complete-command nnn file
 
+define-command broot -docstring "open broot"  -params .. %{
+    terminal "EDITOR=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
+}
+alias global br broot
+complete-command broot file
+
 # IDE
 # ───
 
