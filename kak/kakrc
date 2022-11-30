@@ -17,11 +17,9 @@ add-highlighter global/trailing regex '\h+$' 0:rgb:928374+u  # highlight trailin
 hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:+u }
 hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -hlcursor }
 
-
 # Enable editor config
 # ────────────────────
 hook global WinCreate ^[^*]+$ %{ editorconfig-load }
-
 
 # Improved windowing with tmux
 # ────────────────────────────
@@ -172,9 +170,8 @@ define-command -hidden -params 2 inc %{ try %{
 map global normal <c-a> ': inc %val{count} +<ret>'
 map global normal <c-x> ': inc %val{count} -<ret>'
 
-# use tab for indentation in insert mode
-# Smart Tab
-# ---------
+# Smart Tab:  use tab for indentation in insert mode
+# ──────────────────────────────────────────────────
 hook global InsertChar \t %{ try %{
      execute-keys -draft "h<a-h><a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
 }}
@@ -182,21 +179,6 @@ hook global InsertChar \t %{ try %{
 hook global InsertDelete ' ' %{ try %{
     execute-keys -draft 'h<a-h><a-k>\A\h+\z<ret>i<space><esc><lt>'
 }}
-
-# hook global ModuleLoaded clang %{ set-option global clang_options -std=c++17 }
-# hook global WinSetOption filetype=(c|cpp) %{
-#     set-option global makecmd 'ninja -C build/Release'
-#     # set-option -add global clang_options ' -stdlib=libstdc++'
-#     set-option -add global clang_options ' -I/usr/include/opencv4'
-#     set-option -add global clang_options ' -I/opt/cuda/include'
-#     set-option -add global clang_options ' -Isrc -Iexternal/dlib'
-#     set-option -add global clang_options ' -Wall -Wextra -Weverything'
-#     set-option -add global clang_options ' -Wno-c++98-compat'
-#     clang-enable-autocomplete
-#     clang-enable-diagnostics
-#     alias window lint clang-parse
-#     alias window lint-next-error clang-diagnostics-next
-# }
 
 # kak-lsp configuration
 # ─────────────────────
