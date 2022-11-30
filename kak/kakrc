@@ -49,16 +49,22 @@ complete-command new-below -menu command
 # File management
 # ───────────────
 # wrap nnn inside a shell to be able to run in separate terminals, not just tmux
-define-command nnn -docstring "open nnn"  -params .. %{
+define-command nnn -docstring "open nnn" -params .. %{
     terminal sh -c "NNN_OPENER=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn %arg{@}"
 }
 complete-command nnn file
 
-define-command broot -docstring "open broot"  -params .. %{
-    terminal "EDITOR=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
+define-command broot-right -docstring "open broot" -params .. %{
+    tmux-terminal-horizontal "EDITOR=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
 }
-alias global br broot
-complete-command broot file
+alias global br broot-right
+complete-command broot-right file
+
+define-command broot-below -docstring "open broot" -params .. %{
+    tmux-terminal-vertical "EDITOR=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
+}
+alias global bb broot-below
+complete-command broot-below file
 
 # IDE
 # ───
