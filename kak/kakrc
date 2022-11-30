@@ -7,19 +7,7 @@ set-option global ui_options terminal_assistant=none terminal_status_on_top=true
 
 # Appearance
 # ──────────
-colorscheme gruvbox-dark
-# add extra font names for better semantic highlighting with kak-lsp
-set-face global parameter rgb:83a598+b  # ${blue}+b
-set-face global function_declaration rgb:ebdbb2+b  # ${fg}+b
-set-face global method rgb:ebdbb2+i  # ${fg}+i
-set-face global method_declaration rgb:ebdbb2+ib  # ${fg}+ib
-set-face global property rgb:83a598+i  # ${blue}+i
-set-face global property_declaration rgb:83a598+ib  # ${blue}+i
-set-face global type_declaration rgb:fabd2f+b  # ${yellow}+b
-set-face global value_declaration rgb:d3869b+b  # ${purple}+b
-set-face global meta_member rgb:8ec07c+i  # ${aqua}+i
-set-face global type_parameter rgb:fabd2f+b  # ${yellow}+b
-set-face global concept rgb:fabd2f+i  # ${yellow}+i
+colorscheme gruvbox
 
 # Highlighters
 # ────────────
