@@ -67,11 +67,17 @@ complete-command qalc shell-script-candidates %{
 
 # File management
 # ───────────────
-# wrap nnn inside a shell to be able to run it in separate terminals, not just tmux
+declare-option str kak_open "~/.config/kak/kak_open"
+# wrap these commands inside a shell to be able to run them in separate terminals, not just tmux
 define-command nnn -docstring "open nnn" -params .. %{
-    terminal sh -c "NNN_OPENER=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn %arg{@}"
+    terminal sh -c "NNN_OPENER=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn %arg{@}"
 }
 complete-command nnn file
+
+define-command broot -docstring "open broot" -params .. %{
+    terminal sh -c "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} broot %arg{@}"
+}
+complete-command broot file
 
 define-command find -docstring "find files" -params 1 %{ edit %arg{1} }
 complete-command find shell-script-candidates %{ find . -type f }
@@ -232,13 +238,13 @@ evaluate-commands %sh{
 
     # File managment with Broot
     define-command broot-right -docstring "open broot" -params .. %{
-        tmux-terminal-horizontal "EDITOR=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
+        tmux-terminal-horizontal "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
     }
     alias global br broot-right
     complete-command broot-right file
 
     define-command broot-below -docstring "open broot" -params .. %{
-        tmux-terminal-vertical "EDITOR=~/.config/kak/kak_open KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
+        tmux-terminal-vertical "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
     }
     alias global bb broot-below
     complete-command broot-below file
