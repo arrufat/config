@@ -1,28 +1,27 @@
 # User preferences
 # ────────────────
+
 set-option global makecmd 'ninja -C build/Release'
 set-option global grepcmd 'rg --column --sort path'
-# set-option global grepcmd 'ugrep --column-number --line-number --ignore-binary --sort'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
-
 colorscheme gruvbox
-
 add-highlighter global/ show-matching
 add-highlighter global/todos regex '(//|#|/\*)\h*(TODO|WARNING|FIXME):[^\n]*' 2:+bu
-add-highlighter global/trailing regex '\h+$' 0:rgb:928374+u  # highlight trailing spaces
 hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:+u }
 hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -hlcursor }
 
 # Enable editor config
 # ────────────────────
+
 hook global WinCreate ^[^*]+$ %{ editorconfig-load }
 
 # Extra editor commands
 # ─────────────────────
-define-command clean-whitespace-sel -hidden -docstring 'Remove trailing whitespace and replace tabs with spaces' %{ try %{
+
+define-command clean-whitespace-sel -docstring 'Replace tabs with spaces and remove trailing whitespace' %{ try %{
     execute-keys -draft @s\h+$<ret>d
 } }
-define-command clean-whitespace-all -hidden -docstring 'Remove trailing whitespace and replace tabs with spaces' %{ try %{
+define-command clean-whitespace-all -docstring 'Replace tabs with spaces and remove trailing whitespace' %{ try %{
     execute-keys -draft \%@s\h+$<ret>d
 } }
 
@@ -42,21 +41,29 @@ define-command -hidden -params 2 inc %{ try %{
 map global normal <c-a> ': inc %val{count} +<ret>'
 map global normal <c-x> ': inc %val{count} -<ret>'
 
-# Smart Tab:  use tab for indentation in insert mode
-# ──────────────────────────────────────────────────
+# Smart Tab
+# ─────────
+
+# use tab for indentation in insert mode
+# ──────────────────────────────────────
 hook global InsertChar \t %{ try %{
      execute-keys -draft "h<a-h><a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
 }}
-
 hook global InsertDelete ' ' %{ try %{
     execute-keys -draft 'h<a-h><a-k>\A\h+\z<ret>i<space><esc><lt>'
 }}
 
+# Enable <tab>/<s-tab> for insert completion selection
+# ──────────────────────────────────────────────────────
+hook global InsertCompletionShow .* %{ map window insert <tab> <c-n>; map window insert <s-tab> <c-p> }
+hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap window insert <s-tab> <c-p> }
+
 # Other commands
 # ──────────────
+
 # run external commands in a shell and put the output in the *debug* buffer
-define-command sh -docstring "run a command" -params .. %{ echo %sh{echo "command: ${@}" 1>&2; ${@} 1>&2} }
-complete-command sh shell
+define-command run -docstring "run a command" -params .. %{ echo %sh{echo "command: ${@}" 1>&2; ${@} 1>&2} }
+complete-command run shell
 
 # Qalculate
 define-command qalc -docstring "compute equation with Qalculate!" -params .. %{echo %sh{qalc ${@}}}
@@ -67,41 +74,41 @@ complete-command qalc shell-script-candidates %{
 
 # File management
 # ───────────────
+
+# nnn
+# ───
 declare-option str kak_open "%val{config}/kak_open"
-# wrap these commands inside a shell to be able to run them in separate terminals, not just tmux
 define-command nnn -docstring "open nnn" -params .. %{
     terminal sh -c "NNN_OPENER=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn %arg{@}"
 }
 complete-command nnn file
 
+# broot
+# ─────
 define-command broot -docstring "open broot" -params .. %{
     terminal sh -c "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} broot %arg{@}"
 }
 complete-command broot file
 
+# fuzzy finders
+# ─────────────
 define-command find -docstring "find files" -params 1 %{ edit %arg{1} }
 complete-command find shell-script-candidates %{ find . -type f }
 alias global f find
-
 define-command git-edit -docstring "open files in git" -params 1 %{ edit %arg{1} }
 complete-command git-edit shell-script-candidates %{ git ls-files }
 
 # Various mappings
 # ────────────────
+
 map global normal '#' ': comment-line<ret>'
 map global normal '<a-#>' ': comment-block<ret>'
 # map global normal = ': prompt math: %{exec "a%val{text}<lt>esc>|{ cat; echo; }|bc<lt>ret>"}<ret>'
 map global normal = ': prompt qalc: %{exec "a%val{text}<lt>esc>|qalc -t -u8 -f -<lt>ret>"}<ret>'
 map -docstring "xml tag object" global object t %{c<lt>([\w.]+)\b[^>]*?(?<lt>!/)>,<lt>/([\w.]+)\b[^>]*?(?<lt>!/)><ret>}
 
-
 # User modes
 # ──────────
-declare-user-mode window
-map global window -docstring 'select pane left' h %{: nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -L}<ret>}
-map global window -docstring 'select pane down' j %{: nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -D}<ret>}
-map global window -docstring 'select pane up' k %{: nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -U}<ret>}
-map global window -docstring 'select pane right' l %{: nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -R}<ret>}
 
 declare-user-mode git
 map global git -docstring 'update diff' u ': git update-diff<ret>'
@@ -144,9 +151,7 @@ map global user -docstring 'git mode' g ': enter-user-mode git<ret>'
 map global user -docstring 'qalc mode' q ': enter-user-mode qalc<ret>'
 map global user -docstring 'repl mode' r ': enter-user-mode repl<ret>'
 map global user -docstring 'spell mode' s ': enter-user-mode spell<ret>'
-map global user -docstring 'window mode' w ': enter-user-mode window<ret>'
 map global user -docstring 'zenity mode' z ': enter-user-mode zenity<ret>'
-
 
 # kak-lsp configuration
 # ─────────────────────
@@ -225,62 +230,10 @@ hook global WinSetOption filetype=cmake %{
 
 # TMUX specific configuration
 # ───────────────────────────
-evaluate-commands %sh{
-    [ ! -n "$TMUX" ] || echo '
-    # Improved window management
-    define-command new-right -docstring "create a new kakone client on the right" -params .. %{
-        tmux-terminal-horizontal kak -c %val{session} -e "%arg{@}"}
-    alias global nr new-right
-    complete-command new-right -menu command
-    define-command new-below -docstring "create a new kakone client below" -params .. %{
-        tmux-terminal-vertical kak -c %val{session} -e "%arg{@}"}
-    alias global nb new-below
-    complete-command new-below -menu command
 
-    # File managment with Broot
-    define-command broot-right -docstring "open broot" -params .. %{
-        tmux-terminal-horizontal "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
-    }
-    alias global br broot-right
-    complete-command broot-right file
-
-    define-command broot-below -docstring "open broot" -params .. %{
-        tmux-terminal-vertical "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
-    }
-    alias global bb broot-below
-    complete-command broot-below file
-
-    # IDE layout
-    define-command ide %{
-        rename-client main
-        nnn
-        nop %sh{tmux swap-pane -s 0 -t 1}
-        tmux-terminal-horizontal kak -c %val{session} -e "rename-client docs"
-        tmux-focus main
-        tmux-terminal-vertical kak -c %val{session} -e "rename-client tools"
-        tmux-focus main
-        set global docsclient docs
-        set global toolsclient tools
-        set global jumpclient main
-        nop %sh{
-            tmux resize-pane -t 0 -x 48
-            tmux resize-pane -t 3 -x 80
-            tmux resize-pane -t 2 -y 16
-            tmux select-pane -t 0
-        }
-        lsp-auto-hover-disable
-        lsp-auto-hover-enable docs
-    }
-    '
-}
-
-# clear trailing whitespace before saving
-# hook global BufWritePre .* %{exec -draft '%s\h+$<ret>d'}
-# hook global BufWritePre .* %{ try %{ execute-keys -draft \%s\h+$<ret>d } }
-
-# source ~/.config/kak/rc/gnome.kak
-# source ~/.config/kak/rc/tilix.kak
+evaluate-commands %sh{ [ ! -n "$TMUX" ] || echo "source $kak_config/tmux.kak" }
 
 # Load local Kakoune config file if it exists
 # ───────────────────────────────────────────
+
 evaluate-commands %sh{ [ -f $kak_config/local.kak ] && echo "source $kak_config/local.kak" }
