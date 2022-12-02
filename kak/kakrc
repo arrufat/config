@@ -67,7 +67,7 @@ complete-command qalc shell-script-candidates %{
 
 # File management
 # ───────────────
-declare-option str kak_open "~/.config/kak/kak_open"
+declare-option str kak_open "%val{config}/kak_open"
 # wrap these commands inside a shell to be able to run them in separate terminals, not just tmux
 define-command nnn -docstring "open nnn" -params .. %{
     terminal sh -c "NNN_OPENER=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn %arg{@}"
