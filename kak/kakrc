@@ -173,6 +173,7 @@ hook global WinSetOption filetype=(c|cpp) %{
 
 hook global WinSetOption filetype=python %{
     set-option window formatcmd 'black -q -'
+    set-option window lintcmd 'flake8'
     set-option global lsp_server_configuration pylsp.configurationSources=["flake8"]
     set-option -add global lsp_server_configuration pylsp.plugins.pycodestyle.ignore=["E203,W503"]
     set-option -add global lsp_server_configuration pylsp.plugins.pycodestyle.maxLineLength=90
@@ -280,3 +281,6 @@ evaluate-commands %sh{
 # source ~/.config/kak/rc/gnome.kak
 # source ~/.config/kak/rc/tilix.kak
 
+# Load local Kakoune config file if it exists
+# ───────────────────────────────────────────
+evaluate-commands %sh{ [ -f $kak_config/local.kak ] && echo "source $kak_config/local.kak" }
