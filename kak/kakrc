@@ -33,7 +33,7 @@ alias global nohl nohlsearch
 define-command -hidden -params 2 inc %{ try %{
     evaluate-commands %sh{
         [ "$1" = 0 ] && count=1 || count="$1"
-        printf '%s%s' 'exec h"_/\d<ret><a-i>na' "$2($count)<esc>|{<space>cat<semicolon> echo<semicolon>}|bc<ret>"
+        printf '%s%s' 'exec h"_/\d<ret><a-i>na' "$2($count)<esc>|{<space>cat<semicolon>echo<semicolon>}|bc<ret>"
     }
 } catch %{
     execute-keys l
