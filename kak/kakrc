@@ -231,7 +231,7 @@ hook global WinSetOption filetype=cmake %{
 # TMUX specific configuration
 # ───────────────────────────
 
-evaluate-commands %sh{ [ ! -n "$TMUX" ] || echo "source $kak_config/tmux.kak" }
+hook global ModuleLoaded tmux %{ source "%val{config}/tmux.kak" }
 
 # Load local Kakoune config file if it exists
 # ───────────────────────────────────────────
