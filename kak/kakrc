@@ -32,8 +32,8 @@ alias global nohl nohlsearch
 # Bring back <c-a> and <c-x> from Vim to increment/decrement the number under the cursor
 define-command -hidden -params 2 inc %{ try %{
     evaluate-commands %sh{
-        [ "$1" -eq 0 ] && count=1 || count="$1"
-        printf '%s%s' 'exec h"_/\d<ret><a-i>na' "$2($count)<esc>|( cat\; echo )|bc<ret>"
+        [ "$1" = 0 ] && count=1 || count="$1"
+        printf '%s%s' 'exec h"_/\d<ret><a-i>na' "$2($count)<esc>|{<space>cat<semicolon> echo<semicolon> }|bc<ret>"
     }
 } catch %{
     execute-keys l
