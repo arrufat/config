@@ -20,13 +20,13 @@ complete-command new-below -menu command
 # File managment with Broot
 # ─────────────────────────
 
-define-command broot-right -docstring "open broot" -params .. %{
+define-command broot-right -docstring "open broot right" -params .. %{
     tmux-terminal-horizontal "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
 }
 alias global br broot-right
 complete-command broot-right file
 
-define-command broot-below -docstring "open broot" -params .. %{
+define-command broot-below -docstring "open broot below" -params .. %{
     tmux-terminal-vertical "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
 }
 alias global bb broot-below
