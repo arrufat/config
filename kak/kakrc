@@ -18,10 +18,10 @@ hook global WinCreate ^[^*]+$ %{ editorconfig-load }
 # Extra editor commands
 # ─────────────────────
 
-define-command clean-whitespace-sel -docstring 'Replace tabs with spaces and remove trailing whitespace' %{ try %{
+define-command clean-selections -docstring 'Replace tabs with spaces and remove trailing whitespace' %{ try %{
     execute-keys -draft @s\h+$<ret>d
 } }
-define-command clean-whitespace-all -docstring 'Replace tabs with spaces and remove trailing whitespace' %{ try %{
+define-command clean-buffer -docstring 'Replace tabs with spaces and remove trailing whitespace' %{ try %{
     execute-keys -draft \%@s\h+$<ret>d
 } }
 
@@ -145,8 +145,8 @@ map global user -docstring 'disable autocomplete' A ': set-option -remove buffer
 map global user -docstring 'edit kakrc' e ': e ~/.config/kak/kakrc<ret>'
 # map global user -docstring 'open fuzzy finder' f ': edit %sh{fzf-tmux --preview "cat {}" -}<ret>'
 map global user -docstring 'open fuzzy finder' f ': edit %sh{fzf-tmux --preview "bat --theme=gruvbox-dark --style=numbers,changes --color always {}" -}<ret>'
-map global user -docstring 'clean trailing whitespace on selection' c ': clean-whitespace-sel<ret>'
-map global user -docstring 'clean trailing whitespace on buffer' C ': clean-whitespace-all<ret>'
+map global user -docstring 'clean tabs and trailing whitespace in selections' c ': clean-selections<ret>'
+map global user -docstring 'clean tabs and trailing whitespace in the buffer' C ': clean-buffer<ret>'
 map global user -docstring 'git mode' g ': enter-user-mode git<ret>'
 map global user -docstring 'qalc mode' q ': enter-user-mode qalc<ret>'
 map global user -docstring 'repl mode' r ': enter-user-mode repl<ret>'
