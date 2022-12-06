@@ -17,6 +17,19 @@ define-command new-below -docstring "create a new kakone client below" -params .
 alias global nb new-below
 complete-command new-below -menu command
 
+# Improved repl management
+# ────────────────────────
+define-command repl-right -docstring "create a repl on the right" -params .. %{
+    tmux-repl-horizontal %arg{@}
+}
+alias global rr repl-right
+complete-command repl-right -menu shell
+define-command repl-below -docstring "create a repl below" -params .. %{
+    tmux-repl-vertical %arg{@}
+}
+alias global rb repl-below
+complete-command repl-below -menu shell
+
 # File managment with Broot
 # ─────────────────────────
 
