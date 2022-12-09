@@ -75,7 +75,7 @@ evaluate-commands %sh{
         face global MenuForeground     ${bg2},${blue}
         face global MenuBackground     ${fg},${bg2}
         face global MenuInfo           ${bg}
-        face global Information        ${bg},${fg}
+        face global Information        ${fg1},${bg1}
         face global Error              ${bg},${red}
         face global DiagnosticError    ${red}
         face global DiagnosticWarning  ${yellow}
@@ -88,5 +88,20 @@ evaluate-commands %sh{
         face global MatchingChar       ${fg},${bg3}+b
         face global BufferPadding      ${bg2},${bg}
         face global Whitespace         ${bg2}+f
+
+        # Extra faces for kak-lsp
+        face global InfoDefault               Information
+        face global InfoBlock                 block
+        face global InfoBlockQuote            block
+        face global InfoBullet                bullet
+        face global InfoHeader                header
+        face global InfoLink                  link
+        face global InfoLinkMono              ${fg}+u
+        face global InfoMono                  builtin
+        face global InfoRule                  comment
+        face global InfoDiagnosticError       DiagnosticError
+        face global InfoDiagnosticHint        DiagnosticWarning
+        face global InfoDiagnosticInformation StatusLineInfo
+        face global InfoDiagnosticWarning     DiagnosticWarning
     "
 }
