@@ -74,7 +74,7 @@ evaluate-commands %sh{
         face global LineNumbersWrapped ${bg1}
         face global MenuForeground     ${bg2},${blue}
         face global MenuBackground     ${fg},${bg2}
-        face global MenuInfo           ${bg}
+        face global MenuInfo           ${fg4},${bg2}
         face global Information        ${fg1},${bg1}
         face global Error              ${bg},${red}
         face global DiagnosticError    ${red}
