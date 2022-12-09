@@ -36,7 +36,7 @@ evaluate-commands %sh{
         face global operator      ${fg}
         face global attribute     ${orange}
         face global comment       ${gray}+i
-        face global documentation comment
+        face global documentation ${gray}
         face global meta          ${aqua}
         face global builtin       ${fg}+b
 
