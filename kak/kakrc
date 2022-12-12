@@ -78,15 +78,15 @@ complete-command qalc shell-script-candidates %{
 # nnn
 # ───
 declare-option str kak_open "%val{config}/kak_open"
-define-command nnn -docstring "open nnn" -params 0..1 %{
-    terminal env "NNN_OPENER=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client}" nnn %arg{@}
+define-command nnn -docstring "open nnn" -params .. %{
+    terminal sh -c "NNN_OPENER=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn %arg{@}"
 }
 complete-command nnn file
 
 # broot
 # ─────
 define-command broot -docstring "open broot" -params .. %{
-    terminal env "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client}" broot %arg{@}
+    terminal sh -c "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} broot %arg{@}"
 }
 complete-command broot file
 
