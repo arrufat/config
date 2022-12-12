@@ -34,13 +34,13 @@ complete-command repl-below -menu shell
 # ─────────────────────────
 
 define-command broot-right -docstring "open broot right" -params .. %{
-    tmux-terminal-horizontal env "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client}" broot %arg{@}
+    tmux-terminal-horizontal "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
 }
 alias global br broot-right
 complete-command broot-right file
 
 define-command broot-below -docstring "open broot below" -params .. %{
-    tmux-terminal-vertical env "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client}" broot %arg{@}
+    tmux-terminal-vertical "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
 }
 alias global bb broot-below
 complete-command broot-below file
