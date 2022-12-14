@@ -8,11 +8,11 @@ map global window -docstring 'select pane up' k %{: nop %sh{TMUX="${kak_client_e
 map global window -docstring 'select pane right' l %{: nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -R}<ret>}
 map global user -docstring 'window mode' w ': enter-user-mode window<ret>'
 
-define-command new-right -docstring "create a new kakone client on the right" -params .. %{
+define-command new-right -docstring "create a new Kakoune client on the right" -params .. %{
     tmux-terminal-horizontal kak -c %val{session} -e "%arg{@}"}
 alias global nr new-right
 complete-command new-right -menu command
-define-command new-below -docstring "create a new kakone client below" -params .. %{
+define-command new-below -docstring "create a new Kakoune client below" -params .. %{
     tmux-terminal-vertical kak -c %val{session} -e "%arg{@}"}
 alias global nb new-below
 complete-command new-below -menu command
