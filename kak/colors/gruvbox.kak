@@ -36,7 +36,7 @@ evaluate-commands %sh{
         face global operator      ${fg}
         face global attribute     ${orange}
         face global comment       ${gray}+i
-        face global documentation ${gray}
+        face global documentation ${green}+i
         face global meta          ${aqua}
         face global builtin       ${fg}+b
 
@@ -76,7 +76,7 @@ evaluate-commands %sh{
         face global MenuBackground     ${fg},${bg2}
         face global MenuInfo           ${fg4},${bg2}
         face global Information        ${fg1},${bg1}
-        face global Error              ${bg},${red}
+        face global Error              ${red}+b
         face global DiagnosticError    ${red}
         face global DiagnosticWarning  ${yellow}
         face global StatusLine         ${fg},${bg1}
@@ -84,7 +84,7 @@ evaluate-commands %sh{
         face global StatusLineInfo     ${aqua}
         face global StatusLineValue    ${purple}
         face global StatusCursor       ${bg},${fg}
-        face global Prompt             ${yellow}
+        face global Prompt             ${yellow}+b
         face global MatchingChar       ${fg},${bg3}+b
         face global BufferPadding      ${bg2},${bg}
         face global Whitespace         ${bg2}+f
