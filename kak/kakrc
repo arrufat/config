@@ -2,7 +2,7 @@
 # ────────────────
 
 set-option global makecmd 'ninja -C build/Release'
-set-option global grepcmd 'rg --column --sort path'
+set-option global grepcmd 'rg --column --smart-case --sort path'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
 colorscheme gruvbox
 add-highlighter global/ show-matching
@@ -18,10 +18,10 @@ hook global WinCreate ^[^*]+$ %{ editorconfig-load }
 # Extra editor commands
 # ─────────────────────
 
-define-command clean-selections -docstring 'Replace tabs with spaces and remove trailing whitespace' %{ try %{
+define-command clean-selections -docstring 'Replace tabs with spaces and trim trailing whitespace' %{ try %{
     execute-keys -draft @s\h+$<ret>d
 } }
-define-command clean-buffer -docstring 'Replace tabs with spaces and remove trailing whitespace' %{ try %{
+define-command clean-buffer -docstring 'Replace tabs with spaces and trim trailing whitespace' %{ try %{
     execute-keys -draft \%@s\h+$<ret>d
 } }
 
