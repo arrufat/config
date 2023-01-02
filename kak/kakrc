@@ -62,7 +62,7 @@ hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap wi
 # ──────────────
 
 # run external commands in a shell and put the output in the *debug* buffer
-define-command run -docstring "run a command" -params .. %{ echo %sh{echo "command: ${@}" 1>&2; ${@} 1>&2} }
+define-command run -docstring "run a command" -params .. %{ echo "command: %arg{@}"; echo -debug %sh{ echo "command: ${@}" && ${@} }}
 complete-command run shell
 
 # Qalculate
