@@ -103,5 +103,6 @@ evaluate-commands %sh{
         face global InfoDiagnosticHint        DiagnosticWarning
         face global InfoDiagnosticInformation StatusLineInfo
         face global InfoDiagnosticWarning     DiagnosticWarning
+        face global InlayHint		      ${gray}
     "
 }
