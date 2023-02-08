@@ -66,7 +66,7 @@ define-command run -docstring "run a command" -params .. %{ echo "command: %arg{
 complete-command run shell
 
 # Qalculate
-define-command qalc -docstring "compute equation with Qalculate!" -params .. %{echo %sh{qalc ${@}}}
+define-command qalc -docstring "compute equation with Qalculate!" -params .. %{ echo %sh{qalc ${@}} }
 complete-command qalc shell-script-candidates %{
     { echo $(qalc +u8 --list-functions | head -n -3);
       echo $(qalc +u8 --list-variables | head -n -3); } | tr ' ' '\n' | sort -u
@@ -95,8 +95,6 @@ complete-command broot file
 define-command find -docstring "find files" -params 1 %{ edit %arg{1} }
 complete-command find shell-script-candidates %{ find . -type f }
 alias global f find
-define-command git-edit -docstring "open files in git" -params 1 %{ edit %arg{1} }
-complete-command git-edit shell-script-candidates %{ git ls-files }
 
 # Various mappings
 # ────────────────
@@ -108,17 +106,27 @@ map global normal = ': prompt qalc: %{exec "a%val{text}<lt>esc>|qalc -t -u8 -f -
 map -docstring "xml tag object" global object t %{c<lt>([\w.]+)\b[^>]*?(?<lt>!/)>,<lt>/([\w.]+)\b[^>]*?(?<lt>!/)><ret>}
 map -docstring 'select lines downwards' global normal X T<ret>Lx
 
+# Diff buffers
+# ────────────
+
+define-command diff-buffers -override -params 2 %{
+    evaluate-commands %sh{
+        file1=$(mktemp)
+        file2=$(mktemp)
+        echo "
+            evaluate-commands -buffer '$1' write -force $file1
+            evaluate-commands -buffer '$2' write -force $file2
+            edit! -scratch *diff-buffers*
+            set buffer filetype diff
+            set-register | 'diff -u $file1 $file2; rm $file1 $file2'
+            execute-keys !<ret>gg
+        "
+}}
+
+complete-command diff-buffers buffer
+
 # User modes
 # ──────────
-
-declare-user-mode git
-map global git -docstring 'update diff' u ': git update-diff<ret>'
-map global git -docstring 'show diff' d ': git show-diff<ret>'
-map global git -docstring 'hide diff' D ': git hide-diff<ret>'
-map global git -docstring 'show blame' b ': git blame<ret>'
-map global git -docstring 'hide blame' B ': git hide-blame<ret>'
-map global git -docstring 'next hunk' n ':  git next-hunk<ret>'
-map global git -docstring 'prev hunk' p ':  git prev-hunk<ret>'
 
 declare-user-mode repl
 map global repl -docstring 'evaluate' e ': repl-send-text<ret>'
@@ -148,86 +156,20 @@ map global user -docstring 'edit kakrc' e ': e ~/.config/kak/kakrc<ret>'
 map global user -docstring 'open fuzzy finder' f ': edit %sh{fzf-tmux --preview "bat --theme=gruvbox-dark --style=numbers,changes --color always {}" -}<ret>'
 map global user -docstring 'clean tabs and trailing whitespace in selections' c ': clean-selections<ret>'
 map global user -docstring 'clean tabs and trailing whitespace in the buffer' C ': clean-buffer<ret>'
-map global user -docstring 'git mode' g ': enter-user-mode git<ret>'
 map global user -docstring 'qalc mode' q ': enter-user-mode qalc<ret>'
 map global user -docstring 'repl mode' r ': enter-user-mode repl<ret>'
 map global user -docstring 'spell mode' s ': enter-user-mode spell<ret>'
 map global user -docstring 'zenity mode' z ': enter-user-mode zenity<ret>'
 
+# extra git configuration
+# ───────────────────────
+
+source "%val{config}/git.kak"
+
 # kak-lsp configuration
 # ─────────────────────
 
-evaluate-commands %sh{kak-lsp --kakoune -s $kak_session}
-hook global WinSetOption filetype=(c|cpp|cmake|go|julia|latex|python|rust|sh|vala|zig) %{
-    map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
-    lsp-enable-window
-    lsp-auto-signature-help-enable
-    lsp-auto-hover-insert-mode-disable
-    set-option global lsp_hover_max_lines 20
-}
-
-hook global WinSetOption filetype=(c|cpp) %{
-    set-option window formatcmd 'clang-format'
-    set-option window lsp_auto_highlight_references true
-    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
-    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
-    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-    hook -once -always window WinSetOption filetype=.* %{
-        remove-hooks window semantic-tokens
-    }
-}
-
-hook global WinSetOption filetype=python %{
-    set-option window formatcmd 'black -q -'
-    set-option window lintcmd 'flake8'
-    set-option global lsp_server_configuration pylsp.configurationSources=["flake8"]
-    set-option -add global lsp_server_configuration pylsp.plugins.pycodestyle.ignore=["E203,W503"]
-    set-option -add global lsp_server_configuration pylsp.plugins.pycodestyle.maxLineLength=90
-}
-
-hook global WinSetOption filetype=rust %{
-    set-option window formatcmd 'rustfmt'
-    set-option window lsp_auto_highlight_references true
-    set-option global lsp_hover_max_lines 20
-    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
-    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
-    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-    hook -once -always window WinSetOption filetype=.* %{
-        remove-hooks window semantic-tokens
-    }
-}
-
-hook global WinSetOption filetype=zig %{
-    set-option buffer formatcmd 'zig fmt'
-    set-option window lsp_auto_highlight_references true
-    hook buffer -group format BufWritePre .* lsp-formatting-sync
-
-    set-option global lsp_server_configuration zls.zig_lib_path="/usr/lib/zig"
-    set-option -add global lsp_server_configuration zls.warn_style=true
-    set-option -add global lsp_server_configuration zls.enable_semantic_tokens=true
-    set-option -add global lsp_server_configuration zls.operator_completions=true
-    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
-    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
-    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-    hook -once -always window WinSetOption filetype=.* %{
-        remove-hooks window semantic-tokens
-    }
-}
-
-hook global WinSetOption filetype=go %{
-    set-option buffer formatcmd 'go fmt'
-    hook buffer -group format BufWritePre .* lsp-formatting-sync
-    set-option buffer lsp_auto_highlight_references true
-    set-option buffer lintcmd "run() { golint $1; go vet $1 2> | sed -e 's/: /: error /'; } && run"
-    lint
-    hook buffer -group lint BufWritePost *. lint
-}
-
-hook global WinSetOption filetype=cmake %{
-    set-option window formatcmd 'cmake-format-i -'
-    lsp-auto-hover-disable
-    hook buffer -group lint BufWritePost *. lint
-}
+source "%val{config}/lsp.kak"
 
 # TMUX specific configuration
 # ───────────────────────────
