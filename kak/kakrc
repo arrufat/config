@@ -152,8 +152,6 @@ map global qalc -docstring 'update exchange rates' x ': try %{ nop %sh{qalc -exr
 map global user -docstring 'enable autocomplete' a ': set-option -add buffer autocomplete insert<ret>'
 map global user -docstring 'disable autocomplete' A ': set-option -remove buffer autocomplete insert<ret>'
 map global user -docstring 'edit kakrc' e ': e ~/.config/kak/kakrc<ret>'
-# map global user -docstring 'open fuzzy finder' f ': edit %sh{fzf-tmux --preview "cat {}" -}<ret>'
-map global user -docstring 'open fuzzy finder' f ': edit %sh{fzf-tmux --preview "bat --theme=gruvbox-dark --style=numbers,changes --color always {}" -}<ret>'
 map global user -docstring 'clean tabs and trailing whitespace in selections' c ': clean-selections<ret>'
 map global user -docstring 'clean tabs and trailing whitespace in the buffer' C ': clean-buffer<ret>'
 map global user -docstring 'qalc mode' q ': enter-user-mode qalc<ret>'
