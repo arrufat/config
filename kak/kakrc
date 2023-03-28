@@ -62,7 +62,7 @@ hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap wi
 # ──────────────
 
 # run external commands in a shell and show the output in an info box
-define-command run -docstring "run a command" -params .. %{ info -title "%arg{@}" %sh{${@}} }
+define-command run -docstring "run a command" -params .. %{ info -title "%arg{@}" %sh{${@} 2>&1 } }
 complete-command run shell
 
 # Qalculate
