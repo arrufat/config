@@ -39,7 +39,7 @@ hook global WinSetOption filetype=rust %{
 }
 
 hook global WinSetOption filetype=zig %{
-    set-option buffer formatcmd 'zig fmt'
+    set-option buffer formatcmd 'zig fmt --stdin'
     set-option window lsp_auto_highlight_references true
     hook buffer -group format BufWritePre .* lsp-formatting-sync
 
