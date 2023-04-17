@@ -2,6 +2,7 @@
 !/.gitignore
 !/fish/
 !/fontconfig/
+!/foot/
 !/kak/
 !/kak-lsp/
 !/nnn/
