@@ -129,35 +129,35 @@ complete-command diff-buffers buffer
 # ──────────
 
 declare-user-mode repl
-map global repl -docstring 'evaluate' e ': repl-send-text<ret>'
-map global repl -docstring 'bash' b ': repl-new bash<ret>'
-map global repl -docstring 'julia' j ': repl-new julia<ret>'
-map global repl -docstring 'ipython' p ': repl-new ipython<ret>'
-map global repl -docstring 'qalc' q ': repl-new qalc<ret>'
+map global repl -docstring 'evaluate' e ':repl-send-text<ret>'
+map global repl -docstring 'bash' b ':repl-new bash<ret>'
+map global repl -docstring 'julia' j ':repl-new julia<ret>'
+map global repl -docstring 'ipython' p ':repl-new ipython<ret>'
+map global repl -docstring 'qalc' q ':repl-new qalc<ret>'
 
 declare-user-mode zenity
-map global zenity -docstring 'open file' o ': edit %sh{cd $(dirname $kak_buffile); zenity --file-selection}<ret>'
+map global zenity -docstring 'open file' o ':edit %sh{cd $(dirname $kak_buffile); zenity --file-selection}<ret>'
 
 declare-user-mode spell
-map global spell -docstring 'spelling' s ': spell<ret>'
-map global spell -docstring 'add' a ': spell-add<ret>'
-map global spell -docstring 'next' n ': spell-next<ret>'
-map global spell -docstring 'clear' c ': spell-clear<ret>'
+map global spell -docstring 'spelling' s ':spell<ret>'
+map global spell -docstring 'add' a ':spell-add<ret>'
+map global spell -docstring 'next' n ':spell-next<ret>'
+map global spell -docstring 'clear' c ':spell-clear<ret>'
 
 declare-user-mode qalc
-map global qalc -docstring 'exact mode' e ': try %{ nop %sh{qalc -set exact}}<ret>'
-map global qalc -docstring 'approximate mode' a ': try %{ nop %sh{qalc -set approx}}<ret>'
-map global qalc -docstring 'update exchange rates' x ': try %{ nop %sh{qalc -exrates}}<ret>'
+map global qalc -docstring 'exact mode' e ':try %{ nop %sh{qalc -set exact}}<ret>'
+map global qalc -docstring 'approximate mode' a ':try %{ nop %sh{qalc -set approx}}<ret>'
+map global qalc -docstring 'update exchange rates' x ':try %{ nop %sh{qalc -exrates}}<ret>'
 
-map global user -docstring 'enable autocomplete' a ': set-option -add buffer autocomplete insert<ret>'
-map global user -docstring 'disable autocomplete' A ': set-option -remove buffer autocomplete insert<ret>'
-map global user -docstring 'edit kakrc' e ': e ~/.config/kak/kakrc<ret>'
-map global user -docstring 'clean tabs and trailing whitespace in selections' c ': clean-selections<ret>'
-map global user -docstring 'clean tabs and trailing whitespace in the buffer' C ': clean-buffer<ret>'
-map global user -docstring 'qalc mode' q ': enter-user-mode qalc<ret>'
-map global user -docstring 'repl mode' r ': enter-user-mode repl<ret>'
-map global user -docstring 'spell mode' s ': enter-user-mode spell<ret>'
-map global user -docstring 'zenity mode' z ': enter-user-mode zenity<ret>'
+map global user -docstring 'enable autocomplete' a ':set-option -add buffer autocomplete insert<ret>'
+map global user -docstring 'disable autocomplete' A ':set-option -remove buffer autocomplete insert<ret>'
+map global user -docstring 'edit kakrc' e ':e ~/.config/kak/kakrc<ret>'
+map global user -docstring 'clean tabs and trailing whitespace in selections' c ':clean-selections<ret>'
+map global user -docstring 'clean tabs and trailing whitespace in the buffer' C ':clean-buffer<ret>'
+map global user -docstring 'qalc mode' q ':enter-user-mode qalc<ret>'
+map global user -docstring 'repl mode' r ':enter-user-mode repl<ret>'
+map global user -docstring 'spell mode' s ':enter-user-mode spell<ret>'
+map global user -docstring 'zenity mode' z ':enter-user-mode zenity<ret>'
 
 # extra git configuration
 # ───────────────────────
