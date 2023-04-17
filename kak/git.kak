@@ -9,8 +9,8 @@ map global git -docstring 'show diff' d ':git show-diff<ret>'
 map global git -docstring 'hide diff' D ':git hide-diff<ret>'
 map global git -docstring 'show blame' b ':git blame<ret>'
 map global git -docstring 'hide blame' B ':git hide-blame<ret>'
-map global git -docstring 'next hunk' n ': git next-hunk<ret>'
-map global git -docstring 'prev hunk' p ': git prev-hunk<ret>'
+map global git -docstring 'next hunk' n ':git next-hunk<ret>'
+map global git -docstring 'prev hunk' p ':git prev-hunk<ret>'
 
 map global user -docstring 'git mode' g ':enter-user-mode git<ret>'
 

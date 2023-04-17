@@ -8,11 +8,11 @@ map global user -docstring 'open fuzzy finder' f ': edit %sh{fzf-tmux --preview 
 # ──────────────────────────
 
 declare-user-mode window
-map global window -docstring 'select pane left' h %{: nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -L}<ret>}
-map global window -docstring 'select pane down' j %{: nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -D}<ret>}
-map global window -docstring 'select pane up' k %{: nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -U}<ret>}
-map global window -docstring 'select pane right' l %{: nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -R}<ret>}
-map global user -docstring 'window mode' w ': enter-user-mode window<ret>'
+map global window -docstring 'select pane left' h %{:nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -L}<ret>}
+map global window -docstring 'select pane down' j %{:nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -D}<ret>}
+map global window -docstring 'select pane up' k %{:nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -U}<ret>}
+map global window -docstring 'select pane right' l %{:nop %sh{TMUX="${kak_client_env_TMUX}" tmux select-pane -R}<ret>}
+map global user -docstring 'window mode' w ':enter-user-mode window<ret>'
 
 define-command new-right -docstring "create a new Kakoune client on the right" -params .. %{
     tmux-terminal-horizontal kak -c %val{session} -e "%arg{@}"}
