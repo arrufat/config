@@ -138,6 +138,7 @@ map global repl -docstring 'qalc' q ':repl-new qalc<ret>'
 
 declare-user-mode zenity
 map global zenity -docstring 'open file' o ':edit %sh{cd $(dirname $kak_buffile); zenity --file-selection}<ret>'
+map global zenity -docstring 'select color' c '!zenity --color-selection<ret>'
 
 declare-user-mode spell
 map global spell -docstring 'spelling' s ':spell<ret>'
