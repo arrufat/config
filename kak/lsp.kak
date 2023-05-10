@@ -19,11 +19,14 @@ hook global WinSetOption filetype=(c|cpp) %{
 }
 
 hook global WinSetOption filetype=python %{
-    set-option window formatcmd 'black -l 78 -q -'
-    set-option window lintcmd 'flake8'
-    set-option global lsp_server_configuration pylsp.configurationSources=["flake8"]
-    set-option -add global lsp_server_configuration pylsp.plugins.pycodestyle.ignore=["E203,W503"]
-    set-option -add global lsp_server_configuration pylsp.plugins.pycodestyle.maxLineLength=78
+    set-option window formatcmd 'black -l 99 -q -'
+    set-option window lintcmd 'ruff'
+    set-option window lsp_server_configuration pylsp.configurationSources=["ruff"]
+    set-option -add window lsp_server_configuration pylsp.plugins.pycodestyle.enabled=false
+    set-option -add window lsp_server_configuration pylsp.plugins.mccabe.enabled=false
+    set-option -add window lsp_server_configuration pylsp.plugins.pyflakes.enabled=false
+    set-option -add window lsp_server_configuration pylsp.plugins.ruff.enabled=true
+    set-option -add window lsp_server_configuration pylsp.plugins.ruff.lineLength=99
 }
 
 hook global WinSetOption filetype=rust %{
@@ -39,7 +42,7 @@ hook global WinSetOption filetype=rust %{
 }
 
 hook global WinSetOption filetype=zig %{
-    set-option buffer formatcmd 'zig fmt --stdin'
+    set-option window formatcmd 'zig fmt --stdin'
     set-option window lsp_auto_highlight_references true
     hook buffer -group format BufWritePre .* lsp-formatting-sync
 
