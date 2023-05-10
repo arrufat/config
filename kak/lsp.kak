@@ -4,7 +4,7 @@ hook global WinSetOption filetype=(c|cpp|cmake|go|julia|latex|python|rust|sh|val
     lsp-enable-window
     lsp-auto-signature-help-enable
     lsp-auto-hover-insert-mode-disable
-    set-option global lsp_hover_max_lines 20
+    set-option window lsp_hover_max_lines 20
 }
 
 hook global WinSetOption filetype=(c|cpp) %{
@@ -32,7 +32,6 @@ hook global WinSetOption filetype=python %{
 hook global WinSetOption filetype=rust %{
     set-option window formatcmd 'rustfmt'
     set-option window lsp_auto_highlight_references true
-    set-option global lsp_hover_max_lines 20
     hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
     hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
     hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
@@ -46,10 +45,10 @@ hook global WinSetOption filetype=zig %{
     set-option window lsp_auto_highlight_references true
     hook buffer -group format BufWritePre .* lsp-formatting-sync
 
-    set-option global lsp_server_configuration zls.zig_lib_path="/usr/lib/zig"
-    set-option -add global lsp_server_configuration zls.warn_style=true
-    set-option -add global lsp_server_configuration zls.enable_semantic_tokens=true
-    set-option -add global lsp_server_configuration zls.operator_completions=true
+    set-option window lsp_server_configuration zls.zig_lib_path="/usr/lib/zig"
+    set-option -add window lsp_server_configuration zls.warn_style=true
+    set-option -add window lsp_server_configuration zls.enable_semantic_tokens=true
+    set-option -add window lsp_server_configuration zls.operator_completions=true
     hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
     hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
     hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
