@@ -26,6 +26,7 @@ hook global WinSetOption filetype=python %{
     set-option -add window lsp_server_configuration pylsp.plugins.mccabe.enabled=false
     set-option -add window lsp_server_configuration pylsp.plugins.pyflakes.enabled=false
     set-option -add window lsp_server_configuration pylsp.plugins.ruff.enabled=true
+    set-option -add window lsp_server_configuration pylsp.plugins.ruff.ignore=["E402"]
     set-option -add window lsp_server_configuration pylsp.plugins.ruff.lineLength=99
 }
 
