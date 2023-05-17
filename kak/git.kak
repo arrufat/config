@@ -1,5 +1,6 @@
-define-command git-edit -docstring "open files in git" -params 1 %{ edit %arg{1} }
-complete-command git-edit shell-script-candidates %{ git ls-files }
+define-command git-find -docstring "find files in git" -params 1 %{ edit %arg{1} }
+complete-command git-find shell-script-candidates %{ git ls-files }
+alias global gf git-find
 
 declare-user-mode git
 map global git -docstring 'status' s ':git status<ret>'
