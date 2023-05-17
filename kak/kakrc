@@ -1,7 +1,6 @@
 # User preferences
 # ────────────────
 
-set-option global makecmd 'ninja -C build/Release'
 set-option global grepcmd 'rg --column --smart-case --sort path'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
 colorscheme gruvbox
@@ -118,7 +117,7 @@ define-command diff-buffers -override -params 2 %{
             evaluate-commands -buffer '$1' write -force $file1
             evaluate-commands -buffer '$2' write -force $file2
             edit! -scratch *diff-buffers*
-            set buffer filetype diff
+            set-option buffer filetype diff
             set-register | 'diff -u $file1 $file2; rm $file1 $file2'
             execute-keys !<ret>gg
         "
