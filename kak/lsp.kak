@@ -21,12 +21,12 @@ hook global WinSetOption filetype=(c|cpp) %{
 hook global WinSetOption filetype=python %{
     set-option window formatcmd 'black -l 99 -q -'
     set-option window lintcmd 'ruff'
-    set-option -add window lsp_server_configuration pylsp.plugins.black.enabled=true
-    set-option -add window lsp_server_configuration pylsp.plugins.black.line_length=99
-    set-option -add window lsp_server_configuration pylsp.configurationSources=["ruff"]
     set-option -add window lsp_server_configuration pylsp.plugins.pycodestyle.enabled=false
     set-option -add window lsp_server_configuration pylsp.plugins.mccabe.enabled=false
     set-option -add window lsp_server_configuration pylsp.plugins.pyflakes.enabled=false
+    set-option -add window lsp_server_configuration pylsp.plugins.black.enabled=true
+    set-option -add window lsp_server_configuration pylsp.plugins.black.line_length=99
+    set-option -add window lsp_server_configuration pylsp.configurationSources=["ruff"]
     set-option -add window lsp_server_configuration pylsp.plugins.ruff.enabled=true
     set-option -add window lsp_server_configuration pylsp.plugins.ruff.ignore=["E402"]
     set-option -add window lsp_server_configuration pylsp.plugins.ruff.lineLength=99
