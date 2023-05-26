@@ -21,15 +21,6 @@ hook global WinSetOption filetype=(c|cpp) %{
 hook global WinSetOption filetype=python %{
     set-option window formatcmd 'black -l 99 -q -'
     set-option window lintcmd 'ruff'
-    set-option -add window lsp_server_configuration pylsp.plugins.pycodestyle.enabled=false
-    set-option -add window lsp_server_configuration pylsp.plugins.mccabe.enabled=false
-    set-option -add window lsp_server_configuration pylsp.plugins.pyflakes.enabled=false
-    set-option -add window lsp_server_configuration pylsp.plugins.black.enabled=true
-    set-option -add window lsp_server_configuration pylsp.plugins.black.line_length=99
-    set-option -add window lsp_server_configuration pylsp.configurationSources=["ruff"]
-    set-option -add window lsp_server_configuration pylsp.plugins.ruff.enabled=true
-    set-option -add window lsp_server_configuration pylsp.plugins.ruff.ignore=["E402"]
-    set-option -add window lsp_server_configuration pylsp.plugins.ruff.lineLength=99
 }
 
 hook global WinSetOption filetype=rust %{
@@ -48,10 +39,6 @@ hook global WinSetOption filetype=zig %{
     set-option window lsp_auto_highlight_references true
     hook buffer -group format BufWritePre .* lsp-formatting-sync
 
-    set-option window lsp_server_configuration zls.zig_lib_path="/usr/lib/zig"
-    set-option -add window lsp_server_configuration zls.warn_style=true
-    set-option -add window lsp_server_configuration zls.enable_semantic_tokens=true
-    set-option -add window lsp_server_configuration zls.operator_completions=true
     hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
     hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
     hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens

@@ -31,6 +31,7 @@ faces = [
     # zig specific
     {token = "builtin", face = "meta"},
     {token = "field", face = "property"},
+    {token = "keywordLiteral", face = "value"},
     {token = "comment", face = "documentation", modifiers = ["documentation"]},
 ]
 
@@ -45,7 +46,17 @@ offset_encoding = "utf-8"
 filetypes = ["python"]
 roots = ["requirements.txt", "setup.py", ".git", ".hg"]
 command = "pylsp"
-offset_encoding = "utf-8"
+settings_section = "pylsp"
+[language.python.settings.pylsp]
+pylsp.plugins.pycodestyle.enabled=false
+pylsp.plugins.mccabe.enabled=false
+pylsp.plugins.pyflakes.enabled=false
+pylsp.plugins.black.enabled=true
+pylsp.plugins.black.line_length=99
+pylsp.configurationSources=["ruff"]
+pylsp.plugins.ruff.enabled=true
+pylsp.plugins.ruff.ignore=["E402"]
+pylsp.plugins.ruff.lineLength=99
 
 [language.julia]
 filetypes = ["julia"]
@@ -85,7 +96,7 @@ args = ["buildDirectory", "build"]
 [language.go]
 filetypes = ["go"]
 roots = ["Gopkg.toml", "go.mod", ".git", ".hg"]
-command = "/home/aarrufat/go/bin/gopls"
+command = "gopls"
 offset_encoding = "utf-8"
 
 [language.latex]
@@ -97,13 +108,16 @@ offset_encoding = "utf-8"
 [language.rust]
 filetypes = ["rust"]
 roots = ["Cargo.toml"]
-# command = "rls"
 command = "rust-analyzer"
 
 [language.zig]
 filetypes = ["zig"]
 roots = ["build.zig"]
 command = "zls"
+settings_section = "zls"
+[language.zig.settings.zls]
+semantic_tokens = "full"
+warn_style = true
 
 [language.sh]
 filetypes = ["sh"]
