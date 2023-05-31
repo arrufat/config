@@ -42,6 +42,7 @@ command = "clangd"
 args = ["--clang-tidy", "--compile-commands-dir=build", "--suggest-missing-includes", "--background-index", "--completion-style=detailed"]
 offset_encoding = "utf-8"
 
+# pip install --no-cache python-lsp-server python-lsp-black python-lsp-ruff pyls-isort pylsp-rope ruff pylsp-mypy
 [language.python]
 filetypes = ["python"]
 roots = ["requirements.txt", "setup.py", ".git", ".hg"]
