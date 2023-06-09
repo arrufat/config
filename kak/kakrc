@@ -3,7 +3,6 @@
 
 set-option global grepcmd 'rg --column --smart-case --sort path'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
-colorscheme gruvbox
 add-highlighter global/ show-matching
 add-highlighter global/todos regex '(//|#|/\*)\h*(TODO|WARNING|FIXME)[:]?[^\n]*' 2:+bu
 hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:,,white+c }
@@ -179,3 +178,7 @@ hook global ModuleLoaded tmux %{ source "%val{config}/tmux.kak" }
 # ───────────────────────────────────────────
 
 evaluate-commands %sh{ [ -f $kak_config/local.kak ] && echo "source $kak_config/local.kak" }
+
+# Set the color scheme at the end because of the LSP defined fonts
+# ────────────────────────────────────────────────────────────────
+colorscheme gruvbox
