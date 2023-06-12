@@ -39,10 +39,8 @@ define-command -hidden -params 2 inc %{ try %{
 map global normal <c-a> ': inc %val{count} +<ret>'
 map global normal <c-x> ': inc %val{count} -<ret>'
 
-# Smart Tab
-# ─────────
 
-# use tab for indentation in insert mode
+# Use tab for indentation in insert mode
 # ──────────────────────────────────────
 hook global InsertChar \t %{ try %{
      execute-keys -draft "h<a-h><a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
@@ -50,11 +48,6 @@ hook global InsertChar \t %{ try %{
 hook global InsertDelete ' ' %{ try %{
     execute-keys -draft 'h<a-h><a-k>\A\h+\z<ret>i<space><esc><lt>'
 }}
-
-# Enable <tab>/<s-tab> for insert completion selection
-# ──────────────────────────────────────────────────────
-hook global InsertCompletionShow .* %{ map window insert <tab> <c-n>; map window insert <s-tab> <c-p> }
-hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap window insert <s-tab> <c-p> }
 
 # Other commands
 # ──────────────
