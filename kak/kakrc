@@ -1,6 +1,7 @@
 # User preferences
 # ────────────────
 
+set-option global startup_info_version 20221031
 set-option global grepcmd 'rg --column --smart-case --sort path'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
 add-highlighter global/ show-matching
@@ -90,6 +91,7 @@ alias global f find
 # Various mappings
 # ────────────────
 
+map global insert <s-ret> <ret>
 map global normal '#' ': comment-line<ret>'
 map global normal '<a-#>' '_: comment-block<ret>'
 # map global normal = ': prompt math: %{exec "a%val{text}<lt>esc>|{ cat; echo; }|bc<lt>ret>"}<ret>'
