@@ -49,6 +49,7 @@ roots = ["requirements.txt", "setup.py", ".git", ".hg"]
 command = "pylsp"
 settings_section = "pylsp"
 [language.python.settings.pylsp]
+pylsp.plugins.jedi_completion.include_params = true
 pylsp.plugins.pycodestyle.enabled=false
 pylsp.plugins.mccabe.enabled=false
 pylsp.plugins.pyflakes.enabled=false
