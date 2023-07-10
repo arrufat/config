@@ -97,8 +97,8 @@ map global normal '<a-#>' '_: comment-block<ret>'
 # map global normal = ': prompt math: %{exec "a%val{text}<lt>esc>|{ cat; echo; }|bc<lt>ret>"}<ret>'
 map global normal = ': prompt qalc: %{exec "a%val{text}<lt>esc>|qalc -t -u8 -f -<lt>ret>"}<ret>'
 map -docstring "xml tag object" global object t %{c<lt>([\w.]+)\b[^>]*?(?<lt>!/)>,<lt>/([\w.]+)\b[^>]*?(?<lt>!/)><ret>}
-map -docstring 'extend lines downwards' global normal X %{<a-:>F<ret>x}
-map -docstring 'extend lines upwards' global normal <a-X> %{<a-:><a-;><a-H>Kx}
+map -docstring 'extend lines downwards' global normal X %{:exec "<lt>a-:>%val{count}F<lt>ret>x"<ret>}
+map -docstring 'extend lines upwards' global normal <a-X> %{:exec "<lt>a-:><lt>a-;><lt>a-H>%val{count}Kx"<ret>}
 
 # Diff buffers
 # ────────────
