@@ -72,6 +72,18 @@ filetypes = ["go"]
 roots = ["Gopkg.toml", "go.mod", ".git", ".hg"]
 command = "gopls"
 
+[language.html]
+filetypes = ["html"]
+roots = ["package.json"]
+command = "vscode-html-languageserver"
+args = ["--stdio"]
+
+[language.jsx] # works for javascript as well
+filetypes = ["javascript"]
+roots = ["package.json", "tsconfig.json", ".git", ".hg"]
+command = "typescript-language-server"
+args = ["--stdio"]
+
 [language.latex]
 filetypes = ["latex"]
 roots = [".git", "Makefile"]
