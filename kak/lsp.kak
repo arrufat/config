@@ -36,9 +36,12 @@ hook global WinSetOption filetype=rust %{
 
 hook global WinSetOption filetype=zig %{
     set-option window formatcmd 'zig fmt --stdin'
+    set-option window lintcmd 'zig fmt --color off --ast-check 2>&1'
+    set-option window makecmd 'zig build --summary-all'
     set-option window lsp_auto_highlight_references true
     hook buffer -group format BufWritePre .* lsp-formatting-sync
 
+    hook -group zig-auto-lint window BufWritePre .* lint-buffer
     hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
     hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
     hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
