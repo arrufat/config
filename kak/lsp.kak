@@ -41,7 +41,6 @@ hook global WinSetOption filetype=zig %{
     set-option window lsp_auto_highlight_references true
     hook buffer -group format BufWritePre .* lsp-formatting-sync
 
-    hook -group zig-auto-lint window BufWritePre .* lint-buffer
     hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
     hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
     hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
