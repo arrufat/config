@@ -78,11 +78,21 @@ roots = ["package.json"]
 command = "vscode-html-languageserver"
 args = ["--stdio"]
 
-[language.jsx] # works for javascript as well
+[language.javascriptreact]
 filetypes = ["javascript"]
 roots = ["package.json", "tsconfig.json", ".git", ".hg"]
 command = "typescript-language-server"
 args = ["--stdio"]
+
+[language.javascriptreact]
+filetypes = ["typescript"]
+roots = ["package.json", "tsconfig.json", ".git", ".hg"]
+command = "typescript-language-server"
+args = ["--stdio"]
+settings_section = "_"
+[language.typescriptreact.settings._]
+quotePreference = "double"
+typescript.format.semicolons = "insert"
 
 [language.latex]
 filetypes = ["latex"]
