@@ -84,7 +84,7 @@ roots = ["package.json", "tsconfig.json", ".git", ".hg"]
 command = "typescript-language-server"
 args = ["--stdio"]
 
-[language.javascriptreact]
+[language.typescriptreact]
 filetypes = ["typescript"]
 roots = ["package.json", "tsconfig.json", ".git", ".hg"]
 command = "typescript-language-server"
