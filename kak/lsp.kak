@@ -5,6 +5,13 @@ hook global WinSetOption filetype=(c|cpp|cmake|go|html|javascript|julia|latex|py
     lsp-auto-signature-help-enable
     lsp-auto-hover-insert-mode-disable
     set-option window lsp_hover_max_lines 20
+    map global insert <c-n> '<a-;>:lsp-snippets-select-next-placeholders<ret>' -docstring 'Select next snippet placeholder'
+    hook global InsertCompletionShow .* %{
+        unmap global insert <c-n> '<a-;>:lsp-snippets-select-next-placeholders<ret>'
+    }
+    hook global InsertCompletionHide .* %{
+        map global insert <c-n> '<a-;>:lsp-snippets-select-next-placeholders<ret>' -docstring 'Select next snippet placeholder'
+    }
 }
 
 hook global WinSetOption filetype=(c|cpp) %{
