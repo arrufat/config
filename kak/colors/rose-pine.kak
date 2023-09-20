@@ -76,7 +76,7 @@ evaluate-commands %sh{
         face global StatusLineValue      ${iris}
         face global StatusCursor         ${base},${text}
         face global Prompt               ${foam},${surface}+b
-        face global MatchingChar         ,,${text}+cu
+        face global MatchingChar         default,${highlight_high}+b
         face global BufferPadding        ${muted},${base}
         face global Whitespace           ${subtle}+f
 
