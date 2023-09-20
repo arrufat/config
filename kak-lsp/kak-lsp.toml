@@ -1,5 +1,5 @@
-snippet_support = true
-verbosity = 2
+snippet_support = false
+verbosity = 0
 
 [server]
 timeout = 1800
@@ -31,8 +31,8 @@ faces = [
     # zig specific
     {token = "struct", face = "type"},
     {token = "struct", face = "type_declaration", modifiers = ["declaration"]},
-    {token = "builtin", face = "meta"},
     {token = "field", face = "property"},
+    {token = "builtin", face = "function"},
     {token = "keywordLiteral", face = "value"},
     {token = "comment", face = "documentation", modifiers = ["documentation"]},
 ]
