@@ -1,6 +1,8 @@
 /*
 !/.gitignore
-!/fish/
+!/fish/config.fish
+!/fish/themes/
+!/fish/conf.d/
 !/fontconfig/
 !/foot/
 !/kak/
