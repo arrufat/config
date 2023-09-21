@@ -11,14 +11,12 @@ evaluate-commands %sh{
     orange="rgb:fe8019"
 
     bg="rgb:282828"
-    bg_alpha="rgba:282828a0"
     bg1="rgb:3c3836"
     bg2="rgb:504945"
     bg3="rgb:665c54"
     bg4="rgb:7c6f64"
 
     fg="rgb:ebdbb2"
-    fg_alpha="rgba:ebdbb2a0"
     fg0="rgb:fbf1c7"
     fg2="rgb:d5c4a1"
     fg3="rgb:bdae93"
@@ -33,7 +31,7 @@ evaluate-commands %sh{
         face global function      ${fg}
         face global string        ${green}
         face global keyword       ${red}
-        face global operator      ${fg}
+        face global operator      ${fg3}
         face global attribute     ${orange}
         face global comment       ${gray}+i
         face global documentation ${green}+i
@@ -63,19 +61,19 @@ evaluate-commands %sh{
         face global list      ${fg}
 
         face global Default            ${fg},${bg}
-        face global PrimarySelection   ${fg_alpha},${blue}+g
-        face global SecondarySelection ${bg_alpha},${blue}+g
+        face global PrimarySelection   default,${bg3}+g
+        face global SecondarySelection default,${bg2}+g
         face global PrimaryCursor      ${bg},${fg}+fg
-        face global SecondaryCursor    ${bg},${bg4}+fg
+        face global SecondaryCursor    ${fg4},${bg4}+fg
         face global PrimaryCursorEol   ${bg},${fg4}+fg
-        face global SecondaryCursorEol ${bg},${bg2}+fg
+        face global SecondaryCursorEol ${fg4},${bg3}+fg
         face global LineNumbers        ${bg4}
         face global LineNumberCursor   ${yellow},${bg1}
         face global LineNumbersWrapped ${bg1}
-        face global MenuForeground     ${bg2},${blue}
-        face global MenuBackground     ${fg},${bg2}
-        face global MenuInfo           ${fg4},${bg2}
-        face global Information        ${fg1},${bg1}
+        face global MenuForeground     ${fg0},${bg1}
+        face global MenuBackground     ${fg4},${bg1}
+        face global MenuInfo           ${fg4},${bg1}
+        face global Information        ${fg},${bg1}
         face global Error              ${red}+b
         face global DiagnosticError    ${red}
         face global DiagnosticWarning  ${yellow}
