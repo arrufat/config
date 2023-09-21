@@ -59,9 +59,9 @@ evaluate-commands %sh{
         face global PrimarySelection     default,${highlight_high}+g
         face global SecondarySelection   default,${highlight_med}+g
         face global PrimaryCursor        ${base},${text}+fg
-        face global SecondaryCursor      ${base},${muted}+fg
+        face global SecondaryCursor      ${surface},${subtle}+fg
         face global PrimaryCursorEol     ${base},${subtle}+fg
-        face global SecondaryCursorEol   ${base},${muted}+fg
+        face global SecondaryCursorEol   ${surface},${muted}+fg
         face global LineNumbers          ${subtle},${base}
         face global LineNumberCursor     ${gold},${base}
         face global LineNumbersWrapped   ${subtle}
