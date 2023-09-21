@@ -1,6 +1,7 @@
 # Rosé Pine theme
 
 evaluate-commands %sh{
+
     base="rgb:191724"
     surface="rgb:1f1d2e"
     overlay="rgb:26233a"
@@ -10,9 +11,11 @@ evaluate-commands %sh{
     love="rgb:eb6f92"
     gold="rgb:f6c177"
     rose="rgb:ebbcba"
-    pine="rgb:31748f"
+    # pine="rgb:31748f"
+    pine="rgb:3e8fb0"
     foam="rgb:9ccfd8"
     iris="rgb:c4a7e7"
+    dawn="rgb:ea9d34"
     highlight_low="rgb:21202e"
     highlight_med="rgb:403d52"
     highlight_high="rgb:524f67"
@@ -27,11 +30,11 @@ evaluate-commands %sh{
         face global string        ${gold}
         face global keyword       ${pine}+bi
         face global operator      ${subtle}
-        face global attribute     ${love}
+        face global attribute     ${dawn}
         face global comment       ${muted}+i
         face global documentation ${gold}+i
         face global meta          ${subtle}
-        face global builtin       ${love}+b
+        face global builtin       ${love}
 
         # Extra faces for kak-lsp
         face global parameter            ${text}+b
@@ -70,6 +73,8 @@ evaluate-commands %sh{
         face global MenuInfo             ${text},${surface}
         face global Information          ${text},${overlay}
         face global Error                ${love}+b
+        face global DiagnosticError      ${love}
+        face global DiagnosticWarning    ${gold}
         face global StatusLine           ${text},${surface}
         face global StatusLineMode       ${gold}+b
         face global StatusLineInfo       ${foam}
@@ -81,8 +86,6 @@ evaluate-commands %sh{
         face global Whitespace           ${subtle}+f
 
         # # Extra faces for kak-lsp
-        face global DiagnosticError           ${love}
-        face global DiagnosticWarning         ${gold}
         face global InfoDefault               Information
         face global InfoBlock                 block
         face global InfoBlockQuote            block
