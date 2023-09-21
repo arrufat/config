@@ -11,11 +11,11 @@ evaluate-commands %sh{
     love="rgb:eb6f92"
     gold="rgb:f6c177"
     rose="rgb:ebbcba"
-    # pine="rgb:31748f"
-    pine="rgb:3e8fb0"
+    pine="rgb:31748f"
+    # pine="rgb:3e8fb0"
     foam="rgb:9ccfd8"
     iris="rgb:c4a7e7"
-    dawn="rgb:ea9d34"
+    # dawn="rgb:ea9d34"
     highlight_low="rgb:21202e"
     highlight_med="rgb:403d52"
     highlight_high="rgb:524f67"
@@ -25,12 +25,12 @@ evaluate-commands %sh{
         face global value         ${iris}
         face global type          ${foam}
         face global variable      ${text}
-        face global module        ${foam}
+        face global module        ${gold}
         face global function      ${rose}
         face global string        ${gold}
-        face global keyword       ${pine}+bi
+        face global keyword       ${pine}+b
         face global operator      ${subtle}
-        face global attribute     ${dawn}
+        face global attribute     ${pine}+i
         face global comment       ${muted}+i
         face global documentation ${gold}+i
         face global meta          ${subtle}
@@ -70,18 +70,18 @@ evaluate-commands %sh{
         face global LineNumbersWrapped   ${subtle}
         face global MenuForeground       ${text},${overlay}
         face global MenuBackground       ${subtle},${surface}
-        face global MenuInfo             ${text},${surface}
+        face global MenuInfo             ${muted},${surface}
         face global Information          ${text},${overlay}
         face global Error                ${love}+b
-        face global DiagnosticError      ${love}
-        face global DiagnosticWarning    ${gold}
+        face global DiagnosticError      ,,${love}+cu
+        face global DiagnosticWarning    ,,${gold}+cu
         face global StatusLine           ${text},${surface}
         face global StatusLineMode       ${gold}+b
         face global StatusLineInfo       ${foam}
         face global StatusLineValue      ${iris}
         face global StatusCursor         ${base},${text}
         face global Prompt               ${foam},${surface}+b
-        face global MatchingChar         default,${highlight_high}+b
+        face global MatchingChar         default,${highlight_low}+b
         face global BufferPadding        ${muted},${base}
         face global Whitespace           ${subtle}+f
 
