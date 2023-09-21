@@ -32,7 +32,7 @@ faces = [
     {token = "struct", face = "type"},
     {token = "struct", face = "type_declaration", modifiers = ["declaration"]},
     {token = "field", face = "property"},
-    {token = "builtin", face = "function"},
+    {token = "builtin", face = "meta"},
     {token = "keywordLiteral", face = "value"},
     {token = "comment", face = "documentation", modifiers = ["documentation"]},
 ]
