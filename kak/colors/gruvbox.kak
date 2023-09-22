@@ -30,7 +30,7 @@ evaluate-commands %sh{
         face global module        ${green}
         face global function      ${fg}
         face global string        ${green}
-        face global keyword       ${red}
+        face global keyword       ${red}+i
         face global operator      ${fg3}
         face global attribute     ${orange}
         face global comment       ${gray}+i
@@ -39,12 +39,13 @@ evaluate-commands %sh{
         face global builtin       ${fg}+b
 
         # Extra faces for kak-lsp
+        face global variable_declaration ${blue}+b
         face global parameter            ${blue}+b
         face global function_declaration ${fg}+b
         face global method               ${fg}+i
         face global method_declaration   ${fg}+ib
         face global property             ${blue}+i
-        face global property_declaration ${blue}+i
+        face global property_declaration ${blue}+ib
         face global type_declaration     ${yellow}+b
         face global value_declaration    ${purple}+b
         face global meta_member          ${aqua}+i
@@ -75,8 +76,8 @@ evaluate-commands %sh{
         face global MenuInfo           ${fg4},${bg1}
         face global Information        ${fg},${bg1}
         face global Error              ${red}+b
-        face global DiagnosticError    ${red}
-        face global DiagnosticWarning  ${yellow}
+        face global DiagnosticError    ,,${red}+uc
+        face global DiagnosticWarning  ,,${yellow}+uc
         face global StatusLine         ${fg},${bg1}
         face global StatusLineMode     ${yellow}+b
         face global StatusLineInfo     ${aqua}
@@ -101,6 +102,6 @@ evaluate-commands %sh{
         face global InfoDiagnosticHint        DiagnosticWarning
         face global InfoDiagnosticInformation StatusLineInfo
         face global InfoDiagnosticWarning     DiagnosticWarning
-        face global InlayHint		      ${gray}
+        face global InlayHint		      ${gray}+i
     "
 }
