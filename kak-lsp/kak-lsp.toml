@@ -7,6 +7,7 @@ timeout = 1800
 [semantic_tokens]
 faces = [
     {token = "variable", face = "variable"},
+    {token = "variable", face = "variable_declaration", modifiers = ["declaration"]},
     {token = "parameter",face = "parameter"},
     {token = "function", face = "function"},
     {token = "function", face = "function_declaration", modifiers = ["declaration"]},
@@ -28,13 +29,14 @@ faces = [
     {token = "concept", face = "concept"},
     {token = "macro", face = "meta"},
     {token = "comment", face = "comment"},
+    {token = "comment", face = "documentation", modifiers = ["documentation"]},
     # zig specific
     {token = "struct", face = "type"},
     {token = "struct", face = "type_declaration", modifiers = ["declaration"]},
     {token = "field", face = "property"},
+    {token = "field", face = "property_declaration", modifiers = ["declaration"]},
     {token = "builtin", face = "meta"},
     {token = "keywordLiteral", face = "value"},
-    {token = "comment", face = "documentation", modifiers = ["documentation"]},
 ]
 
 [language.c_cpp]
