@@ -12,10 +12,8 @@ evaluate-commands %sh{
     gold="rgb:f6c177"
     rose="rgb:ebbcba"
     pine="rgb:31748f"
-    # pine="rgb:3e8fb0"
     foam="rgb:9ccfd8"
     iris="rgb:c4a7e7"
-    # dawn="rgb:ea9d34"
     highlight_low="rgb:21202e"
     highlight_med="rgb:403d52"
     highlight_high="rgb:524f67"
@@ -25,18 +23,19 @@ evaluate-commands %sh{
         face global value         ${iris}
         face global type          ${foam}
         face global variable      ${text}
-        face global module        ${gold}
+        face global module        ${foam}+i
         face global function      ${rose}
         face global string        ${gold}
         face global keyword       ${pine}+b
         face global operator      ${subtle}
-        face global attribute     ${pine}+i
+        face global attribute     ${pine}+ib
         face global comment       ${muted}+i
         face global documentation ${gold}+i
-        face global meta          ${subtle}
-        face global builtin       ${love}
+        face global meta          ${rose}
+        face global builtin       ${subtle}
 
         # Extra faces for kak-lsp
+        face global variable_declaration ${text}+b
         face global parameter            ${text}+b
         face global function_declaration ${rose}+b
         face global method               ${rose}+i
@@ -58,7 +57,7 @@ evaluate-commands %sh{
         face global bullet    ${subtle}
         face global list      ${text}
 
-        face global Default              ${text},${base}
+        face global Default              ${text},${surface}
         face global PrimarySelection     default,${highlight_high}+g
         face global SecondarySelection   default,${highlight_med}+g
         face global PrimaryCursor        ${base},${text}+fg
@@ -69,18 +68,18 @@ evaluate-commands %sh{
         face global LineNumberCursor     ${gold},${base}
         face global LineNumbersWrapped   ${subtle}
         face global MenuForeground       ${text},${overlay}
-        face global MenuBackground       ${subtle},${surface}
-        face global MenuInfo             ${muted},${surface}
-        face global Information          ${text},${overlay}
+        face global MenuBackground       ${subtle},${overlay}
+        face global MenuInfo             ${muted},${overlay}
+        face global Information          ${text},${surface}
         face global Error                ${love}+b
         face global DiagnosticError      ,,${love}+cu
         face global DiagnosticWarning    ,,${gold}+cu
-        face global StatusLine           ${text},${surface}
+        face global StatusLine           ${text},${base}
         face global StatusLineMode       ${gold}+b
         face global StatusLineInfo       ${foam}
         face global StatusLineValue      ${iris}
         face global StatusCursor         ${base},${text}
-        face global Prompt               ${foam},${surface}+b
+        face global Prompt               ${foam},${base}+b
         face global MatchingChar         default,${highlight_low}+b
         face global BufferPadding        ${muted},${base}
         face global Whitespace           ${subtle}+f
