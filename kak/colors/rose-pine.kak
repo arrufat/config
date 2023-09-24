@@ -74,7 +74,7 @@ evaluate-commands %sh{
         face global Error                ${love}+b
         face global DiagnosticError      ,,${love}+cu
         face global DiagnosticWarning    ,,${gold}+cu
-        face global StatusLine           ${text},${base}
+        face global StatusLine           ${text},${overlay}
         face global StatusLineMode       ${gold}+b
         face global StatusLineInfo       ${foam}
         face global StatusLineValue      ${iris}
