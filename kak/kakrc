@@ -1,7 +1,6 @@
 # User preferences
 # ────────────────
 
-colorscheme gruvbox
 set-option global startup_info_version 20221031
 set-option global grepcmd 'rg --column --smart-case --sort path'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
@@ -177,4 +176,4 @@ evaluate-commands %sh{ [ -f $kak_config/local.kak ] && echo "source $kak_config/
 
 # Set the color scheme at the end because of the LSP defined fonts
 # ────────────────────────────────────────────────────────────────
-colorscheme gruvbox
+colorscheme rose-pine
