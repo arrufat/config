@@ -159,6 +159,11 @@ map global user -docstring 'zenity mode' z ':enter-user-mode zenity<ret>'
 
 source "%val{config}/git.kak"
 
+# Syntax highlighting tweaks
+# ──────────────────────────
+
+source "%val{config}/syntax.kak"
+
 # kak-lsp configuration
 # ─────────────────────
 
