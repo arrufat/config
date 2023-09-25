@@ -18,17 +18,49 @@ evaluate-commands %sh{
     highlight_med="rgb:403d52"
     highlight_high="rgb:524f67"
 
+    # base="rgb:232136"
+    # surface="rgb:2a273f"
+    # overlay="rgb:393552"
+    # muted="rgb:6e6a86"
+    # subtle="rgb:908caa"
+    # text="rgb:e0def4"
+    # love="rgb:eb6f92"
+    # gold="rgb:f6c177"
+    # rose="rgb:ebbcba"
+    # pine="rgb:31748f"
+    # foam="rgb:9ccfd8"
+    # iris="rgb:c4a7e7"
+    # highlight_low="rgb:2a283e"
+    # highlight_med="rgb:44415a"
+    # highlight_high="rgb:56526e"
+
+    # base="rgb:faf4ed"
+    # surface="rgb:fffaf3"
+    # overlay="rgb:f2e9e1"
+    # muted="rgb:9893a5"
+    # subtle="rgb:797593"
+    # text="rgb:575279"
+    # love="rgb:b4637a"
+    # gold="rgb:ea9d34"
+    # rose="rgb:d7827e"
+    # pine="rgb:286983"
+    # foam="rgb:56949f"
+    # iris="rgb:907aa9"
+    # highlight_low="rgb:f4ede8"
+    # highlight_med="rgb:dfdad9"
+    # highlight_high="rgb:cecacd"
+
     echo "
         # Code highlighting
-        face global value         ${iris}
+        face global value         ${gold}
         face global type          ${foam}
         face global variable      ${text}
-        face global module        ${foam}+i
+        face global module        ${iris}
         face global function      ${rose}
         face global string        ${gold}
-        face global keyword       ${pine}+b
+        face global keyword       ${pine}+bi
         face global operator      ${subtle}
-        face global attribute     ${pine}+ib
+        face global attribute     ${love}+i
         face global comment       ${muted}+i
         face global documentation ${gold}+i
         face global meta          ${rose}
@@ -36,10 +68,10 @@ evaluate-commands %sh{
 
         # Extra faces for kak-lsp
         face global variable_declaration ${text}+b
-        face global parameter            ${text}+b
+        face global parameter            ${iris}
         face global function_declaration ${rose}+b
-        face global method               ${rose}+i
-        face global method_declaration   ${rose}+ib
+        face global method               ${iris}+i
+        face global method_declaration   ${iris}+ib
         face global property             ${text}+i
         face global property_declaration ${text}+i
         face global type_declaration     ${foam}+b
@@ -66,20 +98,20 @@ evaluate-commands %sh{
         face global SecondaryCursorEol   ${surface},${muted}+fg
         face global LineNumbers          ${subtle},${base}
         face global LineNumberCursor     ${gold},${base}
-        face global LineNumbersWrapped   ${subtle}
+        face global LineNumbersWrapped   ${muted},${base}
         face global MenuForeground       ${text},${overlay}
         face global MenuBackground       ${subtle},${overlay}
         face global MenuInfo             ${muted},${overlay}
-        face global Information          ${text},${surface}
+        face global Information          ${text},${overlay}
         face global Error                ${love}+b
         face global DiagnosticError      ,,${love}+cu
         face global DiagnosticWarning    ,,${gold}+cu
         face global StatusLine           ${text},${overlay}
-        face global StatusLineMode       ${gold}+b
-        face global StatusLineInfo       ${foam}
-        face global StatusLineValue      ${iris}
+        face global StatusLineMode       ${rose}+b
+        face global StatusLineInfo       ${iris}
+        face global StatusLineValue      ${gold}
         face global StatusCursor         ${base},${text}
-        face global Prompt               ${foam},${base}+b
+        face global Prompt               ${foam},${surface}+b
         face global MatchingChar         default,${highlight_low}+b
         face global BufferPadding        ${muted},${base}
         face global Whitespace           ${subtle}+f
@@ -87,7 +119,7 @@ evaluate-commands %sh{
         # # Extra faces for kak-lsp
         face global InfoDefault               Information
         face global InfoBlock                 block
-        face global InfoBlockQuote            block
+        face global InfoBlockQuote            ${foam}+i
         face global InfoBullet                bullet
         face global InfoHeader                header
         face global InfoLink                  link
@@ -95,7 +127,7 @@ evaluate-commands %sh{
         face global InfoMono                  builtin
         face global InfoRule                  comment
         face global InfoDiagnosticError       DiagnosticError
-        face global InfoDiagnosticHint        DiagnosticWarning
+        face global InfoDiagnosticHint        ${iris}
         face global InfoDiagnosticInformation StatusLineInfo
         face global InfoDiagnosticWarning     DiagnosticWarning
         face global InlayHint		      ${subtle}
