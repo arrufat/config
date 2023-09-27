@@ -26,9 +26,9 @@ evaluate-commands %sh{
         # Code highlighting
         face global value         ${purple}
         face global type          ${yellow}
-        face global variable      ${blue}
+        face global variable      ${fg}
         face global module        ${green}
-        face global function      ${fg}
+        face global function      ${blue}
         face global string        ${green}
         face global keyword       ${red}+i
         face global operator      ${fg3}
@@ -39,11 +39,11 @@ evaluate-commands %sh{
         face global builtin       ${fg}+b
 
         # Extra faces for kak-lsp
-        face global variable_declaration ${blue}+b
-        face global parameter            ${blue}+b
-        face global function_declaration ${fg}+b
-        face global method               ${fg}+i
-        face global method_declaration   ${fg}+ib
+        face global variable_declaration ${fg}+b
+        face global parameter            ${fg}+b
+        face global function_declaration ${blue}+b
+        face global method               ${blue}+i
+        face global method_declaration   ${blue}+ib
         face global property             ${blue}+i
         face global property_declaration ${blue}+ib
         face global type_declaration     ${yellow}+b
