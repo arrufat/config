@@ -68,7 +68,7 @@ evaluate-commands %sh{
 
         # Extra faces for kak-lsp
         face global variable_declaration ${text}+b
-        face global parameter            ${iris}
+        face global parameter            variable_declaration
         face global function_declaration ${rose}+b
         face global method               ${iris}+i
         face global method_declaration   ${iris}+ib
