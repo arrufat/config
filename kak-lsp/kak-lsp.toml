@@ -8,7 +8,7 @@ timeout = 1800
 faces = [
     {token = "variable", face = "variable"},
     {token = "variable", face = "variable_declaration", modifiers = ["declaration"]},
-    {token = "parameter",face = "parameter"},
+    {token = "parameter",face = "parameter", modifiers = ["declaration"]},
     {token = "function", face = "function"},
     {token = "function", face = "function_declaration", modifiers = ["declaration"]},
     {token = "method", face = "method"},
