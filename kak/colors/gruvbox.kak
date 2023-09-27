@@ -44,8 +44,8 @@ evaluate-commands %sh{
         face global function_declaration ${blue}+b
         face global method               ${blue}+i
         face global method_declaration   ${blue}+ib
-        face global property             ${blue}+i
-        face global property_declaration ${blue}+ib
+        face global property             ${fg}+i
+        face global property_declaration ${fg}+ib
         face global type_declaration     ${yellow}+b
         face global value_declaration    ${purple}+b
         face global meta_member          ${aqua}+i
