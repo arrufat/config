@@ -1,0 +1,3 @@
+[submodule "/home/adria/.config/tmux/plugins/tpm"]
+	path = /home/adria/.config/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
