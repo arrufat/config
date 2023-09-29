@@ -6,6 +6,8 @@ evaluate-commands %sh{
     nord1="rgb:3b4252"
     nord2="rgb:434c5e"
     nord3="rgb:4c566a"
+    # see: https://github.com/nordtheme/nord/issues/94
+    nord3_bright="rgb:616e88"
     nord4="rgb:d8dee9"
     nord5="rgb:e5e9f0"
     nord6="rgb:eceff4"
@@ -30,7 +32,7 @@ evaluate-commands %sh{
         face global keyword       ${nord9}+bi
         face global operator      ${nord9}
         face global attribute     ${nord12}+i
-        face global comment       ${nord3}+i
+        face global comment       ${nord3_bright}+i
         face global documentation ${nord14}+i
         face global meta          ${nord10}
         face global builtin       ${nord8}+b
@@ -71,7 +73,7 @@ evaluate-commands %sh{
         face global MenuForeground       ${nord6},${nord2}
         face global MenuBackground       ${nord4},${nord1}
         face global MenuInfo             ${nord4},${nord1}
-        face global Information          ${nord4},${nord2}
+        face global Information          ${nord4},${nord1}
         face global Error                ${nord11}+b
         face global DiagnosticError      ,,${nord11}+cu
         face global DiagnosticWarning    ,,${nord14}+cu
