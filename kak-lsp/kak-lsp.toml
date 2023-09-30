@@ -28,8 +28,8 @@ faces = [
     {token = "typeParameter", face = "type_parameter"},
     {token = "concept", face = "concept"},
     {token = "macro", face = "meta"},
-    {token = "comment", face = "comment"},
     {token = "comment", face = "documentation", modifiers = ["documentation"]},
+    {token = "operator", face = "operator"},
     # zig specific
     {token = "struct", face = "type"},
     {token = "struct", face = "type_declaration", modifiers = ["declaration"]},
@@ -37,6 +37,8 @@ faces = [
     {token = "field", face = "property_declaration", modifiers = ["declaration"]},
     {token = "builtin", face = "meta"},
     {token = "keywordLiteral", face = "value"},
+    {token = "regexp", face = "regexp"},
+    {token = "label", face = "label"},
 ]
 
 [language.c_cpp]
