@@ -68,7 +68,7 @@ evaluate-commands %sh{
         face global PrimaryCursorEol     ${nord0},${nord3}+fg
         face global SecondaryCursorEol   ${nord1},${nord2}+fg
         face global LineNumbers          ${nord3},${nord0}
-        face global LineNumberCursor     ${nord5},${nord0}
+        face global LineNumberCursor     ${nord4},${nord2}
         face global LineNumbersWrapped   ${nord2}
         face global MenuForeground       ${nord6},${nord2}
         face global MenuBackground       ${nord4},${nord1}
@@ -78,12 +78,12 @@ evaluate-commands %sh{
         face global DiagnosticError      ,,${nord11}+cu
         face global DiagnosticWarning    ,,${nord14}+cu
         face global StatusLine           ${nord4},${nord1}
-        face global StatusLineMode       ${nord14}+b
+        face global StatusLineMode       ${nord8}+b
         face global StatusLineInfo       ${nord7}
         face global StatusLineValue      ${nord15}
-        face global StatusCursor         ${nord0},${nord4}
-        face global Prompt               ${nord7},${nord1}+b
-        face global MatchingChar         default,${nord2}+b
+        face global StatusCursor         ${nord1},${nord4}
+        face global Prompt               ${nord8},${nord1}+b
+        face global MatchingChar         default,${nord1}+b
         face global BufferPadding        ${nord3},${nord0}
         face global Whitespace           ${nord3}+f
 
