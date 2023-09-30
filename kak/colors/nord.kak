@@ -34,10 +34,12 @@ evaluate-commands %sh{
         face global attribute     ${nord12}+i
         face global comment       ${nord3_bright}+i
         face global documentation ${nord14}+i
-        face global meta          ${nord10}
-        face global builtin       ${nord8}+b
 
         # Extra faces for kak-lsp
+        face global meta                 ${nord10}
+        face global builtin              ${nord8}+b
+        face global regexp               ${nord13}
+        face global label                ${nord9}
         face global variable_declaration ${nord4}+b
         face global parameter            variable_declaration
         face global function_declaration ${nord8}+b
