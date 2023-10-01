@@ -6,37 +6,62 @@ timeout = 1800
 
 [semantic_tokens]
 faces = [
+    # values
+    {token = "number", face = "value"},
+    {token = "enumMember", face = "value"},
+    {token = "enumMember", face = "value_declaration", modifiers = ["declaration"]},
+    {token = "keywordLiteral", face = "value"},
+
+    # types
+    {token = "type", face = "type"},
+    {token = "class", face = "type"},
+    {token = "enum", face = "type"},
+    {token = "struct", face = "type"},
+    {token = "type", face = "type_declaration", modifiers = ["declaration"]},
+    {token = "class", face = "type_declaration", modifiers = ["declaration"]},
+    {token = "enum", face = "type_declaration", modifiers = ["declaration"]},
+    {token = "struct", face = "type_declaration", modifiers = ["declaration"]},
+
+    # variables
     {token = "variable", face = "variable"},
     {token = "variable", face = "variable_declaration", modifiers = ["declaration"]},
-    {token = "parameter",face = "parameter", modifiers = ["declaration"]},
+    {token = "parameter", face = "parameter", modifiers = ["declaration"]},
+    {token = "property", face = "property"},
+    {token = "property", face = "property_declaration", modifiers = ["declaration"]},
+
+    # functions
     {token = "function", face = "function"},
     {token = "function", face = "function_declaration", modifiers = ["declaration"]},
     {token = "method", face = "method"},
     {token = "method", face = "method_declaration", modifiers = ["declaration"]},
-    {token = "property", face = "property"},
-    {token = "property", face = "property_declaration", modifiers = ["declaration"]},
-    {token = "class", face = "type"},
-    {token = "class", face = "type_declaration", modifiers = ["declaration"]},
-    {token = "enum", face = "type"},
-    {token = "enum", face = "type_declaration", modifiers = ["declaration"]},
-    {token = "enumMember", face = "value"},
-    {token = "enumMember", face = "value_declaration", modifiers = ["declaration"]},
-    {token = "type", face = "type"},
-    {token = "type", face = "type_declaration", modifiers = ["declaration"]},
+
+    # strings
+    # {token = "string", face = "string"},
+
+    # keywords
+    {token = "keyword", face = "keyword"},
+
+    # operator
+    {token = "operator", face = "operator"},
+
+    # attributes
+    {token = "attribute", face = "attribute"},
+
+    # comments
+    {token = "comment", face = "comment"},
+    {token = "comment", face = "documentation", modifiers = ["documentation"]},
+
+    # meta
+    {token = "macro", face = "meta"},
     {token = "dependent", face = "meta_member"},
+
+    # builtins
+    {token = "builtin", face = "builtin"},
+
+    # other
     {token = "namespace", face = "module"},
     {token = "typeParameter", face = "type_parameter"},
     {token = "concept", face = "concept"},
-    {token = "macro", face = "meta"},
-    {token = "comment", face = "documentation", modifiers = ["documentation"]},
-    {token = "operator", face = "operator"},
-    # zig specific
-    {token = "struct", face = "type"},
-    {token = "struct", face = "type_declaration", modifiers = ["declaration"]},
-    {token = "field", face = "property"},
-    {token = "field", face = "property_declaration", modifiers = ["declaration"]},
-    {token = "builtin", face = "meta"},
-    {token = "keywordLiteral", face = "value"},
     {token = "regexp", face = "regexp"},
     {token = "label", face = "label"},
 ]
