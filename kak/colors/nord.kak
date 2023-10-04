@@ -79,7 +79,7 @@ evaluate-commands %sh{
         face global Information          ${nord4},${nord1}
         face global Error                ${nord11}+b
         face global DiagnosticError      ,,${nord11}+cu
-        face global DiagnosticWarning    ,,${nord14}+cu
+        face global DiagnosticWarning    ,,${nord13}+cu
         face global StatusLine           ${nord4},${nord1}
         face global StatusLineMode       ${nord8}+b
         face global StatusLineInfo       ${nord7}
