@@ -73,10 +73,11 @@ evaluate-commands %sh{
         face global LineNumbers          ${nord3},${nord0}
         face global LineNumberCursor     ${nord4},${nord2}
         face global LineNumbersWrapped   ${nord2}
-        face global MenuForeground       ${nord6},${nord2}
+        face global MenuForeground       ${nord6},${nord3}
         face global MenuBackground       ${nord4},${nord1}
         face global MenuInfo             ${nord4},${nord1}
         face global Information          ${nord4},${nord1}
+        face global InlineInformation    ${nord4},${nord1}
         face global Error                ${nord11}+b
         face global DiagnosticError      ,,${nord11}+cu
         face global DiagnosticWarning    ,,${nord13}+cu
@@ -93,17 +94,17 @@ evaluate-commands %sh{
         # # Extra faces for kak-lsp
         face global InfoDefault               Information
         face global InfoBlock                 block
-        face global InfoBlockQuote            block
+        face global InfoBlockQuote            ${nord7}+i
         face global InfoBullet                bullet
         face global InfoHeader                header
         face global InfoLink                  link
         face global InfoLinkMono              ${nord15}+u
         face global InfoMono                  builtin
         face global InfoRule                  comment
-        face global InfoDiagnosticError       DiagnosticError
-        face global InfoDiagnosticHint        DiagnosticWarning
+        face global InfoDiagnosticError       ${nord11}
+        face global InfoDiagnosticHint        ${nord15}
         face global InfoDiagnosticInformation StatusLineInfo
-        face global InfoDiagnosticWarning     DiagnosticWarning
-        face global InlayHint                 ${nord2}
+        face global InfoDiagnosticWarning     ${nord13}
+        face global InlayHint                 ${nord3}
     "
 }
