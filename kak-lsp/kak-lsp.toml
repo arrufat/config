@@ -13,7 +13,7 @@ faces = [
     {token = "keywordLiteral", face = "value"},
 
     # types
-    {token = "type", face = "type"},
+    # {token = "type", face = "type"},
     {token = "class", face = "type"},
     {token = "enum", face = "type"},
     {token = "struct", face = "type"},
@@ -76,6 +76,10 @@ args = ["--clang-tidy", "--compile-commands-dir=build", "--suggest-missing-inclu
 [language.python]
 filetypes = ["python"]
 roots = ["requirements.txt", "setup.py", ".git", ".hg"]
+
+# command = "pyright-langserver"
+# args = ["--stdio"]
+
 command = "pylsp"
 settings_section = "pylsp"
 [language.python.settings.pylsp]
