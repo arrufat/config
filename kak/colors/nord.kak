@@ -45,8 +45,8 @@ evaluate-commands %sh{
         face global property_declaration ${nord4}+i
         face global parameter            variable_declaration
         face global function_declaration ${nord8}+b
-        face global method_declaration   ${nord8}+ib
         face global method               ${nord8}+i
+        face global method_declaration   ${nord8}+ib
         face global meta_member          ${nord2}+i
         face global type_parameter       ${nord7}+b
         face global concept              ${nord7}+i
@@ -55,13 +55,13 @@ evaluate-commands %sh{
         face global label                ${nord10}
 
         # Markdown highlighting
-        face global title     ${nord14}+b
+        face global title     ${nord8}+b
         face global header    ${nord8}
-        face global mono      ${nord10}
+        face global mono      ${nord9}
         face global block     ${nord7}
-        face global link      ${nord15}+u
-        face global bullet    ${nord9}
-        face global list      ${nord9}
+        face global link      ${nord9}+u
+        face global bullet    ${nord8}
+        face global list      ${nord4}
 
         face global Default              ${nord6},${nord0}
         face global PrimarySelection     default,${nord2}+g
@@ -91,7 +91,7 @@ evaluate-commands %sh{
         face global BufferPadding        ${nord3},${nord0}
         face global Whitespace           ${nord3}+f
 
-        # # Extra faces for kak-lsp
+        # Extra faces for kak-lsp
         face global InfoDefault               Information
         face global InfoBlock                 block
         face global InfoBlockQuote            ${nord7}+i

@@ -55,7 +55,7 @@ evaluate-commands %sh{
         face global value         ${gold}
         face global type          ${foam}
         face global variable      ${text}
-        face global module        ${iris}
+        face global module        ${foam}
         face global function      ${rose}
         face global string        ${gold}
         face global keyword       ${pine}+bi
@@ -63,22 +63,25 @@ evaluate-commands %sh{
         face global attribute     ${love}+i
         face global comment       ${muted}+i
         face global documentation ${gold}+i
-        face global meta          ${rose}
-        face global builtin       ${subtle}
+        face global meta          ${subtle}
+        face global builtin       ${rose}
 
         # Extra faces for kak-lsp
+        face global value_declaration    ${gold}+b
+        face global type_declaration     ${foam}+b
+        face global property             ${text}+i
         face global variable_declaration ${text}+b
+        face global property_declaration ${text}+i
         face global parameter            variable_declaration
         face global function_declaration ${rose}+b
         face global method               ${iris}+i
         face global method_declaration   ${iris}+ib
-        face global property             ${text}+i
-        face global property_declaration ${text}+i
-        face global type_declaration     ${foam}+b
-        face global value_declaration    ${foam}+b
         face global meta_member          ${subtle}+i
         face global type_parameter       ${foam}+b
         face global concept              ${foam}+i
+        face global escape		 ${foam}
+        face global regexp		 ${foam}
+        face global label		 ${subtle}
 
         # Markdown highlighting
         face global title     ${gold}+b
@@ -89,26 +92,27 @@ evaluate-commands %sh{
         face global bullet    ${subtle}
         face global list      ${text}
 
-        face global Default              ${text},${surface}
+        face global Default              ${text},${base}
         face global PrimarySelection     default,${highlight_high}+g
         face global SecondarySelection   default,${highlight_med}+g
         face global PrimaryCursor        ${base},${text}+fg
         face global SecondaryCursor      ${surface},${subtle}+fg
         face global PrimaryCursorEol     ${base},${subtle}+fg
         face global SecondaryCursorEol   ${surface},${muted}+fg
-        face global LineNumbers          ${subtle},${base}
-        face global LineNumberCursor     ${gold},${base}
-        face global LineNumbersWrapped   ${muted},${base}
+        face global LineNumbers          ${subtle},${surface}
+        face global LineNumberCursor     ${gold},${surface}
+        face global LineNumbersWrapped   ${muted},${surface}
         face global MenuForeground       ${text},${overlay}
         face global MenuBackground       ${subtle},${overlay}
         face global MenuInfo             ${muted},${overlay}
         face global Information          ${text},${overlay}
+        face global InlineInformation    ${text},${overlay}
         face global Error                ${love}+b
         face global DiagnosticError      ,,${love}+cu
         face global DiagnosticWarning    ,,${gold}+cu
         face global StatusLine           ${text},${overlay}
         face global StatusLineMode       ${rose}+b
-        face global StatusLineInfo       ${iris}
+        face global StatusLineInfo       ${foam}
         face global StatusLineValue      ${gold}
         face global StatusCursor         ${base},${text}
         face global Prompt               ${foam},${surface}+b
