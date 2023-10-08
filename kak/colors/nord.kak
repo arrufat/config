@@ -40,18 +40,16 @@ evaluate-commands %sh{
         # Extra code highlighting faces for kak-lsp
         face global value_declaration    ${nord15}+b
         face global type_declaration     ${nord7}+b
-        face global property             ${nord4}+i
         face global variable_declaration ${nord4}+b
-        face global property_declaration ${nord4}+i
-        face global parameter            variable_declaration
+        face global property             ${nord4}+i
+        face global property_declaration ${nord4}+ib
         face global function_declaration ${nord8}+b
         face global method               ${nord8}+i
         face global method_declaration   ${nord8}+ib
         face global meta_member          ${nord2}+i
-        face global type_parameter       ${nord7}+b
         face global concept              ${nord7}+i
         face global escape               ${nord13}
-        face global regexp               ${nord13}
+        face global regexp               ${nord13}+i
         face global label                ${nord10}
 
         # Markdown highlighting
