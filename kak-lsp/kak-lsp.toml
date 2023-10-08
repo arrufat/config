@@ -9,31 +9,35 @@ faces = [
     # values
     {token = "number", face = "value"},
     {token = "enumMember", face = "value"},
-    {token = "enumMember", face = "value_declaration", modifiers = ["declaration"]},
+    {token = "enumMember", modifiers = ["declaration"], face = "value_declaration"},
     {token = "keywordLiteral", face = "value"},
 
     # types
-    # {token = "type", face = "type"},
+    {token = "type", face = "type"},
     {token = "class", face = "type"},
     {token = "enum", face = "type"},
     {token = "struct", face = "type"},
-    {token = "type", face = "type_declaration", modifiers = ["declaration"]},
-    {token = "class", face = "type_declaration", modifiers = ["declaration"]},
-    {token = "enum", face = "type_declaration", modifiers = ["declaration"]},
-    {token = "struct", face = "type_declaration", modifiers = ["declaration"]},
+    {token = "type", modifiers = ["declaration"], face = "type_declaration"},
+    {token = "class", modifiers = ["declaration"], face = "type_declaration"},
+    {token = "enum", modifiers = ["declaration"], face = "type_declaration"},
+    {token = "struct", modifiers = ["declaration"], face = "type_declaration"},
+    {token = "typeParameter", face = "type_declaration"},
 
     # variables
     {token = "variable", face = "variable"},
-    {token = "variable", face = "variable_declaration", modifiers = ["declaration"]},
-    {token = "parameter", face = "parameter", modifiers = ["declaration"]},
+    {token = "variable", modifiers = ["declaration"], face = "variable_declaration"},
+    {token = "parameter", modifiers = ["declaration"], face = "variable_declaration"},
     {token = "property", face = "property"},
-    {token = "property", face = "property_declaration", modifiers = ["declaration"]},
+    {token = "property", modifiers = ["declaration"], face = "property_declaration"},
+
+    # modules
+    {token = "namespace", face = "module"},
 
     # functions
     {token = "function", face = "function"},
-    {token = "function", face = "function_declaration", modifiers = ["declaration"]},
+    {token = "function", modifiers = ["declaration"], face = "function_declaration"},
     {token = "method", face = "method"},
-    {token = "method", face = "method_declaration", modifiers = ["declaration"]},
+    {token = "method", modifiers = ["declaration"], face = "method_declaration"},
 
     # strings
     # {token = "string", face = "string"},
@@ -49,7 +53,7 @@ faces = [
 
     # comments
     {token = "comment", face = "comment"},
-    {token = "comment", face = "documentation", modifiers = ["documentation"]},
+    {token = "comment", modifiers = ["documentation"], face = "documentation"},
 
     # meta
     {token = "macro", face = "meta"},
@@ -59,8 +63,6 @@ faces = [
     {token = "builtin", face = "builtin"},
 
     # other
-    {token = "namespace", face = "module"},
-    {token = "typeParameter", face = "type_parameter"},
     {token = "concept", face = "concept"},
     {token = "regexp", face = "regexp"},
     {token = "label", face = "label"},
