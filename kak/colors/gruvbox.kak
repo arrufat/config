@@ -36,7 +36,7 @@ evaluate-commands %sh{
         face global comment       ${gray}+i
         face global documentation ${green}+i
         face global meta          ${aqua}
-        face global builtin       ${fg}+b
+        face global builtin       ${aqua}
 
         # Extra faces for kak-lsp
         face global variable_declaration ${fg}+b
