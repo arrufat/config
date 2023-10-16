@@ -26,7 +26,7 @@ evaluate-commands %sh{
         face global value         ${nord15}
         face global type          ${nord7}
         face global variable      ${nord4}
-        face global module        ${nord7}
+        face global module        ${nord7}+i
         face global function      ${nord8}
         face global string        ${nord14}
         face global keyword       ${nord9}
@@ -69,17 +69,17 @@ evaluate-commands %sh{
         face global PrimaryCursorEol     ${nord0},${nord3}+fg
         face global SecondaryCursorEol   ${nord1},${nord2}+fg
         face global LineNumbers          ${nord3},${nord0}
-        face global LineNumberCursor     ${nord4},${nord2}
+        face global LineNumberCursor     ${nord5},${nord2}
         face global LineNumbersWrapped   ${nord2}
-        face global MenuForeground       ${nord6},${nord3}
+        face global MenuForeground       ${nord5},${nord3}+b
         face global MenuBackground       ${nord4},${nord1}
         face global MenuInfo             ${nord4},${nord1}
-        face global Information          ${nord4},${nord1}
+        face global Information          ${nord5},${nord1}
         face global InlineInformation    ${nord4},${nord1}
         face global Error                ${nord11}+b
         face global DiagnosticError      ,,${nord11}+cu
         face global DiagnosticWarning    ,,${nord13}+cu
-        face global StatusLine           ${nord4},${nord1}
+        face global StatusLine           ${nord5},${nord2}
         face global StatusLineMode       ${nord8}+b
         face global StatusLineInfo       ${nord7}
         face global StatusLineValue      ${nord15}
