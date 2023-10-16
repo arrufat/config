@@ -66,22 +66,20 @@ evaluate-commands %sh{
         face global meta          ${subtle}
         face global builtin       ${rose}
 
-        # Extra faces for kak-lsp
+        # Extra code highlighting faces for kak-lsp
         face global value_declaration    ${gold}+b
         face global type_declaration     ${foam}+b
-        face global property             ${text}+i
         face global variable_declaration ${text}+b
+        face global property             ${text}+i
         face global property_declaration ${text}+i
-        face global parameter            variable_declaration
         face global function_declaration ${rose}+b
         face global method               ${iris}+i
         face global method_declaration   ${iris}+ib
         face global meta_member          ${subtle}+i
-        face global type_parameter       ${foam}+b
         face global concept              ${foam}+i
-        face global escape		 ${foam}
-        face global regexp		 ${foam}
-        face global label		 ${subtle}
+        face global escape               ${foam}
+        face global regexp               ${foam}
+        face global label                ${subtle}
 
         # Markdown highlighting
         face global title     ${gold}+b
@@ -115,7 +113,7 @@ evaluate-commands %sh{
         face global StatusLineInfo       ${foam}
         face global StatusLineValue      ${gold}
         face global StatusCursor         ${base},${text}
-        face global Prompt               ${foam},${surface}+b
+        face global Prompt               ${foam},${overlay}+b
         face global MatchingChar         default,${highlight_low}+b
         face global BufferPadding        ${muted},${base}
         face global Whitespace           ${subtle}+f
@@ -130,10 +128,10 @@ evaluate-commands %sh{
         face global InfoLinkMono              ${iris}+u
         face global InfoMono                  builtin
         face global InfoRule                  comment
-        face global InfoDiagnosticError       DiagnosticError
+        face global InfoDiagnosticError       ${love}
         face global InfoDiagnosticHint        ${iris}
         face global InfoDiagnosticInformation StatusLineInfo
         face global InfoDiagnosticWarning     DiagnosticWarning
-        face global InlayHint		      ${subtle}
+        face global InlayHint                 ${subtle}
     "
 }
