@@ -71,19 +71,19 @@ evaluate-commands %sh{
         face global LineNumbers          ${nord3},${nord0}
         face global LineNumberCursor     ${nord5},${nord2}
         face global LineNumbersWrapped   ${nord2}
-        face global MenuForeground       ${nord5},${nord3}+b
+        face global MenuForeground       ${nord6},${nord3}+b
         face global MenuBackground       ${nord4},${nord1}
         face global MenuInfo             ${nord4},${nord1}
-        face global Information          ${nord5},${nord1}
+        face global Information          ${nord5},${nord2}
         face global InlineInformation    ${nord4},${nord1}
         face global Error                ${nord11}+b
         face global DiagnosticError      ,,${nord11}+cu
         face global DiagnosticWarning    ,,${nord13}+cu
         face global StatusLine           ${nord5},${nord2}
         face global StatusLineMode       ${nord8}+b
-        face global StatusLineInfo       ${nord7}
+        face global StatusLineInfo       ${nord7},${nord2}
         face global StatusLineValue      ${nord15}
-        face global StatusCursor         ${nord1},${nord4}
+        face global StatusCursor         ${nord1},${nord5}
         face global Prompt               ${nord8},${nord2}+b
         face global MatchingChar         default,${nord1}+b
         face global BufferPadding        ${nord3},${nord0}
