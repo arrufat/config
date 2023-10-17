@@ -84,7 +84,7 @@ evaluate-commands %sh{
         face global StatusLineInfo       ${nord7}
         face global StatusLineValue      ${nord15}
         face global StatusCursor         ${nord1},${nord4}
-        face global Prompt               ${nord8},${nord1}+b
+        face global Prompt               ${nord8},${nord2}+b
         face global MatchingChar         default,${nord1}+b
         face global BufferPadding        ${nord3},${nord0}
         face global Whitespace           ${nord3}+f
