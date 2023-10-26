@@ -26,7 +26,7 @@ hook global WinSetOption filetype=(c|cpp) %{
 }
 
 hook global WinSetOption filetype=python %{
-    set-option window formatcmd 'black -l 99 -q -'
+    set-option window formatcmd 'ruff format -'
     set-option window lintcmd 'ruff'
 }
 
