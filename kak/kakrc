@@ -41,6 +41,20 @@ map global normal <c-a> ': inc %val{count} +<ret>'
 map global normal <c-x> ': inc %val{count} -<ret>'
 
 
+# Preview line in buffer (numb.nvim-like)
+# ───────────────────────────────────────
+declare-option -hidden int-list jump_back_line
+define-command -override -hidden jump-to-line %{
+    set-option global jump_back_line %val{cursor_line} %val{cursor_char_column}
+    prompt ':' nop \
+        -on-abort %{
+            edit %val{bufname} %opt{jump_back_line}
+        } \
+        -on-change %{
+            try %{ edit %val{bufname} %val{text} }
+        }
+}
+
 # Use tab for indentation in insert mode
 # ──────────────────────────────────────
 hook global InsertChar \t %{ try %{
@@ -149,6 +163,7 @@ map global user -docstring 'disable autocomplete' A ':set-option -remove buffer 
 map global user -docstring 'edit kakrc' e ':e ~/.config/kak/kakrc<ret>'
 map global user -docstring 'clean tabs and trailing whitespace in selections' c ':clean-selections<ret>'
 map global user -docstring 'clean tabs and trailing whitespace in the buffer' C ':clean-buffer<ret>'
+map global user -docstring 'jump to line' j ':jump-to-line<ret>'
 map global user -docstring 'qalc mode' q ':enter-user-mode qalc<ret>'
 map global user -docstring 'repl mode' r ':enter-user-mode repl<ret>'
 map global user -docstring 'spell mode' s ':enter-user-mode spell<ret>'
