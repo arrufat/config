@@ -85,14 +85,14 @@ roots = ["requirements.txt", "setup.py", ".git", ".hg"]
 command = "pylsp"
 settings_section = "pylsp"
 [language.python.settings.pylsp]
-pylsp.plugins.jedi_completion.include_params = true
+pylsp.plugins.jedi_completion.include_params=true
 pylsp.plugins.pycodestyle.enabled=false
 pylsp.plugins.mccabe.enabled=false
 pylsp.plugins.pyflakes.enabled=false
-pylsp.plugins.black.enabled=true
-pylsp.plugins.black.line_length=99
+pylsp.plugins.black.enabled=false
 pylsp.configurationSources=["ruff"]
 pylsp.plugins.ruff.enabled=true
+pylsp.plugins.ruff.format=["I"]
 pylsp.plugins.ruff.ignore=["E402"]
 pylsp.plugins.ruff.lineLength=99
 
