@@ -23,3 +23,7 @@ hook global WinSetOption filetype=git-status %{
         unmap global git r
     }
 }
+
+define-command tig -params .. -docstring "Run tig" %{
+    terminal env "EDITOR=kak -c %val{session}" tig %arg{@}
+}
