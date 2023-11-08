@@ -2,7 +2,7 @@
 # ────────────────
 
 set-option global startup_info_version 20221031
-set-option global grepcmd 'rg --column --smart-case --sort path'
+set-option global grepcmd 'rg --column --smart-case --sort path --line-buffered'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
 add-highlighter global/ show-matching
 add-highlighter global/todos regex '(//|#|/\*)\h*(TODO|WARNING|FIXME)[:]?[^\n]*' 2:+bu
