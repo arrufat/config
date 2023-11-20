@@ -68,23 +68,25 @@ faces = [
     {token = "label", face = "label"},
 ]
 
-[language.c_cpp]
+[language_ids]
+c = "c_cpp"
+cpp = "c_cpp"
+javascript = "javascriptreact"
+typescript = "typescriptreact"
+
+[language_server.c_cpp]
 filetypes = ["c", "cpp"]
 roots = ["compile_flags.txt", "compile_commands.json", "meson.build", "CMakeLists.txt", ".git"]
 command = "clangd"
 args = ["--clang-tidy", "--compile-commands-dir=build", "--suggest-missing-includes", "--background-index", "--completion-style=detailed"]
 
 # pip install --no-cache python-lsp-server python-lsp-black python-lsp-ruff pyls-isort pylsp-rope pylsp-mypy
-[language.python]
+[language_server.pylsp]
 filetypes = ["python"]
 roots = ["requirements.txt", "setup.py", ".git", ".hg"]
-
-# command = "pyright-langserver"
-# args = ["--stdio"]
-
 command = "pylsp"
-settings_section = "pylsp"
-[language.python.settings.pylsp]
+settings_section = "_"
+[language_server.pylsp.settings._]
 pylsp.plugins.jedi_completion.include_params=true
 pylsp.plugins.pycodestyle.enabled=false
 pylsp.plugins.mccabe.enabled=false
@@ -96,65 +98,47 @@ pylsp.plugins.ruff.format=["I"]
 pylsp.plugins.ruff.ignore=["E402"]
 pylsp.plugins.ruff.lineLength=99
 
-[language.cmake]
-filetypes = ["cmake"]
-roots = ["build"]
-command = "cmake-language-server"
-args = ["buildDirectory", "build"]
-
-[language.go]
+[language_server.gopls]
 filetypes = ["go"]
 roots = ["Gopkg.toml", "go.mod", ".git", ".hg"]
 command = "gopls"
 
-[language.html]
+[language_server.html-language-server]
 filetypes = ["html"]
 roots = ["package.json"]
 command = "vscode-html-languageserver"
 args = ["--stdio"]
+settings_section = "_"
+[language_server.html-language-server.settings._]
+quotePreference = "single"
+javascript.format.semicolons = "insert"
 
-[language.javascriptreact]
-filetypes = ["javascript"]
-roots = ["package.json", "tsconfig.json", ".git", ".hg"]
-command = "typescript-language-server"
-args = ["--stdio"]
-
-[language.typescriptreact]
-filetypes = ["typescript"]
-roots = ["package.json", "tsconfig.json", ".git", ".hg"]
+[language_server.typescript-language-server]
+filetypes = ["javascript", "typescript"]
+roots = ["package.json", "tsconfig.json", "jsconfig.json", ".git", ".hg"]
 command = "typescript-language-server"
 args = ["--stdio"]
 settings_section = "_"
-[language.typescriptreact.settings._]
+[language_server.typescript-language-server.settings._]
 quotePreference = "double"
 typescript.format.semicolons = "insert"
 
-[language.latex]
+[language_server.latex]
 filetypes = ["latex"]
 roots = [".git", "Makefile"]
 command = "texlab"
 
-[language.rust]
+[language_server.rust-analyzer]
 filetypes = ["rust"]
 roots = ["Cargo.toml"]
 command = "rust-analyzer"
 
-[language.zig]
+[language_server.zls]
 filetypes = ["zig"]
 roots = ["build.zig"]
 command = "zls"
-settings_section = "zls"
-[language.zig.settings.zls]
+settings_section = "_"
+[language_server.zls.settings._]
 semantic_tokens = "full"
 warn_style = true
 
-[language.sh]
-filetypes = ["sh"]
-roots = ["."]
-command = "bash-language-server"
-args = ["start"]
-
-[language.vala]
-filetypes = ["vala"]
-roots = ["meson.build", "compile_commands.json"]
-command = "vala-language-server"
