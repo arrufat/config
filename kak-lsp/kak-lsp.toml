@@ -80,27 +80,19 @@ roots = ["compile_flags.txt", "compile_commands.json", "meson.build", "CMakeList
 command = "clangd"
 args = ["--clang-tidy", "--compile-commands-dir=build", "--suggest-missing-includes", "--background-index", "--completion-style=detailed"]
 
-# pip install --no-cache python-lsp-server python-lsp-black python-lsp-ruff pyls-isort pylsp-rope pylsp-mypy
-[language_server.pylsp]
+[language_server.jedi]
 filetypes = ["python"]
-roots = ["requirements.txt", "setup.py", ".git", ".hg"]
-command = "pylsp"
-settings_section = "_"
-[language_server.pylsp.settings._]
-pylsp.plugins.jedi_completion.include_params=true
-pylsp.plugins.pycodestyle.enabled=false
-pylsp.plugins.mccabe.enabled=false
-pylsp.plugins.pyflakes.enabled=false
-pylsp.plugins.black.enabled=false
-pylsp.configurationSources=["ruff"]
-pylsp.plugins.ruff.enabled=true
-pylsp.plugins.ruff.format=["I"]
-pylsp.plugins.ruff.ignore=["E402"]
-pylsp.plugins.ruff.lineLength=99
+roots = ["requirements.txt", "setup.py", ".git"]
+command = "jedi-language-server"
+
+[language_server.ruff]
+filetypes = ["python"]
+roots = ["requirements.txt", "setup.py", ".git"]
+command = "ruff-lsp"
 
 [language_server.gopls]
 filetypes = ["go"]
-roots = ["Gopkg.toml", "go.mod", ".git", ".hg"]
+roots = ["Gopkg.toml", "go.mod", ".git"]
 command = "gopls"
 
 [language_server.html-language-server]
@@ -115,7 +107,7 @@ javascript.format.semicolons = "insert"
 
 [language_server.typescript-language-server]
 filetypes = ["javascript", "typescript"]
-roots = ["package.json", "tsconfig.json", "jsconfig.json", ".git", ".hg"]
+roots = ["package.json", "tsconfig.json", "jsconfig.json", ".git"]
 command = "typescript-language-server"
 args = ["--stdio"]
 settings_section = "_"
