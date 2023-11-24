@@ -55,7 +55,7 @@ evaluate-commands %sh{
         face global value         ${gold}
         face global type          ${foam}
         face global variable      ${text}
-        face global module        ${foam}
+        face global module        ${foam}+i
         face global function      ${rose}
         face global string        ${gold}
         face global keyword       ${pine}+bi

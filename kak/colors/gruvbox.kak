@@ -27,7 +27,7 @@ evaluate-commands %sh{
         face global value         ${purple}
         face global type          ${yellow}
         face global variable      ${fg}
-        face global module        ${green}
+        face global module        ${green}+i
         face global function      ${blue}
         face global string        ${green}
         face global keyword       ${red}+i
@@ -51,6 +51,9 @@ evaluate-commands %sh{
         face global meta_member          ${aqua}+i
         face global type_parameter       ${yellow}+b
         face global concept              ${yellow}+i
+        face global escape               ${yellow}
+        face global regexp               ${yellow}+i
+        face global label                ${aqua}
 
         # Markdown highlighting
         face global title     ${green}+b
@@ -102,6 +105,6 @@ evaluate-commands %sh{
         face global InfoDiagnosticHint        DiagnosticWarning
         face global InfoDiagnosticInformation StatusLineInfo
         face global InfoDiagnosticWarning     DiagnosticWarning
-        face global InlayHint		      ${gray}+i
+        face global InlayHint		      ${gray}
     "
 }
