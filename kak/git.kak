@@ -16,9 +16,11 @@ map global git -docstring 'prev hunk' p ':git prev-hunk<ret>'
 map global user -docstring 'git mode' g ':enter-user-mode git<ret>'
 
 hook global WinSetOption filetype=git-status %{
+    map global normal -docstring 'go to file' <ret> %{<a-i><a-w>:e %reg{dot}<ret>} 
     map global git -docstring 'add file' a %{<a-i><a-w>:git add %reg{dot}<ret>:git status<ret>}
     map global git -docstring 'reset file' r %{<a-i><a-w>:git reset %reg{dot}<ret>: git status<ret>}
     hook -once -always window WinSetOption filetype=.* %{
+        unmap global normal <ret>
         unmap global git a
         unmap global git r
     }
