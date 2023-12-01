@@ -169,7 +169,12 @@ map global user -docstring 'repl mode' r ':enter-user-mode repl<ret>'
 map global user -docstring 'spell mode' s ':enter-user-mode spell<ret>'
 map global user -docstring 'zenity mode' z ':enter-user-mode zenity<ret>'
 
-# extra git configuration
+# Allow writing in *grep*
+# ───────────────────────
+
+source "%val{config}/grep-write.kak"
+
+# Extra git configuration
 # ───────────────────────
 
 source "%val{config}/git.kak"
