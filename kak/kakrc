@@ -72,7 +72,7 @@ define-command sh -docstring "run a shell command" -params .. %{ info -title "%a
 complete-command sh shell
 
 # Qalculate
-define-command qalc -docstring "compute equation with Qalculate!" -params .. %{ echo %sh{qalc ${@}} }
+define-command qalc -docstring "compute equation with Qalculate!" -params .. %{ info -title "qalc" %sh{qalc ${@}} }
 complete-command qalc shell-script-candidates %{
     { echo $(qalc +u8 --list-functions | head -n -3);
       echo $(qalc +u8 --list-variables | head -n -3); } | tr ' ' '\n' | sort -u
