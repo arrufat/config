@@ -120,6 +120,11 @@ filetypes = ["latex"]
 roots = [".git", "Makefile"]
 command = "texlab"
 
+[language_server.ltex]
+filetypes = ["markdown"]
+roots = [".git"]
+command = "ltex-ls"
+
 [language_server.rust-analyzer]
 filetypes = ["rust"]
 roots = ["Cargo.toml"]

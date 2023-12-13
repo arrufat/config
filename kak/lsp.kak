@@ -1,5 +1,5 @@
 evaluate-commands %sh{kak-lsp --kakoune -s $kak_session}
-hook global WinSetOption filetype=(c|cpp|cmake|go|html|javascript|julia|latex|python|rust|sh|typescript|zig) %{
+hook global WinSetOption filetype=(c|cpp|cmake|go|html|javascript|julia|latex|markdown|python|rust|sh|typescript|zig) %{
     map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
     lsp-enable-window
     lsp-auto-signature-help-enable
