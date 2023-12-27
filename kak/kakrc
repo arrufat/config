@@ -158,6 +158,7 @@ map global qalc -docstring 'exact mode' e ':try %{ nop %sh{qalc -set exact}}<ret
 map global qalc -docstring 'approximate mode' a ':try %{ nop %sh{qalc -set approx}}<ret>'
 map global qalc -docstring 'update exchange rates' x ':try %{ nop %sh{qalc -exrates}}<ret>'
 
+map global user -docstring 'fuzzy finder' f ':prompt -shell-script-candidates "find . -type f" open: %{ edit -existing %val{text} }<ret>'
 map global user -docstring 'enable autocomplete' a ':set-option -add buffer autocomplete insert<ret>'
 map global user -docstring 'disable autocomplete' A ':set-option -remove buffer autocomplete insert<ret>'
 map global user -docstring 'edit kakrc' e ':e ~/.config/kak/kakrc<ret>'
@@ -204,6 +205,6 @@ hook global ModuleLoaded tmux %{ source "%val{config}/tmux.kak" }
 
 evaluate-commands %sh{ [ -f $kak_config/local.kak ] && echo "source $kak_config/local.kak" }
 
-# Set the color scheme at the end because of the LSP defined fonts
+# Set the color scheme at the end because of the LSP defined faces
 # ────────────────────────────────────────────────────────────────
 colorscheme nord
