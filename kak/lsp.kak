@@ -1,5 +1,5 @@
 evaluate-commands %sh{kak-lsp --kakoune -s $kak_session}
-hook global WinSetOption filetype=(c|cpp|cmake|go|html|javascript|julia|latex|markdown|python|rust|sh|typescript|zig) %{
+hook global WinSetOption filetype=(c|cpp|go|html|javascript|latex|markdown|python|rust|typescript|zig) %{
     map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
     lsp-enable-window
     lsp-auto-signature-help-enable
@@ -30,17 +30,6 @@ hook global WinSetOption filetype=python %{
     set-option window lintcmd 'ruff'
 }
 
-hook global WinSetOption filetype=rust %{
-    set-option window formatcmd 'rustfmt'
-    set-option window lsp_auto_highlight_references true
-    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
-    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
-    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-    hook -once -always window WinSetOption filetype=.* %{
-        remove-hooks window semantic-tokens
-    }
-}
-
 hook global WinSetOption filetype=zig %{
     set-option window formatcmd 'zig fmt --stdin'
     set-option window lintcmd 'zig fmt --color off --ast-check 2>&1'
@@ -56,8 +45,19 @@ hook global WinSetOption filetype=zig %{
     }
 }
 
+hook global WinSetOption filetype=rust %{
+    set-option window formatcmd 'rustfmt'
+    set-option window lsp_auto_highlight_references true
+    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+    hook -once -always window WinSetOption filetype=.* %{
+        remove-hooks window semantic-tokens
+    }
+}
+
 hook global WinSetOption filetype=go %{
-    set-option buffer formatcmd 'go fmt'
+    set-option buffer formatcmd 'gofmt'
     hook buffer -group format BufWritePre .* lsp-formatting-sync
     set-option buffer lsp_auto_highlight_references true
     set-option buffer lintcmd "run() { golint $1; go vet $1 2> | sed -e 's/: /: error /'; } && run"
@@ -65,9 +65,11 @@ hook global WinSetOption filetype=go %{
     hook buffer -group lint BufWritePost *. lint
 }
 
-hook global WinSetOption filetype=cmake %{
-    set-option window formatcmd 'cmake-format-i -'
-    lsp-auto-hover-disable
-    hook buffer -group lint BufWritePost *. lint
+hook global WinSetOption filetype=html %{
+    set-option buffer formatcmd "run(){ tidy -q --indent yes --indent-spaces %opt{tabstop} 2>/dev/null || true; } && run"
+}
+
+hook global WinSetOption filetype=javascript %{
+    set-option buffer formatcmd "prettier --stdin-filepath=%val{buffile}"
 }
 
