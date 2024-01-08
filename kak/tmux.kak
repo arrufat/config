@@ -1,8 +1,8 @@
 # Fuzzy finder
 # ────────────
 
-# map global user -docstring 'open fuzzy finder' f ': edit %sh{fzf-tmux --preview "cat {}" -}<ret>'
-map global user -docstring 'open fuzzy finder' F ': edit -existing %sh{fzf-tmux --color=16 --preview "bat --theme=Nord --style=numbers,changes --color always {}" -}<ret>'
+# map global user -docstring 'open fuzzy finder' f ': try %{ edit -existing %sh{fzf-tmux --preview "cat {}" -} }<ret>'
+map global user -docstring 'open fuzzy finder' F ': try %{ edit -existing %sh{fzf-tmux --color=16 --preview "bat --theme=Nord --style=numbers,changes --color always {}" -} }<ret>'
 
 # Improved window management
 # ──────────────────────────
@@ -36,17 +36,22 @@ define-command repl-below -docstring "create a repl below" -params .. %{
 alias global rb repl-below
 complete-command repl-below -menu shell
 
+define-command -override nnn -docstring "open nnn" -params .. %{
+    tmux-terminal-horizontal sh -c "NNN_OPENER=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} nnn %arg{@}"
+}
+
 # File managment with Broot
 # ─────────────────────────
 
 define-command broot-right -docstring "open broot right" -params .. %{
-    tmux-terminal-horizontal "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
+    tmux-terminal-horizontal "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} broot %arg{@}"
+
 }
 alias global br broot-right
 complete-command broot-right file
 
 define-command broot-below -docstring "open broot below" -params .. %{
-    tmux-terminal-vertical "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} br %arg{@}"
+    tmux-terminal-vertical "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} broot %arg{@}"
 }
 alias global bb broot-below
 complete-command broot-below file
