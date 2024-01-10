@@ -22,3 +22,9 @@ set -g -x NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+# Jumping between prompts
+function mark_prompt_start --on-event fish_prompt
+    echo -en "\e]133;A\e\\"
+end
+
