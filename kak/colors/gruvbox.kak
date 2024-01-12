@@ -51,7 +51,7 @@ evaluate-commands %sh{
         face global meta_member          ${aqua}+i
         face global type_parameter       ${yellow}+b
         face global concept              ${yellow}+i
-        face global escape               ${yellow}
+        face global escape               ${aqua}
         face global regexp               ${yellow}+i
         face global label                ${aqua}
 
