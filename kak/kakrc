@@ -154,6 +154,7 @@ map global spell -docstring 'next' n ':spell-next<ret>'
 map global spell -docstring 'clear' c ':spell-clear<ret>'
 
 declare-user-mode qalc
+map global qalc -docstring 'prompt' q ':qalc '
 map global qalc -docstring 'exact mode' e ':try %{ nop %sh{qalc -set exact}}<ret>'
 map global qalc -docstring 'approximate mode' a ':try %{ nop %sh{qalc -set approx}}<ret>'
 map global qalc -docstring 'update exchange rates' x ':try %{ nop %sh{qalc -exrates}}<ret>'
