@@ -35,7 +35,7 @@ evaluate-commands %sh{
         face global comment       ${nord3_bright}+i
         face global documentation ${nord14}+i
         face global meta          ${nord10}
-        face global builtin       ${nord10}
+        face global builtin       ${nord8}
 
         # Extra code highlighting faces for kak-lsp
         face global value_declaration    ${nord15}+b
@@ -50,7 +50,7 @@ evaluate-commands %sh{
         face global concept              ${nord7}+i
         face global escape               ${nord13}
         face global regexp               ${nord13}+i
-        face global label                ${nord10}
+        face global label                ${nord12}
 
         # Markdown highlighting
         face global title     ${nord8}+b
@@ -77,8 +77,8 @@ evaluate-commands %sh{
         face global Information          ${nord5},${nord2}
         face global InlineInformation    ${nord4},${nord1}
         face global Error                ${nord11}+b
-        face global DiagnosticError      ,,${nord11}+cu
-        face global DiagnosticWarning    ,,${nord13}+cu
+        face global DiagnosticError      ${nord11}
+        face global DiagnosticWarning    ${nord13}
         face global StatusLine           ${nord5},${nord2}
         face global StatusLineMode       ${nord8}+b
         face global StatusLineInfo       ${nord7},${nord2}
