@@ -5,13 +5,7 @@ hook global WinSetOption filetype=(c|cpp|go|html|javascript|latex|markdown|pytho
     lsp-auto-signature-help-enable
     lsp-auto-hover-insert-mode-disable
     set-option window lsp_hover_max_lines 20
-    map global insert <c-n> '<a-;>:lsp-snippets-select-next-placeholders<ret>' -docstring 'Select next snippet placeholder'
-    hook global InsertCompletionShow .* %{
-        unmap global insert <c-n> '<a-;>:lsp-snippets-select-next-placeholders<ret>'
-    }
-    hook global InsertCompletionHide .* %{
-        map global insert <c-n> '<a-;>:lsp-snippets-select-next-placeholders<ret>' -docstring 'Select next snippet placeholder'
-    }
+    map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
 }
 
 hook global WinSetOption filetype=(c|cpp) %{
@@ -71,5 +65,9 @@ hook global WinSetOption filetype=html %{
 
 hook global WinSetOption filetype=javascript %{
     set-option buffer formatcmd "prettier --stdin-filepath=%val{buffile}"
+}
+
+hook global WinSetOption filetype=makefile %{
+    add-highlighter buffer/ show-whitespaces
 }
 
