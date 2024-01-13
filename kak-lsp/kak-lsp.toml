@@ -121,8 +121,8 @@ roots = [".git", "Makefile"]
 command = "texlab"
 
 [language_server.ltex]
-filetypes = ["markdown"]
-roots = [".git"]
+filetypes = ["markdown", "latex"]
+roots = [".git", "Makefile"]
 command = "ltex-ls"
 
 [language_server.rust-analyzer]
