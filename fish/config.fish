@@ -2,6 +2,8 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+set -g -x EDITOR "kak"
+
 # only meant to be used from kakrc
 set -g -x NNN_PLUG ";:kak_open"
 # nnn nord theme
