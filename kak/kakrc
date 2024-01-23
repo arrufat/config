@@ -9,6 +9,20 @@ add-highlighter global/todos regex '(//|#|/\*)\h*(TODO|WARNING|FIXME)[:]?[^\n]*'
 hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:,,white+c }
 hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -relative -hlcursor }
 
+define-command hex-hl-update %{ try %{
+    execute-keys \%s(#|0(x|X)|rgb:)([0-9A-Fa-f]{6,7})<ret>
+    add-highlighter -override window/hex-colors group
+    evaluate-commands %sh{
+        for color in $kak_reg_3
+        do
+            printf "add-highlighter -override window/hex-colors/ regex '(#|0(x|X)|rgb:)(%s)' 1:rgb:%s,rgb:%s\n" "$color" "$color" "$color"
+        done
+    }
+}}
+define-command hex-hl-remove %{ try %{
+    remove-highlighter window/hex-colors
+}}
+
 # Enable editor config
 # ────────────────────
 
@@ -170,6 +184,8 @@ map global user -docstring 'qalc mode' q ':enter-user-mode qalc<ret>'
 map global user -docstring 'repl mode' r ':enter-user-mode repl<ret>'
 map global user -docstring 'spell mode' s ':enter-user-mode spell<ret>'
 map global user -docstring 'zenity mode' z ':enter-user-mode zenity<ret>'
+map global user -docstring 'preview hex colors' h 'Z:hex-hl-update<ret>z'
+map global user -docstring 'remove hex colors' <a-h> ':hex-hl-remove<ret>'
 
 # Extra configuration for GNOME
 # ─────────────────────────────
