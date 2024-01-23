@@ -9,19 +9,25 @@ add-highlighter global/todos regex '(//|#|/\*)\h*(TODO|WARNING|FIXME)[:]?[^\n]*'
 hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:,,white+c }
 hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -relative -hlcursor }
 
-define-command hex-hl-update %{ try %{
-    execute-keys \%s(#|0(x|X)|rgb:)([0-9A-Fa-f]{6,7})<ret>
-    add-highlighter -override window/hex-colors group
-    evaluate-commands %sh{
-        for color in $kak_reg_3
-        do
-            printf "add-highlighter -override window/hex-colors/ regex '(#|0(x|X)|rgb:)(%s)' 1:rgb:%s,rgb:%s\n" "$color" "$color" "$color"
-        done
+
+declare-option -hidden range-specs hex_color_code_ranges
+add-highlighter shared/hex_color_code ranges hex_color_code_ranges
+define-command update_hex_color_code_ranges %{
+  set-option window hex_color_code_ranges %val{timestamp}
+  evaluate-commands -draft %{
+    execute-keys '%'
+    evaluate-commands -draft -verbatim try %{
+      execute-keys 's(#|0[xX]|rgb:)([0-9A-Fa-f]{6})<ret>'
+      evaluate-commands -itersel %{
+        set-option -add window hex_color_code_ranges "%val{selection_desc}|default,rgb:%reg{2}"
+      }
     }
-}}
-define-command hex-hl-remove %{ try %{
-    remove-highlighter window/hex-colors
-}}
+  }
+}
+hook -always global NormalIdle '' update_hex_color_code_ranges
+hook -always global InsertIdle '' update_hex_color_code_ranges
+hook -always global PromptIdle '' update_hex_color_code_ranges
+add-highlighter -override global/hex_color_code ref hex_color_code
 
 # Enable editor config
 # ────────────────────
@@ -175,7 +181,7 @@ map global qalc -docstring 'update exchange rates' x ':try %{ nop %sh{qalc -exra
 
 map global user -docstring 'fuzzy finder' f ':prompt -shell-script-candidates "find . -type f" open: %{ edit -existing %val{text} }<ret>'
 map global user -docstring 'enable autocomplete' a ':set-option -add buffer autocomplete insert<ret>'
-map global user -docstring 'disable autocomplete' A ':set-option -remove buffer autocomplete insert<ret>'
+map global user -docstring 'disable autocomplete' <a-a> ':set-option -remove buffer autocomplete insert<ret>'
 map global user -docstring 'edit kakrc' e ':e ~/.config/kak/kakrc<ret>'
 map global user -docstring 'clean tabs and trailing whitespace in selections' c ':clean-selections<ret>'
 map global user -docstring 'clean tabs and trailing whitespace in the buffer' C ':clean-buffer<ret>'
@@ -184,8 +190,8 @@ map global user -docstring 'qalc mode' q ':enter-user-mode qalc<ret>'
 map global user -docstring 'repl mode' r ':enter-user-mode repl<ret>'
 map global user -docstring 'spell mode' s ':enter-user-mode spell<ret>'
 map global user -docstring 'zenity mode' z ':enter-user-mode zenity<ret>'
-map global user -docstring 'preview hex colors' h 'Z:hex-hl-update<ret>z'
-map global user -docstring 'remove hex colors' <a-h> ':hex-hl-remove<ret>'
+map global user -docstring 'enable hex colors highlighter' h ':addhl -override global/hex_color_code ref hex_color_code<ret>'
+map global user -docstring 'remove hex colors highlighter' <a-h> ':rmhl global/hex_color_code<ret>'
 
 # Extra configuration for GNOME
 # ─────────────────────────────
