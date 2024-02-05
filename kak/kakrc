@@ -180,6 +180,7 @@ map global qalc -docstring 'approximate mode' a ':try %{ nop %sh{qalc -set appro
 map global qalc -docstring 'update exchange rates' x ':try %{ nop %sh{qalc -exrates}}<ret>'
 
 map global user -docstring 'fuzzy finder' f ':prompt -shell-script-candidates "find . -type f" open: %{ edit -existing %val{text} }<ret>'
+map global user -docstring 'open buffers' b ':buffer '
 map global user -docstring 'enable autocomplete' a ':set-option -add buffer autocomplete insert<ret>'
 map global user -docstring 'disable autocomplete' <a-a> ':set-option -remove buffer autocomplete insert<ret>'
 map global user -docstring 'edit kakrc' e ':e ~/.config/kak/kakrc<ret>'
