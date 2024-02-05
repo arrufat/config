@@ -1,8 +1,5 @@
-define-command git-find -docstring "find files in git" -params 1 %{ edit %arg{1} }
-complete-command git-find shell-script-candidates %{ git ls-files }
-alias global gf git-find
-
 declare-user-mode git
+map global git -docstring 'edit' e ':git edit '
 map global git -docstring 'status' s ':git status<ret>'
 map global git -docstring 'commit' c ':git commit<ret>'
 map global git -docstring 'update diff' u ':git update-diff<ret>'
