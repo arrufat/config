@@ -27,7 +27,7 @@ hook global WinSetOption filetype=python %{
 hook global WinSetOption filetype=zig %{
     set-option window formatcmd 'zig fmt --stdin'
     set-option window lintcmd 'zig fmt --color off --ast-check 2>&1'
-    set-option window makecmd 'zig build --summary all'
+    # set-option window makecmd 'zig build --summary all'
     set-option window lsp_auto_highlight_references true
     hook buffer -group format BufWritePre .* lsp-formatting-sync
 
@@ -51,23 +51,23 @@ hook global WinSetOption filetype=rust %{
 }
 
 hook global WinSetOption filetype=go %{
-    set-option buffer formatcmd 'gofmt'
-    hook buffer -group format BufWritePre .* lsp-formatting-sync
-    set-option buffer lsp_auto_highlight_references true
-    set-option buffer lintcmd "run() { golint $1; go vet $1 2> | sed -e 's/: /: error /'; } && run"
+    set-option window formatcmd 'gofmt'
+    hook window -group format BufWritePre .* lsp-formatting-sync
+    set-option window lsp_auto_highlight_references true
+    set-option window lintcmd "run() { golint $1; go vet $1 2> | sed -e 's/: /: error /'; } && run"
     lint
-    hook buffer -group lint BufWritePost *. lint
+    hook window -group lint BufWritePost *. lint
 }
 
 hook global WinSetOption filetype=html %{
-    set-option buffer formatcmd "run(){ tidy -q --indent yes --indent-spaces %opt{tabstop} 2>/dev/null || true; } && run"
+    set-option window formatcmd "run(){ tidy -q --indent yes --indent-spaces %opt{tabstop} 2>/dev/null || true; } && run"
 }
 
 hook global WinSetOption filetype=javascript %{
-    set-option buffer formatcmd "prettier --stdin-filepath=%val{buffile}"
+    set-option window formatcmd "prettier --stdin-filepath=%val{buffile}"
 }
 
 hook global WinSetOption filetype=makefile %{
-    add-highlighter buffer/ show-whitespaces
+    add-highlighter window/ show-whitespaces
 }
 
