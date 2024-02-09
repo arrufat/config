@@ -115,6 +115,13 @@ settings_section = "_"
 quotePreference = "double"
 typescript.format.semicolons = "insert"
 
+[language_server.quick-lint-js]
+filetypes = ["javascript"]
+roots = ["package.json", "tsconfig.json", "jsconfig.json", ".git"]
+command = "quick-lint-js"
+args = ["--lsp"]
+
+
 [language_server.latex]
 filetypes = ["latex"]
 roots = [".git", "Makefile"]
