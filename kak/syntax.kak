@@ -25,6 +25,13 @@ hook global ModuleLoaded zig %{
     add-highlighter -override shared/zig/string/ regex '\\n|\\r|\\t|\\\\|\\''|\\"|\\x[0-9a-fA-F]{2}|\\u\{[0-9a-fA-F]+\}' 0:escape
     # Zig format string: an odd number of opening and closing curly braces enclosing the format string
     add-highlighter -override shared/zig/string/ regex '(?<!\{)(?:\{\{)*(\{)(([^\{\}]*)(\[[_a-zA-Z]\w*\])?(\d+)?(((\?|!)?(x|X|s|e|d|b|o|c|u|\?|!|\*|any)?)(:(.|\\n|\\t|\\|\\"|\\'')?([<^>])?\d*\.?\d+?)?)?)(\})(?:\}\})*(?!\})' 1:operator 2:escape 13:operator
+
+    add-highlighter -override shared/zig/multiline_string region '\\\\' '$' group
+    add-highlighter -override shared/zig/multiline_string/ fill string
+    add-highlighter -override shared/zig/multiline_string/ regex '(\\\\)' 0:operator
+    # Zig format string: an odd number of opening and closing curly braces enclosing the format string
+    add-highlighter -override shared/zig/multiline_string/ regex '(?<!\{)(?:\{\{)*(\{)(([^\{\}]*)(\[[_a-zA-Z]\w*\])?(\d+)?(((\?|!)?(x|X|s|e|d|b|o|c|u|\?|!|\*|any)?)(:(.|\\t|\\|\\"|\\'')?([<^>])?\d*\.?\d+?)?)?)(\})(?:\}\})*(?!\})' 1:operator 2:escape 13:operator
+
     add-highlighter -override shared/zig/character region "'" (?<!\\)(\\\\)*' group
     add-highlighter -override shared/zig/character/ fill string
     add-highlighter -override shared/zig/character/ regex '\\n|\\r|\\t|\\\\|\\''|\\"|\\x[0-9a-fA-F]{2}|\\u\{[0-9a-fA-F]+\}' 0:escape
