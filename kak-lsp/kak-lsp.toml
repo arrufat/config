@@ -78,7 +78,7 @@ typescript = "typescriptreact"
 filetypes = ["c", "cpp"]
 roots = ["compile_flags.txt", "compile_commands.json", "meson.build", "CMakeLists.txt", ".git"]
 command = "clangd"
-args = ["--clang-tidy", "--compile-commands-dir=build", "--suggest-missing-includes", "--background-index", "--completion-style=detailed"]
+args = ["-clang-tidy", "-compile-commands-dir=build", "-background-index", "-completion-style=detailed", "-header-insertion=never"]
 
 [language_server.jedi]
 filetypes = ["python"]
