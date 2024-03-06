@@ -9,25 +9,23 @@ add-highlighter global/todos regex '(//|#|/\*)\h*(TODO|WARNING|FIXME)[:]?[^\n]*'
 hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:,,white+c }
 hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -relative -hlcursor }
 
-
 declare-option -hidden range-specs hex_color_code_ranges
 add-highlighter shared/hex_color_code ranges hex_color_code_ranges
 define-command update_hex_color_code_ranges %{
-  set-option window hex_color_code_ranges %val{timestamp}
-  evaluate-commands -draft %{
-    execute-keys 'gtGbx' # select the visible part of the buffer only.
-    evaluate-commands -draft -verbatim try %{
-      execute-keys 's(#|0[xX]|rgb:)([0-9A-Fa-f]{6})<ret>'
-      evaluate-commands -itersel %{
-        set-option -add window hex_color_code_ranges "%val{selection_desc}|rgb:%reg{2}+bf"
-      }
+    set-option window hex_color_code_ranges %val{timestamp}
+    evaluate-commands -draft %{
+        execute-keys 'gtGbx' # select the visible part of the buffer only.
+        evaluate-commands -draft -verbatim try %{
+            execute-keys 's(#|0[xX]|rgb:)([0-9A-Fa-f]{6})<ret>'
+            evaluate-commands -itersel %{
+                set-option -add window hex_color_code_ranges "%val{selection_desc}|rgb:%reg{2}+bf"
+            }
+        }
     }
-  }
 }
 hook -always global NormalIdle '' update_hex_color_code_ranges
 hook -always global InsertIdle '' update_hex_color_code_ranges
 hook -always global PromptIdle '' update_hex_color_code_ranges
-# add-highlighter -override global/hex_color_code ref hex_color_code
 
 # Enable editor config
 # ────────────────────
@@ -165,7 +163,8 @@ map global repl -docstring 'qalc' q ':repl-new qalc<ret>'
 
 declare-user-mode zenity
 map global zenity -docstring 'open file' o ':edit %sh{cd $(dirname $kak_buffile); zenity --file-selection}<ret>'
-map global zenity -docstring 'select color' c '!zenity --color-selection<ret>'
+map global zenity -docstring 'select color' c '!zenity --color-selection --show-palette<ret>'
+map global zenity -docstring 'select date' d '!zenity --calendar --date-format=%Y-%m-%d<ret>'
 
 declare-user-mode spell
 map global spell -docstring 'spelling' s ':spell<ret>'
@@ -191,8 +190,7 @@ map global user -docstring 'qalc mode' q ':enter-user-mode qalc<ret>'
 map global user -docstring 'repl mode' r ':enter-user-mode repl<ret>'
 map global user -docstring 'spell mode' s ':enter-user-mode spell<ret>'
 map global user -docstring 'zenity mode' z ':enter-user-mode zenity<ret>'
-map global user -docstring 'enable hex colors highlighter' h ':addhl -override global/hex_color_code ref hex_color_code<ret>'
-map global user -docstring 'remove hex colors highlighter' <a-h> ':rmhl global/hex_color_code<ret>'
+map global user -docstring 'toogle hex colors' h ':try %{addhl global/hex_color_code ref hex_color_code} catch %{rmhl global/hex_color_code}<ret>'
 
 # Extra configuration for GNOME
 # ─────────────────────────────
