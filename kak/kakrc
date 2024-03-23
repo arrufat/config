@@ -4,10 +4,12 @@
 set-option global startup_info_version 20221031
 set-option global grepcmd 'rg --column --smart-case --sort path --line-buffered'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
-add-highlighter global/ show-matching
-add-highlighter global/todos regex '(//|#|/\*)\h*(TODO|WARNING|FIXME)[:]?[^\n]*' 2:+bu
+add-highlighter global/ show-matching -previous
 hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:,,white+c }
 hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -relative -hlcursor }
+hook -group todohighlight global BufCreate .* %{
+    add-highlighter buffer/todos regex "%opt{comment_line}[ \t]*\b(TODO|WARNING|FIXME)\b" 1:default+bu@comment
+}
 
 declare-option -hidden range-specs hex_color_code_ranges
 add-highlighter shared/hex_color_code ranges hex_color_code_ranges
