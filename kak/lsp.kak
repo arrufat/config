@@ -37,7 +37,7 @@ hook global WinSetOption filetype=zig %{
     hook -once -always window WinSetOption filetype=.* %{
         remove-hooks window semantic-tokens
     }
-    map window normal '<a-#>' 'x_i// FIXME: auto<ret><ret>if(false){<esc>a}<esc>:format<ret>_'
+    map window normal '<a-#>' ':exec %{x_i// autofix<lt>ret>if(false){<lt>esc>a<lt>ret>}<lt>esc>:format<lt>ret>_}<ret>'
 }
 
 hook global WinSetOption filetype=rust %{
