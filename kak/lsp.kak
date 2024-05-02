@@ -1,5 +1,5 @@
 evaluate-commands %sh{kak-lsp --kakoune -s $kak_session}
-hook global WinSetOption filetype=(c|cpp|go|html|javascript|latex|markdown|python|rust|typescript|zig) %{
+hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|python|rust|typescript|zig) %{
     map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
     lsp-enable-window
     lsp-auto-signature-help-enable
@@ -62,6 +62,7 @@ hook global WinSetOption filetype=go %{
 
 hook global WinSetOption filetype=html %{
     set-option window formatcmd "run(){ tidy -q --indent yes --indent-spaces %opt{tabstop} 2>/dev/null || true; } && run"
+    set-option window lintcmd "tidy -e --gnu-emacs yes --quiet yes 2>&1"
 }
 
 hook global WinSetOption filetype=javascript %{

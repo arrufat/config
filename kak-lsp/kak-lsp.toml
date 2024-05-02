@@ -89,11 +89,21 @@ command = "jedi-language-server"
 filetypes = ["python"]
 roots = ["requirements.txt", "setup.py", ".git"]
 command = "ruff-lsp"
+[language_server.ruff.settings._.globalSettings]
+organizeImports = true
+fixAll = true
+
 
 [language_server.gopls]
 filetypes = ["go"]
 roots = ["Gopkg.toml", "go.mod", ".git"]
 command = "gopls"
+
+[language_server.css-language-server]
+filetypes = ["css"]
+roots = ["package.json", ".git", ".hg"]
+command = "vscode-css-languageserver"
+args = ["--stdio"]
 
 [language_server.html-language-server]
 filetypes = ["html"]
@@ -104,6 +114,12 @@ settings_section = "_"
 [language_server.html-language-server.settings._]
 quotePreference = "single"
 javascript.format.semicolons = "insert"
+
+[language_server.json-language-server]
+filetypes = ["json"]
+roots = ["package.json"]
+command = "vscode-json-languageserver"
+args = ["--stdio"]
 
 [language_server.typescript-language-server]
 filetypes = ["javascript", "typescript"]
