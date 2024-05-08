@@ -1,3 +1,17 @@
+hook global WinSetOption filetype=git-commit %{
+    declare-option -hidden range-specs commit_column_ranges
+    add-highlighter window/ ranges commit_column_ranges
+    define-command update_commit_column_ranges %{
+        set-option window commit_column_ranges %val{timestamp}
+        set-option -add window commit_column_ranges '1.51,1.51|,yellow'
+        set-option -add window commit_column_ranges '3.73,3.73|,yellow'
+    }
+    hook -always global NormalIdle '' update_commit_column_ranges
+    hook -always global InsertIdle '' update_commit_column_ranges
+    hook -always global PromptIdle '' update_commit_column_ranges
+}
+
+
 declare-user-mode git
 map global git -docstring 'edit' e ':git edit '
 map global git -docstring 'status' s ':git status<ret>'
