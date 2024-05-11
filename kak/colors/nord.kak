@@ -51,6 +51,7 @@ evaluate-commands %sh{
         face global escape               ${nord13}
         face global regexp               ${nord13}+i
         face global label                ${nord12}
+        face global errortag 		 ${nord15}+i
 
         # Markdown highlighting
         face global title     ${nord8}+b

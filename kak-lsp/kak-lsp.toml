@@ -66,7 +66,7 @@ faces = [
     {token = "concept", face = "concept"},
     {token = "regexp", face = "regexp"},
     {token = "label", face = "label"},
-    {token = "errorTag", face = "attribute"},
+    {token = "errorTag", face = "errortag"},
 ]
 
 [language_ids]
