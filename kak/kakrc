@@ -214,10 +214,15 @@ source "%val{config}/git.kak"
 
 source "%val{config}/syntax.kak"
 
-# kak-lsp configuration
-# ─────────────────────
+# languages configuration
+# ───────────────────────
 
-source "%val{config}/lsp.kak"
+source "%val{config}/languages.kak"
+
+# snippets configuration
+# ──────────────────────
+
+source "%val{config}/snippets.kak"
 
 # TMUX specific configuration
 # ───────────────────────────
