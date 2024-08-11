@@ -54,6 +54,7 @@ hook global WinSetOption filetype=rust %{
 
 hook global WinSetOption filetype=go %{
     set-option window formatcmd 'gofmt'
+    set-option window tabstop 4
     hook window -group format BufWritePre .* lsp-formatting-sync
     set-option window lsp_auto_highlight_references true
     set-option window lintcmd "run() { golint $1; go vet $1 2> | sed -e 's/: /: error /'; } && run"
