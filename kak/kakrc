@@ -5,7 +5,7 @@ set-option global startup_info_version 20240518
 set-option global grepcmd 'rg --column --smart-case --sort path --line-buffered'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
 add-highlighter global/ show-matching -previous
-hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:,,white+c }
+hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:,,rgb:4c566a+u }
 hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -relative -hlcursor }
 hook -group todohighlight global BufCreate .* %{
     add-highlighter buffer/todos regex "%opt{comment_line}[ \t]*\b(TODO|WARNING|FIXME)\b" 1:default+bu@comment
@@ -18,9 +18,15 @@ define-command update_hex_color_code_ranges %{
     evaluate-commands -draft %{
         execute-keys 'gtGbx' # select the visible part of the buffer only.
         evaluate-commands -draft -verbatim try %{
-            execute-keys 's(#|0[xX]|rgb:)([0-9A-Fa-f]{6})<ret>'
+            execute-keys 's(\B#|\b0[xX]|\brgb[a]?:)([0-9A-Fa-f]{6})([0-9A-Fa-f]{2})?)\b<ret>'
             evaluate-commands -itersel %{
                 set-option -add window hex_color_code_ranges "%val{selection_desc}|,,rgb:%reg{2}+u"
+            }
+        }
+        evaluate-commands -draft -verbatim try %{
+            execute-keys 's\B#([0-9A-Fa-f])([0-9A-Fa-f])([0-9A-Fa-f])\b<ret>'
+            evaluate-commands -itersel %{
+                set-option -add window hex_color_code_ranges "%val{selection_desc}|default,rgb:%reg{1}%reg{1}%reg{2}%reg{2}%reg{3}%reg{3}"
             }
         }
     }
