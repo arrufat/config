@@ -20,7 +20,7 @@ define-command update_hex_color_code_ranges %{
         evaluate-commands -draft -verbatim try %{
             execute-keys 's(\B#|\b0[xX]|\brgb[a]?:)([0-9A-Fa-f]{6})([0-9A-Fa-f]{2})?)\b<ret>'
             evaluate-commands -itersel %{
-                set-option -add window hex_color_code_ranges "%val{selection_desc}|,,rgb:%reg{2}+u"
+                set-option -add window hex_color_code_ranges "%val{selection_desc}|,,rgb:%reg{2}+U"
             }
         }
         evaluate-commands -draft -verbatim try %{
