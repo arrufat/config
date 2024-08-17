@@ -39,6 +39,7 @@ hook global WinSetOption filetype=zig %{
         remove-hooks window semantic-tokens
     }
     map window normal '<a-#>' ':exec %{x_i// autofix<lt>ret>if(false){<lt>esc>a<lt>ret>}<lt>esc>:format<lt>ret>_}<ret>'
+    set-register pipe "fmt -w 99 -p '///'"
 }
 
 hook global WinSetOption filetype=rust %{
