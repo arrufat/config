@@ -132,12 +132,11 @@ settings_section = "_"
 quotePreference = "double"
 typescript.format.semicolons = "insert"
 
-[language_server.quick-lint-js]
-filetypes = ["javascript"]
+[language_server.biome]
+filetypes = ["javascript", "html"]
 roots = ["package.json", "tsconfig.json", "jsconfig.json", ".git"]
-command = "quick-lint-js"
-args = ["--lsp"]
-
+command = "biome"
+args = ["lsp-proxy"]
 
 [language_server.latex]
 filetypes = ["latex"]
