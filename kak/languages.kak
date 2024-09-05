@@ -76,3 +76,68 @@ hook global WinSetOption filetype=makefile %{
     add-highlighter window/ show-whitespaces
 }
 
+set-option global lsp_semantic_tokens %{
+    [
+        # values
+        {token = "number", face = "value"},
+        {token = "enumMember", face = "value"},
+        {token = "enumMember", modifiers = ["declaration"], face = "value_declaration"},
+        {token = "keywordLiteral", face = "value"},
+
+        # types
+        {token = "type", face = "type"},
+        {token = "class", face = "type"},
+        {token = "enum", face = "type"},
+        {token = "struct", face = "type"},
+        {token = "type", modifiers = ["declaration"], face = "type_declaration"},
+        {token = "class", modifiers = ["declaration"], face = "type_declaration"},
+        {token = "enum", modifiers = ["declaration"], face = "type_declaration"},
+        {token = "struct", modifiers = ["declaration"], face = "type_declaration"},
+        {token = "typeParameter", face = "type_declaration"},
+
+        # variables
+        {token = "variable", face = "variable"},
+        {token = "variable", modifiers = ["declaration"], face = "variable_declaration"},
+        {token = "parameter", modifiers = ["declaration"], face = "variable_declaration"},
+        {token = "property", face = "property"},
+        {token = "property", modifiers = ["declaration"], face = "property_declaration"},
+
+        # modules
+        {token = "namespace", face = "module"},
+
+        # functions
+        {token = "function", face = "function"},
+        {token = "function", modifiers = ["declaration"], face = "function_declaration"},
+        {token = "method", face = "method"},
+        {token = "method", modifiers = ["declaration"], face = "method_declaration"},
+
+        # strings
+        # {token = "string", face = "string"},
+
+        # keywords
+        {token = "keyword", face = "keyword"},
+
+        # operator
+        {token = "operator", face = "operator"},
+
+        # attributes
+        {token = "attribute", face = "attribute"},
+
+        # comments
+        {token = "comment", face = "comment"},
+        {token = "comment", modifiers = ["documentation"], face = "documentation"},
+
+        # meta
+        {token = "macro", face = "meta"},
+        {token = "dependent", face = "meta_member"},
+
+        # builtins
+        {token = "builtin", face = "builtin"},
+
+        # other
+        {token = "concept", face = "concept"},
+        {token = "regexp", face = "regexp"},
+        {token = "label", face = "label"},
+        {token = "errorTag", face = "errortag"},
+    ]
+}
