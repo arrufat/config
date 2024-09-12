@@ -5,19 +5,23 @@ hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|p
     lsp-enable-window
     lsp-auto-signature-help-enable
     lsp-auto-hover-insert-mode-disable
+    set-option window lsp_auto_highlight_references true
     set-option window lsp_hover_max_lines 20
     map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
 }
 
-hook global WinSetOption filetype=(c|cpp) %{
-    set-option window formatcmd 'clang-format'
-    set-option window lsp_auto_highlight_references true
+# Semantic highlighting for supported languages
+hook global WinSetOption filetype=(c|cpp|go|rust|zig) %{
     hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
     hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
     hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
     hook -once -always window WinSetOption filetype=.* %{
         remove-hooks window semantic-tokens
     }
+}
+
+hook global WinSetOption filetype=(c|cpp) %{
+    set-option window formatcmd 'clang-format'
 }
 
 hook global WinSetOption filetype=python %{
@@ -29,28 +33,13 @@ hook global WinSetOption filetype=zig %{
     set-option window formatcmd 'zig fmt --stdin'
     set-option window lintcmd 'zig fmt --color off --ast-check 2>&1'
     # set-option window makecmd 'zig build --summary all'
-    set-option window lsp_auto_highlight_references true
     hook buffer -group format BufWritePre .* lsp-formatting-sync
-
-    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
-    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
-    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-    hook -once -always window WinSetOption filetype=.* %{
-        remove-hooks window semantic-tokens
-    }
     map window normal '<a-#>' ':exec %{x_i// autofix<lt>ret>if(false){<lt>esc>a<lt>ret>}<lt>esc>:format<lt>ret>_}<ret>'
     set-register pipe "fmt -w 99 -p '///'"
 }
 
 hook global WinSetOption filetype=rust %{
     set-option window formatcmd 'rustfmt'
-    set-option window lsp_auto_highlight_references true
-    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
-    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
-    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-    hook -once -always window WinSetOption filetype=.* %{
-        remove-hooks window semantic-tokens
-    }
 }
 
 hook global WinSetOption filetype=go %{
@@ -60,7 +49,6 @@ hook global WinSetOption filetype=go %{
     set-option window lsp_auto_highlight_references true
     set-option window lintcmd "run() { golint $1; go vet $1 2> | sed -e 's/: /: error /'; } && run"
     lint
-    hook window -group lint BufWritePost *. lint
 }
 
 hook global WinSetOption filetype=html %{
