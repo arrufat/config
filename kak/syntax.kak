@@ -18,6 +18,10 @@ hook global ModuleLoaded javascript %{
     add-highlighter shared/javascript/code/type regex "[^@]\b([A-Z]\w*)\b\h*\h*[:\(]" 1:type
 }
 
+hook global ModuleLoaded makefile %{
+    add-highlighter -override shared/makefile/content/ regex ^\S.*?(::|:|!)\s 0:function
+}
+
 hook global ModuleLoaded zig %{
     # string interpolation
     add-highlighter -override shared/zig/string region '"' (?<!\\)(\\\\)*" group
