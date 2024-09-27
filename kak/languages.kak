@@ -45,7 +45,7 @@ hook -group lsp-filetype-python global BufSetOption filetype=python %{
 }
 
 hook global WinSetOption filetype=zig %{
-    remove-highlighter window/zig
+    # remove-highlighter window/zig
     set-option window formatcmd 'zig fmt --stdin'
     set-option window lintcmd 'zig fmt --color off --ast-check 2>&1'
     set-option window makecmd 'zig build --summary all'
