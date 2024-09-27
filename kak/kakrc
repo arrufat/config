@@ -198,7 +198,7 @@ map global user -docstring 'qalc mode' q ':enter-user-mode qalc<ret>'
 map global user -docstring 'repl mode' r ':enter-user-mode repl<ret>'
 map global user -docstring 'spell mode' s ':enter-user-mode spell<ret>'
 map global user -docstring 'zenity mode' z ':enter-user-mode zenity<ret>'
-map global user -docstring 'toogle hex colors' h ':try %{addhl global/hex_color_code ref hex_color_code} catch %{rmhl global/hex_color_code}<ret>'
+map global user -docstring 'toggle hex colors' h ':try %{addhl global/hex_color_code ref hex_color_code} catch %{rmhl global/hex_color_code}<ret>'
 
 # Extra configuration for GNOME
 # ─────────────────────────────
