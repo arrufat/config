@@ -11,7 +11,7 @@ hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|p
 }
 
 # Semantic highlighting for supported languages
-hook global WinSetOption filetype=(c|cpp|go|rust|zig) %{
+hook global WinSetOption filetype=(c|cpp|html|javascript|go|rust|zig) %{
     hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
     hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
     hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
@@ -29,10 +29,26 @@ hook global WinSetOption filetype=python %{
     set-option window lintcmd 'ruff'
 }
 
+hook -group lsp-filetype-python global BufSetOption filetype=python %{
+    set-option buffer lsp_servers %exp{
+        [jedi-language-server]
+        root = "%sh{eval "$kak_opt_lsp_find_root" requirements.txt setup.py pyproject.toml .git .hg $(: kak_buffile)}"
+    }
+    set-option -add buffer lsp_servers %exp{
+        [ruff-lsp]
+        root = "%sh{eval "$kak_opt_lsp_find_root" requirements.txt setup.py pyproject.toml .git .hg $(: kak_buffile)}"
+        settings_section = "_"
+        [ruff-lsp.settings._.globalSettings]
+        organizeImports = true
+        fixAll = true
+    }
+}
+
 hook global WinSetOption filetype=zig %{
+    remove-highlighter window/zig
     set-option window formatcmd 'zig fmt --stdin'
     set-option window lintcmd 'zig fmt --color off --ast-check 2>&1'
-    # set-option window makecmd 'zig build --summary all'
+    set-option window makecmd 'zig build --summary all'
     hook buffer -group format BufWritePre .* lsp-formatting-sync
     map window normal '<a-#>' ':exec %{x_i// autofix<lt>ret>if(false){<lt>esc>a<lt>ret>}<lt>esc>:format<lt>ret>_}<ret>'
     set-register pipe "fmt -w 99 -p '///'"
@@ -40,6 +56,7 @@ hook global WinSetOption filetype=zig %{
 
 hook global WinSetOption filetype=rust %{
     set-option window formatcmd 'rustfmt'
+    hook window -group format BufWritePre .* lsp-formatting-sync
 }
 
 hook global WinSetOption filetype=go %{
@@ -51,9 +68,37 @@ hook global WinSetOption filetype=go %{
     lint
 }
 
+hook global BufSetOption filetype=go %{
+    set-option buffer lsp_servers %exp{
+        [gopls]
+        root = "%sh{eval "$kak_opt_lsp_find_root" Gopkg.toml go.mod .git .hg $(: kak_buffile)}"
+        [gopls.settings.gopls]
+        hints.assignVariableTypes = true
+        hints.compositeLiteralFields = true
+        hints.compositeLiteralTypes = true
+        hints.constantValues = true
+        hints.functionTypeParameters = true
+        hints.parameterNames = true
+        hints.rangeVariableTypes = true
+        usePlaceholders = true
+        semanticTokens = true
+    }
+}
+
 hook global WinSetOption filetype=html %{
-    set-option window formatcmd "run(){ tidy -q --indent yes --indent-spaces %opt{tabstop} 2>/dev/null || true; } && run"
-    set-option window lintcmd "tidy -e --gnu-emacs yes --quiet yes 2>&1"
+    set-option window formatcmd 'superhtml fmt --stdin'
+    # set-option window lintcmd "run() { superhtml check $1 } && run"
+    set-option window lintcmd 'superhtml check'
+    hook buffer -group format BufWritePre .* lsp-formatting-sync
+}
+
+hook global BufSetOption filetype=html %{
+    # https://github.com/kakoune-lsp/kakoune-lsp#server-specific-configuration
+    set-option buffer lsp_servers %exp{
+        [superhtml]
+        root = "%sh{eval "$kak_opt_lsp_find_root" index.html package.json .git .hg $(: kak_buffile)}"
+        args = ["lsp"]
+    }
 }
 
 hook global WinSetOption filetype=javascript %{
