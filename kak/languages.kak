@@ -24,6 +24,14 @@ hook global WinSetOption filetype=(c|cpp) %{
     set-option window formatcmd 'clang-format'
 }
 
+hook -group lsp-filetype-c-family global BufSetOption filetype=(?:c|cpp|objc) %{
+    set-option buffer lsp_servers %{
+        [clangd]
+        root_globs = ["compile_commands.json", ".clangd", ".git", ".hg"]
+        args = ["-clang-tidy", "-compile-commands-dir=build", "-background-index", "-completion-style=detailed", "-header-insertion=never"]
+    }
+}
+
 hook global WinSetOption filetype=python %{
     set-option window formatcmd 'ruff format -'
     set-option window lintcmd 'ruff'
