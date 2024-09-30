@@ -2,12 +2,12 @@ evaluate-commands %sh{kak-lsp --kakoune -s $kak_session}
 # set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|python|rust|typescript|zig) %{
     map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
+    set-option global lsp_snippet_support false
     lsp-enable-window
     lsp-auto-signature-help-enable
     lsp-auto-hover-insert-mode-disable
     set-option window lsp_auto_highlight_references true
     set-option window lsp_hover_max_lines 20
-    map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
 }
 
 # Semantic highlighting for supported languages
