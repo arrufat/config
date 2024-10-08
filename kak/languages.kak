@@ -11,7 +11,7 @@ hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|p
 }
 
 # Semantic highlighting for supported languages
-hook global WinSetOption filetype=(c|cpp|html|javascript|go|rust|zig) %{
+hook global WinSetOption filetype=(c|cpp|html|javascript|typescript|go|rust|zig) %{
     hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
     hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
     hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
