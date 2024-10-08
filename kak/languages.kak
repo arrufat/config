@@ -57,7 +57,7 @@ hook global WinSetOption filetype=zig %{
     set-option window formatcmd 'zig fmt --stdin'
     set-option window lintcmd 'zig fmt --color off --ast-check 2>&1'
     set-option window makecmd 'zig build --summary all'
-    hook buffer -group format BufWritePre .* lsp-formatting-sync
+    hook window -group format BufWritePre .* lsp-formatting-sync
     map window normal '<a-#>' ':exec %{x_i// autofix<lt>ret>if(false){<lt>esc>a<lt>ret>}<lt>esc>:format<lt>ret>_}<ret>'
     set-register pipe "fmt -w 99 -p '///'"
 }
