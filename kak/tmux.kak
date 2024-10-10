@@ -1,8 +1,7 @@
 # Fuzzy finder
 # ────────────
 
-# map global user -docstring 'open fuzzy finder' f ': try %{ edit -existing %sh{fzf-tmux --preview "cat {}" -} }<ret>'
-map global user -docstring 'open fuzzy finder' F ': try %{ edit -existing %sh{fzf-tmux --color=16 --preview "bat --theme=Nord --style=numbers,changes --color always {}" -} }<ret>'
+map global user -docstring 'open fuzzy finder' f ': try %{ edit -existing %sh{fzf-tmux --color=16 --preview "bat --theme=Nord --style=numbers,changes --color always {}" -} }<ret>'
 
 # Improved window management
 # ──────────────────────────
