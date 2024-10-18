@@ -1,4 +1,7 @@
 evaluate-commands %sh{kak-lsp}
+
+map global object a '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+
 # set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|python|rust|typescript|zig) %{
     map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
