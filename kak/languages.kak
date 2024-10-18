@@ -1,4 +1,4 @@
-evaluate-commands %sh{kak-lsp --kakoune -s $kak_session}
+evaluate-commands %sh{kak-lsp}
 # set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|python|rust|typescript|zig) %{
     map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
@@ -38,15 +38,16 @@ hook global WinSetOption filetype=python %{
 }
 
 hook -group lsp-filetype-python global BufSetOption filetype=python %{
-    set-option buffer lsp_servers %exp{
+    set-option buffer lsp_servers %{
         [jedi-language-server]
-        root = "%sh{eval "$kak_opt_lsp_find_root" requirements.txt setup.py pyproject.toml .git .hg $(: kak_buffile)}"
+        root_globs = ["requirements.txt", "setup.py", "pyproject.toml", ".git", ".hg"]
     }
-    set-option -add buffer lsp_servers %exp{
-        [ruff-lsp]
-        root = "%sh{eval "$kak_opt_lsp_find_root" requirements.txt setup.py pyproject.toml .git .hg $(: kak_buffile)}"
+    set-option -add buffer lsp_servers %{
+        [ruff]
+        args = ["server", "--quiet"]
+        root_globs = ["requirements.txt", "setup.py", "pyproject.toml", ".git", ".hg"]
         settings_section = "_"
-        [ruff-lsp.settings._.globalSettings]
+        [ruff.settings._.globalSettings]
         organizeImports = true
         fixAll = true
     }
@@ -77,9 +78,9 @@ hook global WinSetOption filetype=go %{
 }
 
 hook global BufSetOption filetype=go %{
-    set-option buffer lsp_servers %exp{
+    set-option buffer lsp_servers %{
         [gopls]
-        root = "%sh{eval "$kak_opt_lsp_find_root" Gopkg.toml go.mod .git .hg $(: kak_buffile)}"
+        root_globs = ["Gopkg.toml" "go.mod" ".git" ".hg"]
         [gopls.settings.gopls]
         hints.assignVariableTypes = true
         hints.compositeLiteralFields = true
@@ -100,11 +101,19 @@ hook global WinSetOption filetype=html %{
     hook buffer -group format BufWritePre .* lsp-formatting-sync
 }
 
-hook global BufSetOption filetype=html %{
-    # https://github.com/kakoune-lsp/kakoune-lsp#server-specific-configuration
-    set-option buffer lsp_servers %exp{
+hook -group lsp-filetype-html global BufSetOption filetype=html %{
+    set-option buffer lsp_servers %{
+        [vscode-html-language-server]
+        root_globs = ["package.json"]
+        args = ["--stdio"]
+        settings_section = "_"
+        [vscode-html-language-server.settings._]
+        quotePreference = "single"
+        javascript.format.semicolons = "insert"
+    }
+    set-option -add buffer lsp_servers %{
         [superhtml]
-        root = "%sh{eval "$kak_opt_lsp_find_root" index.html package.json .git .hg $(: kak_buffile)}"
+        root_globs = ["index.html", "package.json"]
         args = ["lsp"]
     }
 }
@@ -112,6 +121,41 @@ hook global BufSetOption filetype=html %{
 hook global WinSetOption filetype=javascript %{
     set-option window formatcmd "prettier --stdin-filepath=%val{buffile}"
 }
+
+hook -group lsp-filetype-javascript global BufSetOption filetype=(?:javascript|typescript) %{
+    set-option buffer lsp_servers %{
+        [typescript-language-server]
+        root_globs = ["package.json", "tsconfig.json", "jsconfig.json", ".git", ".hg"]
+        args = ["--stdio"]
+        settings_section = "_"
+        [typescript-language-server.settings._]
+        quotePreference = "double"
+        typescript.format.semicolons = "insert"
+    }
+    # set-option -add buffer lsp_servers %{
+    #     [biome]
+    #     root_globs = ["biome.json", "package.json", "tsconfig.json", "jsconfig.json", ".git", ".hg"]
+    #     args = ["lsp-proxy"]
+    # }
+    set-option -add buffer lsp_servers %{
+        [eslint-language-server]
+        root_globs = [".eslintrc", ".eslintrc.json"]
+        args = ["--stdio"]
+        workaround_eslint = true
+        [eslint-language-server.settings]
+        codeActionsOnSave = { mode = "all", "source.fixAll.eslint" = true }
+        format = { enable = true }
+        quiet = false
+        rulesCustomizations = []
+        run = "onType"
+        validate = "on"
+        experimental = {}
+        problems = { shortenToSingleLine = false }
+        codeAction.disableRuleComment = { enable = true, location = "separateLine" }
+        codeAction.showDocumentation = { enable = false }
+    }
+}
+
 
 hook global WinSetOption filetype=makefile %{
     add-highlighter window/ show-whitespaces
