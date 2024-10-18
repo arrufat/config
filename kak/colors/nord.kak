@@ -104,6 +104,8 @@ evaluate-commands %sh{
         face global InfoDiagnosticHint        ${nord15}
         face global InfoDiagnosticInformation StatusLineInfo
         face global InfoDiagnosticWarning     ${nord13}
+        face global DiagnosticTagDeprecated   ${nord13}
+        face global DiagnosticTagUnnecessary  ${nord13}
         face global InlayHint                 ${nord3}
     "
 }
