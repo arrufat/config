@@ -123,8 +123,10 @@ hook -group lsp-filetype-html global BufSetOption filetype=html %{
     }
 }
 
-hook global WinSetOption filetype=javascript %{
-    set-option window formatcmd "prettier --stdin-filepath=%val{buffile}"
+hook global WinSetOption filetype=(javascript|typescript) %{
+    set-option window formatcmd "npx prettier --stdin-filepath=%val{buffile}"
+    hook buffer BufWritePre .* format
+    map global lsp -docstring 'format buffer' f ':format<ret>'
 }
 
 hook -group lsp-filetype-javascript global BufSetOption filetype=(?:javascript|typescript) %{
@@ -134,7 +136,7 @@ hook -group lsp-filetype-javascript global BufSetOption filetype=(?:javascript|t
         args = ["--stdio"]
         settings_section = "_"
         [typescript-language-server.settings._]
-        quotePreference = "double"
+        quotePreference = "single"
         typescript.format.semicolons = "insert"
     }
     # set-option -add buffer lsp_servers %{
