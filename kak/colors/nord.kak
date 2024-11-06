@@ -100,12 +100,12 @@ evaluate-commands %sh{
         face global InfoLinkMono              ${nord15}+u
         face global InfoMono                  builtin
         face global InfoRule                  comment
-        face global InfoDiagnosticError       ${nord11}
-        face global InfoDiagnosticHint        ${nord15}
+        face global InfoDiagnosticError       ${nord11}+i
+        face global InfoDiagnosticHint        ${nord15}+i
         face global InfoDiagnosticInformation StatusLineInfo
-        face global InfoDiagnosticWarning     ${nord13}
-        face global DiagnosticTagDeprecated   ${nord13}
-        face global DiagnosticTagUnnecessary  ${nord13}
-        face global InlayHint                 ${nord3}
+        face global InfoDiagnosticWarning     ${nord13}+i
+        face global DiagnosticTagDeprecated   ${nord13}+i
+        face global DiagnosticTagUnnecessary  ${nord13}+i
+        face global InlayHint                 ${nord3}+i
     "
 }

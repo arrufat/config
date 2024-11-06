@@ -97,8 +97,8 @@ evaluate-commands %sh{
         face global SecondaryCursor      ${surface},${subtle}+fg
         face global PrimaryCursorEol     ${base},${subtle}+fg
         face global SecondaryCursorEol   ${surface},${muted}+fg
-        face global LineNumbers          ${subtle},${surface}
-        face global LineNumberCursor     ${gold},${surface}
+        face global LineNumbers          ${muted},${surface}
+        face global LineNumberCursor     ${text},${surface}
         face global LineNumbersWrapped   ${muted},${surface}
         face global MenuForeground       ${text},${overlay}
         face global MenuBackground       ${subtle},${overlay}
