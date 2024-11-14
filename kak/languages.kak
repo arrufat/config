@@ -109,16 +109,27 @@ hook global WinSetOption filetype=html %{
 hook -group lsp-filetype-html global BufSetOption filetype=html %{
     set-option buffer lsp_servers %{
         [vscode-html-language-server]
-        root_globs = ["package.json"]
+        root_globs = ["package.json", ".git", ".hg"]
         args = ["--stdio"]
         settings_section = "_"
         [vscode-html-language-server.settings._]
-        quotePreference = "single"
-        javascript.format.semicolons = "insert"
-    }
-    set-option -add buffer lsp_servers %{
+        provideFormatter = true
+        [vscode-html-language-server.settings]
+        embeddedLanguages.css = true
+        embeddedLanguages.javascript = true
+        html.autoClosingTags = true
+        html.format.enable = true
+        html.mirrorCursorOnMatchingTag = true
+        html.validate.scripts = true
+        html.validate.styles = true
+        css.validate = true
+        css.format.enable = true
+        css.validProperties = []
+        javascript.format.enable = true
+        javascript.validate.enable = true
+
         [superhtml]
-        root_globs = ["index.html", "package.json"]
+        root_globs = ["package.json", ".git", ".hg"]
         args = ["lsp"]
     }
 }
@@ -128,41 +139,6 @@ hook global WinSetOption filetype=(javascript|typescript) %{
     hook buffer BufWritePre .* format
     map global lsp -docstring 'format buffer' f ':format<ret>'
 }
-
-hook -group lsp-filetype-javascript global BufSetOption filetype=(?:javascript|typescript) %{
-    set-option buffer lsp_servers %{
-        [typescript-language-server]
-        root_globs = ["package.json", "tsconfig.json", "jsconfig.json", ".git", ".hg"]
-        args = ["--stdio"]
-        settings_section = "_"
-        [typescript-language-server.settings._]
-        quotePreference = "single"
-        typescript.format.semicolons = "insert"
-    }
-    # set-option -add buffer lsp_servers %{
-    #     [biome]
-    #     root_globs = ["biome.json", "package.json", "tsconfig.json", "jsconfig.json", ".git", ".hg"]
-    #     args = ["lsp-proxy"]
-    # }
-    set-option -add buffer lsp_servers %{
-        [eslint-language-server]
-        root_globs = [".eslintrc", ".eslintrc.json"]
-        args = ["--stdio"]
-        workaround_eslint = true
-        [eslint-language-server.settings]
-        codeActionsOnSave = { mode = "all", "source.fixAll.eslint" = true }
-        format = { enable = true }
-        quiet = false
-        rulesCustomizations = []
-        run = "onType"
-        validate = "on"
-        experimental = {}
-        problems = { shortenToSingleLine = false }
-        codeAction.disableRuleComment = { enable = true, location = "separateLine" }
-        codeAction.showDocumentation = { enable = false }
-    }
-}
-
 
 hook global WinSetOption filetype=makefile %{
     add-highlighter window/ show-whitespaces
