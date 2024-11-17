@@ -172,6 +172,7 @@ set-option global lsp_semantic_tokens %{
 
         # modules
         {token = "namespace", face = "module"},
+        {token = "namespace", modifiers = ["declaration"], face = "module_declaration"},
 
         # functions
         {token = "function", face = "function"},

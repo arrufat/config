@@ -41,6 +41,7 @@ evaluate-commands %sh{
         face global value_declaration    ${nord15}+b
         face global type_declaration     ${nord7}+b
         face global variable_declaration ${nord4}+b
+        face global module_declaration   ${nord7}+ib
         face global property             ${nord4}+i
         face global property_declaration ${nord4}+ib
         face global function_declaration ${nord8}+b
