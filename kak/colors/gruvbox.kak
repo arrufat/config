@@ -48,6 +48,7 @@ evaluate-commands %sh{
         face global property_declaration ${blue}+ib
         face global type_declaration     ${yellow}+b
         face global value_declaration    ${purple}+b
+        face global module_declaration   ${yellow}+ib
         face global meta_member          ${aqua}+i
         face global type_parameter       ${yellow}+b
         face global concept              ${yellow}+i
