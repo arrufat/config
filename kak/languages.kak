@@ -7,12 +7,12 @@ map global object d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>'
 # set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|python|rust|typescript|zig) %{
     map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
+    set-option global lsp_auto_highlight_references true
     set-option global lsp_snippet_support false
+    set-option global lsp_hover_max_lines 20
     lsp-enable-window
     lsp-auto-signature-help-enable
     lsp-auto-hover-insert-mode-disable
-    set-option window lsp_auto_highlight_references true
-    set-option window lsp_hover_max_lines 20
 }
 
 # Semantic highlighting for supported languages
@@ -77,7 +77,6 @@ hook global WinSetOption filetype=go %{
     set-option window formatcmd 'gofmt'
     set-option window tabstop 4
     hook window -group format BufWritePre .* lsp-formatting-sync
-    set-option window lsp_auto_highlight_references true
     set-option window lintcmd "run() { golint $1; go vet $1 2> | sed -e 's/: /: error /'; } && run"
     lint
 }
@@ -85,7 +84,7 @@ hook global WinSetOption filetype=go %{
 hook global BufSetOption filetype=go %{
     set-option buffer lsp_servers %{
         [gopls]
-        root_globs = ["Gopkg.toml" "go.mod" ".git" ".hg"]
+        root_globs = ["Gopkg.toml", "go.mod", ".git", ".hg"]
         [gopls.settings.gopls]
         hints.assignVariableTypes = true
         hints.compositeLiteralFields = true
@@ -165,6 +164,7 @@ set-option global lsp_semantic_tokens %{
 
         # variables
         {token = "variable", face = "variable"},
+        {token = "parameter", face = "variable"},
         {token = "variable", modifiers = ["declaration"], face = "variable_declaration"},
         {token = "parameter", modifiers = ["declaration"], face = "variable_declaration"},
         {token = "property", face = "property"},
