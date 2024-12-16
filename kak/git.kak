@@ -14,11 +14,12 @@ hook global WinSetOption filetype=git-commit %{
 
 declare-user-mode git
 map global git -docstring 'edit' e ':git edit '
+map global git -docstring 'diff' d ':git diff %val{bufname}<ret>'
 map global git -docstring 'status' s ':git status<ret>'
 map global git -docstring 'commit' c ':git commit<ret>'
 map global git -docstring 'update diff' u ':git update-diff<ret>'
-map global git -docstring 'show diff' d ':git show-diff<ret>'
-map global git -docstring 'hide diff' <a-d> ':git hide-diff<ret>'
+map global git -docstring 'git gutter on' g ':git show-diff<ret>'
+map global git -docstring 'git gutter off' <a-g> ':git hide-diff<ret>'
 map global git -docstring 'toggle blame' b ':git blame<ret>'
 map global git -docstring 'next hunk' n ':git next-hunk<ret>'
 map global git -docstring 'prev hunk' p ':git prev-hunk<ret>'
