@@ -87,11 +87,12 @@ evaluate-commands %sh{
         face global StatusLineValue      ${nord15}
         face global StatusCursor         ${nord1},${nord5}
         face global Prompt               ${nord8},${nord2}+b
-        face global MatchingChar         default,${nord1}+b
+        face global MatchingChar         ${nord8},${nord3}+b
         face global BufferPadding        ${nord3},${nord0}
         face global Whitespace           ${nord3}+f
 
         # Extra faces for kak-lsp
+        face global Reference		      default,${nord1}+b
         face global InfoDefault               Information
         face global InfoBlock                 block
         face global InfoBlockQuote            ${nord7}+i
@@ -108,5 +109,5 @@ evaluate-commands %sh{
         face global DiagnosticTagDeprecated   ${nord13}+i
         face global DiagnosticTagUnnecessary  ${nord13}+i
         face global InlayHint                 ${nord3}+i
-    "
+"
 }
