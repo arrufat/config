@@ -92,7 +92,7 @@ evaluate-commands %sh{
         face global Whitespace           ${nord3}+f
 
         # Extra faces for kak-lsp
-        face global Reference		      default,${nord1}+b
+        face global Reference                 default,${nord1}+b
         face global InfoDefault               Information
         face global InfoBlock                 block
         face global InfoBlockQuote            ${nord7}+i
