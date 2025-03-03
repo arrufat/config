@@ -53,6 +53,7 @@ evaluate-commands %sh{
         face global regexp               ${nord13}+i
         face global label                ${nord12}
         face global errortag             ${nord15}+i
+        face global deprecated           ,,+s
 
         # Markdown highlighting
         face global title     ${nord8}+b
@@ -90,6 +91,7 @@ evaluate-commands %sh{
         face global MatchingChar         ${nord8},${nord3}+b
         face global BufferPadding        ${nord3},${nord0}
         face global Whitespace           ${nord3}+f
+        face global WrapMarker           ${nord3}+f
 
         # Extra faces for kak-lsp
         face global Reference                 default,${nord1}+b
