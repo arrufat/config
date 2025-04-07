@@ -5,7 +5,7 @@ set-option global startup_info_version 20240518
 set-option global grepcmd 'rg --column --smart-case --sort path --line-buffered'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
 add-highlighter global/ show-matching -previous
-hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:,,rgb:4c566a+u }
+hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:,,rgb:4c566a+uB }
 hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -relative -hlcursor }
 hook -group todohighlight global BufCreate .* %{
     add-highlighter buffer/todos regex "%opt{comment_line}[ \t]*\b(TODO|WARNING|FIXME)\b" 1:default+bu@comment
@@ -49,10 +49,6 @@ define-command clean-selections -docstring 'Replace tabs with spaces and trim tr
 define-command clean-buffer -docstring 'Replace tabs with spaces and trim trailing whitespace' %{ try %{
     execute-keys -draft \%@s\h+$<ret>d
 } }
-
-# clear search highlighter
-define-command nohlsearch -docstring 'clear the search register' %{ set-register slash '' }
-alias global nohl nohlsearch
 
 # Bring back <c-a> and <c-x> from Vim to increment/decrement the number under the cursor
 define-command -hidden -params 2 inc %{ try %{
@@ -188,6 +184,7 @@ map global qalc -docstring 'update exchange rates' x ':try %{ nop %sh{qalc -exra
 
 map global user -docstring 'fuzzy finder' f ':prompt -shell-script-candidates "find . -type f" open: %{ edit -existing %val{text} }<ret>'
 map global user -docstring 'open buffers' b ':prompt -buffer-completion buffer: %{ edit %val{text} }<ret>'
+map global user -docstring 'clear search register' / ':set-register slash ""<ret>' 
 map global user -docstring 'enable autocomplete' a ':set-option -add buffer autocomplete insert<ret>'
 map global user -docstring 'disable autocomplete' <a-a> ':set-option -remove buffer autocomplete insert<ret>'
 map global user -docstring 'edit kakrc' e ':e ~/.config/kak/kakrc<ret>'
@@ -224,7 +221,7 @@ source "%val{config}/syntax.kak"
 # languages configuration
 # ───────────────────────
 
-# source "%val{config}/languages.kak"
+source "%val{config}/languages.kak"
 
 # snippets configuration
 # ──────────────────────
