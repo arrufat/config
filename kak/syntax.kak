@@ -22,6 +22,14 @@ hook global ModuleLoaded makefile %{
     add-highlighter -override shared/makefile/content/ regex ^\S.*?(::|:|!)\s 0:function
 }
 
+hook global ModuleLoaded go %{
+    add-highlighter -override shared/go/double_string region '"' (?<!\\)(\\\\)*" group
+    add-highlighter -override shared/go/double_string/ fill string
+
+    add-highlighter -override shared/go/double_string/ regex '\\([abfnrtv\\"]|[0-7]{1,3}|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})' 0:escape
+    add-highlighter -override shared/go/double_string/ regex '%([svdf])' 0:escape
+}
+
 hook global ModuleLoaded zig %{
     # string interpolation
     add-highlighter -override shared/zig/string region '"' (?<!\\)(\\\\)*" group
