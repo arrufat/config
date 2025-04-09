@@ -77,8 +77,7 @@ hook global WinSetOption filetype=go %{
     set-option window formatcmd 'gofmt'
     set-option window tabstop 4
     hook window -group format BufWritePre .* lsp-formatting-sync
-    set-option window lintcmd "run() { golint $1; go vet $1 2> | sed -e 's/: /: error /'; } && run"
-    lint
+    set-option window lintcmd "run() { staticcheck | sed -e 's/: /: error: /'; } && run"
 }
 
 hook global BufSetOption filetype=go %{
