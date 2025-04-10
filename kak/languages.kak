@@ -163,9 +163,11 @@ set-option global lsp_semantic_tokens %{
 
         # variables
         {token = "variable", face = "variable"},
-        {token = "parameter", face = "variable"},
         {token = "variable", modifiers = ["declaration"], face = "variable_declaration"},
+        {token = "variable", modifiers = ["definition"], face = "variable_declaration"},
+        {token = "parameter", face = "variable"},
         {token = "parameter", modifiers = ["declaration"], face = "variable_declaration"},
+        {token = "parameter", modifiers = ["definition"], face = "variable_declaration"},
         {token = "property", face = "property"},
         {token = "property", modifiers = ["declaration"], face = "property_declaration"},
 
@@ -176,11 +178,14 @@ set-option global lsp_semantic_tokens %{
         # functions
         {token = "function", face = "function"},
         {token = "function", modifiers = ["declaration"], face = "function_declaration"},
+        {token = "function", modifiers = ["definition"], face = "function_declaration"},
         {token = "method", face = "method"},
         {token = "method", modifiers = ["declaration"], face = "method_declaration"},
+        {token = "method", modifiers = ["definition"], face = "method_declaration"},
 
         # strings
         # {token = "string", face = "string"},
+        {token = "string", modifiers = ["format"], face = "escape"},
 
         # keywords
         {token = "keyword", face = "keyword"},
