@@ -13,6 +13,12 @@ hook global ModuleLoaded python %{
     add-highlighter -override shared/python/f_single_string/ regex \{.*?\} 0:escape
 }
 
+hook global ModuleLoaded go %{
+    add-highlighter -override shared/go/double_string region '"' (?<!\\)(\\\\)*" group
+    add-highlighter -override shared/go/double_string/ fill string
+    add-highlighter -override shared/go/double_string/ regex '\\([abfnrtv\\"]|[0-7]{1,3}|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})' 0:escape
+}
+
 hook global ModuleLoaded javascript %{
     add-highlighter shared/javascript/code/function regex "[^@]\b([_a-z]\w*)\b\h*\h*\(" 1:function
     add-highlighter shared/javascript/code/type regex "[^@]\b([A-Z]\w*)\b\h*\h*[:\(]" 1:type
