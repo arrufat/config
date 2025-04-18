@@ -186,6 +186,7 @@ set-option global lsp_semantic_tokens %{
         # strings
         # {token = "string", face = "string"},
         {token = "string", modifiers = ["format"], face = "escape"},
+        {token = "escapeSequence", face = "escape"},
 
         # keywords
         {token = "keyword", face = "keyword"},
