@@ -197,6 +197,7 @@ map global user -docstring 'repl mode' r ':enter-user-mode repl<ret>'
 map global user -docstring 'spell mode' s ':enter-user-mode spell<ret>'
 map global user -docstring 'zenity mode' z ':enter-user-mode zenity<ret>'
 map global user -docstring 'toggle hex colors' h ':try %{addhl global/hex_color_code ref hex_color_code} catch %{rmhl global/hex_color_code}<ret>'
+map global user -docstring 'toggle line wrap' w ':try %{addhl buffer/ wrap -word -indent} catch %{rmhl buffer/wrap_-word_-indent}<ret>'
 
 # Extra configuration for GNOME
 # ─────────────────────────────
