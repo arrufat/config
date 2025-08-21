@@ -44,10 +44,6 @@ hook global WinSetOption filetype=python %{
 
 hook -group lsp-filetype-python global BufSetOption filetype=python %{
     set-option buffer lsp_servers %{
-        [jedi-language-server]
-        root_globs = ["requirements.txt", "setup.py", "pyproject.toml", ".git", ".hg"]
-    }
-    set-option -add buffer lsp_servers %{
         [ty]
         args = ["server"]
         root_globs = ["requirements.txt", "setup.py", "pyproject.toml", ".git", ".hg"]
