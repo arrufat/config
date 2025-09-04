@@ -27,9 +27,7 @@ define-command gemini -params .. -docstring "Query Gemini AI with optional promp
             # Parameters provided - use them as query with context prepended
             query="$@"
             # Combine context and query
-            full_query="$context
-
-$query"
+            full_query=$(printf '%s\n\n%s' "$context" "$query")
         else
             # No parameters - use context as the entire query
             full_query="$context"
