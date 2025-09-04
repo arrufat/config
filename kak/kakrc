@@ -230,6 +230,11 @@ source "%val{config}/languages.kak"
 
 source "%val{config}/snippets.kak"
 
+# Gemini AI integration
+# ─────────────────────
+
+source "%val{config}/gemini.kak"
+
 # TMUX specific configuration
 # ───────────────────────────
 
