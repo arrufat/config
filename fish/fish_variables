@@ -26,14 +26,14 @@ SETUVAR fish_color_search_match:\x2d\x2dbold\x1e\x2d\x2dbackground\x3d434c5e
 SETUVAR fish_color_selection:d8dee9\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3d434c5e
 SETUVAR fish_color_status:bf616a
 SETUVAR fish_color_user:a3be8c
-SETUVAR fish_color_valid_path:\x2d\x2dunderline
+SETUVAR fish_color_valid_path:\x2d\x2dunderline\x3dsingle
 SETUVAR fish_greeting:\x1d
 SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_pager_color_background:\x1d
 SETUVAR fish_pager_color_completion:e5e9f0
 SETUVAR fish_pager_color_description:ebcb8b\x1e\x2d\x2ditalics
-SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
-SETUVAR fish_pager_color_progress:3b4252\x1e\x2d\x2dbackground\x3dd08770
+SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline\x3dsingle
+SETUVAR fish_pager_color_progress:3b4252\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dd08770
 SETUVAR fish_pager_color_secondary_background:\x1d
 SETUVAR fish_pager_color_secondary_completion:\x1d
 SETUVAR fish_pager_color_secondary_description:\x1d
