@@ -28,6 +28,14 @@ hook global ModuleLoaded makefile %{
     add-highlighter -override shared/makefile/content/ regex ^\S.*?(::|:|!)\s 0:function
 }
 
+hook global ModuleLoaded json %{
+    remove-highlighter shared/json
+    add-highlighter shared/json group
+    add-highlighter shared/json/literal regex \b(true|false|null|\d+(?:\.\d+)?(?:[eE][+-]?\d*)?)\b 0:value
+    add-highlighter shared/json/string regex (?<!\\)("(?:[^"]|\\")*(?<!\\)") 1:string
+    add-highlighter shared/json/key regex (?<!\\)("(?:[^"]|\\")*(?<!\\)")\s*: 1:keyword
+}
+
 hook global ModuleLoaded zig %{
     # string interpolation
     add-highlighter -override shared/zig/string region '"' (?<!\\)(\\\\)*" group
