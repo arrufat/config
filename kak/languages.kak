@@ -2,7 +2,7 @@ evaluate-commands %sh{kak-lsp}
 
 map global object a '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
 map global object f '<a-semicolon>lsp-object Function Method<ret>' -docstring 'LSP function or method'
-map global object d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>' -docstring 'LSP diagnostic'
+map global object d '<a-semicolon>lsp-diagnostic-object error warning info hint<ret>' -docstring 'LSP diagnostic'
 
 # set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|python|rust|typescript|zig) %{
