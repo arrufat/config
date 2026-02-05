@@ -24,6 +24,7 @@ set -g -x NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+set --export PATH "$HOME/.local/bin/" $PATH
 
 # Jumping between prompts
 function mark_prompt_start --on-event fish_prompt
@@ -32,3 +33,6 @@ end
 
 # Customize git prompt characters
 set -g __fish_git_prompt_char_dirtystate '±'
+
+# Amp CLI
+export PATH="/home/adria/.amp/bin:$PATH"
