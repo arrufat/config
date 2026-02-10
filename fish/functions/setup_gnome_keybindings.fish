@@ -29,7 +29,7 @@ function setup_gnome_keybindings
 
     # Terminal
     gsettings set "$schema:$base/custom0/" name "Terminal"
-    gsettings set "$schema:$base/custom0/" command "foot"
+    gsettings set "$schema:$base/custom0/" command "footclient"
     gsettings set "$schema:$base/custom0/" binding "<Super>Return"
 
     # System Monitor
