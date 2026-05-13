@@ -14,11 +14,12 @@ set --global fish_color_cwd_root bf616a
 set --global fish_color_end 81a1c1
 set --global fish_color_error bf616a
 set --global fish_color_escape ebcb8b
+set --global fish_color_gray
 set --global fish_color_history_current e5e9f0 --bold
 set --global fish_color_host a3be8c
 set --global fish_color_host_remote ebcb8b
 set --global fish_color_keyword 81a1c1
-set --global fish_color_normal normal
+set --global fish_color_normal --reset
 set --global fish_color_operator 81a1c1
 set --global fish_color_option 8fbcbb
 set --global fish_color_param d8dee9
@@ -32,7 +33,7 @@ set --global fish_color_valid_path --underline=single
 set --global fish_pager_color_background 
 set --global fish_pager_color_completion e5e9f0
 set --global fish_pager_color_description ebcb8b --italics
-set --global fish_pager_color_prefix normal --bold --underline=single
+set --global fish_pager_color_prefix --bold --underline=single
 set --global fish_pager_color_progress 3b4252 --bold --background=d08770
 set --global fish_pager_color_secondary_background 
 set --global fish_pager_color_secondary_completion 
