@@ -14,7 +14,7 @@ set --global fish_color_cwd_root bf616a
 set --global fish_color_end 81a1c1
 set --global fish_color_error bf616a
 set --global fish_color_escape ebcb8b
-set --global fish_color_gray
+set --global fish_color_gray 
 set --global fish_color_history_current e5e9f0 --bold
 set --global fish_color_host a3be8c
 set --global fish_color_host_remote ebcb8b
