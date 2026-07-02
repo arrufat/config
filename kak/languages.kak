@@ -5,6 +5,7 @@ map global object f '<a-semicolon>lsp-object Function Method<ret>' -docstring 'L
 map global object d '<a-semicolon>lsp-diagnostic-object error warning info hint<ret>' -docstring 'LSP diagnostic'
 
 # set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
+# set-option global lsp_debug true
 hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|python|rust|typescript|zig) %{
     map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
     set-option global lsp_auto_highlight_references true
