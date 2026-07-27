@@ -33,6 +33,3 @@ end
 
 # Customize git prompt characters
 set -g __fish_git_prompt_char_dirtystate '±'
-
-# Amp CLI
-export PATH="/home/adria/.amp/bin:$PATH"
