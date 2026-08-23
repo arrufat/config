@@ -2,3 +2,6 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "mpv/scripts/jamak"]
+	path = mpv/scripts/jamak
+	url = https://github.com/arrufat/mpv-jamak

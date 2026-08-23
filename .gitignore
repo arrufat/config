@@ -5,5 +5,7 @@
 !/foot/
 !/kak/
 !/kak-lsp/
+!/mpv/
+/mpv/script-opts/jamak.conf
 !/nnn/
 !/tmux/tmux.conf
