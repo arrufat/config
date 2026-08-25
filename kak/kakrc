@@ -21,13 +21,13 @@ define-command update_hex_color_code_ranges %{
             # <a-;> puts the cursor on the first char of each match: the swatch is inserted there
             execute-keys 's(\B#|\b0[xX]|\brgb[a]?:)([0-9A-Fa-f]{6})([0-9A-Fa-f]{2})?\b<ret><a-;>'
             evaluate-commands -itersel %{
-                set-option -add window hex_color_code_ranges "%val{cursor_line}.%val{cursor_column}+0|{rgb:%reg{2}}■"
+                set-option -add window hex_color_code_ranges "%val{cursor_line}.%val{cursor_column}+0|{rgb:%reg{2}+f}■"
             }
         }
         evaluate-commands -draft -verbatim try %{
             execute-keys 's\B#([0-9A-Fa-f])([0-9A-Fa-f])([0-9A-Fa-f])\b<ret><a-;>'
             evaluate-commands -itersel %{
-                set-option -add window hex_color_code_ranges "%val{cursor_line}.%val{cursor_column}+0|{rgb:%reg{1}%reg{1}%reg{2}%reg{2}%reg{3}%reg{3}}■"
+                set-option -add window hex_color_code_ranges "%val{cursor_line}.%val{cursor_column}+0|{rgb:%reg{1}%reg{1}%reg{2}%reg{2}%reg{3}%reg{3}+f}■"
             }
         }
     }
