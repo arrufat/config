@@ -13,21 +13,21 @@ hook -group todohighlight global BufCreate .* %{
 }
 
 declare-option -hidden range-specs hex_color_code_ranges
-add-highlighter shared/hex_color_code ranges hex_color_code_ranges
 define-command update_hex_color_code_ranges %{
     set-option window hex_color_code_ranges %val{timestamp}
     evaluate-commands -draft %{
         execute-keys 'gtGbx' # select the visible part of the buffer only.
         evaluate-commands -draft -verbatim try %{
-            execute-keys 's(\B#|\b0[xX]|\brgb[a]?:)([0-9A-Fa-f]{6})([0-9A-Fa-f]{2})?)\b<ret>'
+            # <a-;> puts the cursor on the first char of each match: the swatch is inserted there
+            execute-keys 's(\B#|\b0[xX]|\brgb[a]?:)([0-9A-Fa-f]{6})([0-9A-Fa-f]{2})?\b<ret><a-;>'
             evaluate-commands -itersel %{
-                set-option -add window hex_color_code_ranges "%val{selection_desc}|rgb:000000,rgb:%reg{2}+F"
+                set-option -add window hex_color_code_ranges "%val{cursor_line}.%val{cursor_column}+0|{rgb:%reg{2}}■"
             }
         }
         evaluate-commands -draft -verbatim try %{
-            execute-keys 's\B#([0-9A-Fa-f])([0-9A-Fa-f])([0-9A-Fa-f])\b<ret>'
+            execute-keys 's\B#([0-9A-Fa-f])([0-9A-Fa-f])([0-9A-Fa-f])\b<ret><a-;>'
             evaluate-commands -itersel %{
-                set-option -add window hex_color_code_ranges "%val{selection_desc}|rgb:000000,rgb:%reg{1}%reg{1}%reg{2}%reg{2}%reg{3}%reg{3}+F"
+                set-option -add window hex_color_code_ranges "%val{cursor_line}.%val{cursor_column}+0|{rgb:%reg{1}%reg{1}%reg{2}%reg{2}%reg{3}%reg{3}}■"
             }
         }
     }
@@ -198,7 +198,7 @@ map global user -docstring 'qalc mode' q ':enter-user-mode qalc<ret>'
 map global user -docstring 'repl mode' r ':enter-user-mode repl<ret>'
 map global user -docstring 'spell mode' s ':enter-user-mode spell<ret>'
 map global user -docstring 'zenity mode' z ':enter-user-mode zenity<ret>'
-map global user -docstring 'toggle hex colors' h ':try %{addhl global/hex_color_code ref hex_color_code} catch %{rmhl global/hex_color_code}<ret>'
+map global user -docstring 'toggle hex colors' h ':try %{addhl global/hex_color_code replace-ranges hex_color_code_ranges} catch %{rmhl global/hex_color_code}<ret>'
 map global user -docstring 'toggle line wrap' w ':try %{addhl buffer/ wrap -word -indent} catch %{rmhl buffer/wrap_-word_-indent}<ret>'
 
 # Extra configuration for GNOME
