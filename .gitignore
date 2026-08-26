@@ -7,5 +7,6 @@
 !/kak-lsp/
 !/mpv/
 /mpv/script-opts/jamak.conf
+/mpv/watch_later/
 !/nnn/
 !/tmux/tmux.conf
