@@ -43,6 +43,39 @@ define-command hex-color-code-toggle -docstring 'toggle colour swatches in front
     remove-highlighter global/hex_color_code
 } }
 
+# Language highlighting in Diffs
+
+hook global ModuleLoaded diff %{
+    set-face global DiffAdd ,rgba:00800032
+    set-face global DiffRm ,rgba:80000032
+    # set-face global DiffAdd ,rgba:a3b38c32
+    # set-face global DiffRm ,rgba:bf616a32
+}
+
+define-command diff-load-languages %{
+    evaluate-commands -draft -save-regs /a %{
+        try %{
+            add-highlighter shared/diff/languages regions
+        }
+
+        execute-keys '%s^\+\+\+ [^\n]+\.\K\w+$<ret>'
+        evaluate-commands -itersel %{
+            evaluate-commands -draft %{
+                edit -scratch "*diff-filetype-resolver*.%val{selection}"
+                set-register a %opt{filetype}
+                delete-buffer
+            }
+            try %{
+                require-module %reg{a}
+                add-highlighter "shared/diff/languages/%val{selection}" region "^\+\+\+ [^\n]+\.%val{selection}$" "^diff" ref "%reg{a}"
+            }
+        }
+    }
+}
+
+hook -group diff-load-languages global WinSetOption filetype=diff diff-load-languages
+hook -group diff-load-languages global WinSetOption filetype=git-(log|diff) %{ hook -once buffer BufCloseFifo .* diff-load-languages }
+
 # Enable editor config
 # ────────────────────
 
