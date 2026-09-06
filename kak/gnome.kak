@@ -23,7 +23,7 @@ gnome-terminal-tab <program> [<arguments>]: create a new terminal as gnome-termi
 The program passed as argument will be executed in the new terminal' \
 %{
     nop %sh{
-        gnome-terminal quiet --tab --active --working-directory "$PWD" -- "$@"
+        gnome-terminal --quiet --tab --active --working-directory "$PWD" -- "$@"
     }
 }
 
