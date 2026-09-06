@@ -1,6 +1,8 @@
 # Gemini AI integration
 # ─────────────────────
 
+declare-option -docstring "Gemini model used by the gemini command" str gemini_model "gemini-flash-latest"
+
 define-command gemini -params .. -docstring "Query Gemini AI with optional prompt" %{
     evaluate-commands -draft %{
         try %{
@@ -23,7 +25,7 @@ define-command gemini -params .. -docstring "Query Gemini AI with optional promp
         fi
 
         json_query=$(printf '%s' "$full_query" | jq -Rs .)
-        response=$(curl -s "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" \
+        response=$(curl -s --fail -m 60 "https://generativelanguage.googleapis.com/v1beta/models/$kak_opt_gemini_model:generateContent" \
             -H "x-goog-api-key: $GEMINI_API_KEY" \
             -H 'Content-Type: application/json' \
             -d "{\"contents\":[{\"parts\":[{\"text\":$json_query}]}]}" | \
