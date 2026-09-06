@@ -6,11 +6,12 @@ map global object d '<a-semicolon>lsp-diagnostic-object error warning info hint<
 
 # set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 # set-option global lsp_debug true
+set-option global lsp_auto_highlight_references true
+set-option global lsp_snippet_support false
+set-option global lsp_hover_max_lines 20
+
 hook global WinSetOption filetype=(c|cpp|css|go|html|javascript|latex|markdown|python|rust|typescript|zig) %{
     map window user -docstring 'LSP mode' l ': enter-user-mode lsp<ret>'
-    set-option global lsp_auto_highlight_references true
-    set-option global lsp_snippet_support false
-    set-option global lsp_hover_max_lines 20
     lsp-enable-window
     lsp-auto-signature-help-enable
     lsp-auto-hover-insert-mode-disable
@@ -82,7 +83,7 @@ hook global WinSetOption filetype=go %{
     set-option window lintcmd "run() { staticcheck | sed -e 's/: /: error: /'; } && run"
 }
 
-hook global BufSetOption filetype=go %{
+hook -group lsp-filetype-go global BufSetOption filetype=go %{
     set-option buffer lsp_servers %{
         [gopls]
         root_globs = ["Gopkg.toml", "go.mod", ".git", ".hg"]
