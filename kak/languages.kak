@@ -103,7 +103,7 @@ hook global WinSetOption filetype=html %{
     set-option window formatcmd 'superhtml fmt --stdin'
     # set-option window lintcmd "run() { superhtml check $1 } && run"
     set-option window lintcmd 'superhtml check'
-    hook buffer -group format BufWritePre .* lsp-formatting-sync
+    hook window -group format BufWritePre .* lsp-formatting-sync
 }
 
 hook -group lsp-filetype-html global BufSetOption filetype=html %{
@@ -136,8 +136,8 @@ hook -group lsp-filetype-html global BufSetOption filetype=html %{
 
 hook global WinSetOption filetype=(javascript|typescript) %{
     set-option window formatcmd "npx prettier --stdin-filepath=%val{buffile}"
-    hook buffer BufWritePre .* format
-    map global lsp -docstring 'format buffer' f ':format<ret>'
+    hook window -group format BufWritePre .* format
+    map window lsp -docstring 'format buffer' f ':format<ret>'
 }
 
 hook global WinSetOption filetype=makefile %{
