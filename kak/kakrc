@@ -6,7 +6,9 @@ set-option global startup_info_version 20250603
 set-option global grepcmd 'rg --column --smart-case --sort path --line-buffered'
 set-option global ui_options terminal_assistant=none terminal_status_on_top=true
 add-highlighter global/ show-matching -previous
-hook global RegisterModified '/' %{ add-highlighter -override global/search regex "%reg{/}" 0:,,rgb:4c566a+uB }
+add-highlighter global/search dynregex '%reg{/}' 0:,,rgb:4c566a+uB
+# re-arm the search highlighter on the next search after it was cleared
+hook global RegisterModified '/' %{ try %{ add-highlighter global/search dynregex '%reg{/}' 0:,,rgb:4c566a+uB } }
 hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -relative -hlcursor }
 hook -group todohighlight global BufCreate .* %{
     add-highlighter buffer/todos regex "%opt{comment_line}[ \t]*\b(TODO|WARNING|FIXME)\b" 1:default+bu@comment
@@ -162,7 +164,7 @@ complete-command broot file
 # fuzzy finders
 # ─────────────
 define-command find -docstring "find files" -params 1 %{ edit %arg{1} }
-complete-command find shell-script-candidates %{ find . -type f }
+complete-command find shell-script-candidates %{ rg --files }
 alias global f find
 
 # Various mappings
@@ -173,7 +175,7 @@ map global normal '#' ':comment-line<ret>'
 map global normal '<a-#>' '_:comment-block<ret>'
 map global normal = ':prompt math: %{exec "a%val{text}<lt>esc>|{ cat; echo; }|bc<lt>ret>"}<ret>'
 map global normal '<a-=>' ':prompt qalc: %{exec "a%val{text}<lt>esc>|qalc -t -u8 -f -<lt>ret>"}<ret>'
-map global normal <c-/> ":set-register / ''<ret>"
+map global normal <c-/> ':remove-highlighter global/search<ret>'
 map -docstring "XML tag object" global object t %{c<lt>([\w.]+)\b[^>]*?(?<lt>!/)>,<lt>/([\w.]+)\b[^>]*?(?<lt>!/)><ret>}
 map -docstring 'extend lines downwards' global normal X %{:exec "<lt>a-:>%val{count}F<lt>ret>x"<ret>}
 map -docstring 'extend lines upwards' global normal <a-X> %{:exec "<lt>a-:><lt>a-;><lt>a-H>%val{count}Kx"<ret>}
@@ -224,9 +226,9 @@ map global qalc -docstring 'exact mode' e ':try %{ nop %sh{qalc -set exact}}<ret
 map global qalc -docstring 'approximate mode' a ':try %{ nop %sh{qalc -set approx}}<ret>'
 map global qalc -docstring 'update exchange rates' x ':try %{ nop %sh{qalc -exrates}}<ret>'
 
-map global user -docstring 'fuzzy finder' f ':prompt -shell-script-candidates "find . -type f" open: %{ edit -existing %val{text} }<ret>'
+map global user -docstring 'fuzzy finder' f ':prompt -shell-script-candidates "rg --files" open: %{ edit -existing %val{text} }<ret>'
 map global user -docstring 'open buffers' b ':prompt -buffer-completion buffer: %{ edit %val{text} }<ret>'
-map global user -docstring 'clear search register' / ':set-register slash ""<ret>' 
+map global user -docstring 'clear search highlight' / ':remove-highlighter global/search<ret>'
 map global user -docstring 'enable autocomplete' a ':set-option -add buffer autocomplete insert<ret>'
 map global user -docstring 'disable autocomplete' <a-a> ':set-option -remove buffer autocomplete insert<ret>'
 map global user -docstring 'edit kakrc' e ':e ~/.config/kak/kakrc<ret>'
@@ -284,7 +286,7 @@ hook global ModuleLoaded tmux %{ source "%val{config}/tmux.kak" }
 # Load local Kakoune config file if it exists
 # ───────────────────────────────────────────
 
-evaluate-commands %sh{ [ -f $kak_config/local.kak ] && echo "source $kak_config/local.kak" }
+try %{ source "%val{config}/local.kak" }
 
 # Set the color scheme at the end because of the LSP defined faces
 # ────────────────────────────────────────────────────────────────
