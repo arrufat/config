@@ -1,14 +1,12 @@
+declare-option -hidden range-specs commit_column_ranges
+define-command -hidden update_commit_column_ranges %{
+    set-option window commit_column_ranges %val{timestamp} '1.51,1.51|,yellow'
+}
 hook global WinSetOption filetype=git-commit %{
-    declare-option -hidden range-specs commit_column_ranges
-    add-highlighter window/ ranges commit_column_ranges
-    define-command update_commit_column_ranges %{
-        set-option window commit_column_ranges %val{timestamp}
-        set-option -add window commit_column_ranges '1.51,1.51|,yellow'
-        set-option -add window commit_column_ranges '3.73,3.73|,yellow'
-    }
-    hook -always global NormalIdle '' update_commit_column_ranges
-    hook -always global InsertIdle '' update_commit_column_ranges
-    hook -always global PromptIdle '' update_commit_column_ranges
+    add-highlighter window/commit-columns ranges commit_column_ranges
+    add-highlighter window/commit-body-limit regex '^[^#\n][^\n]{71}\K[^\n]' 0:,yellow
+    hook -group commit-columns window NormalIdle '' update_commit_column_ranges
+    hook -group commit-columns window InsertIdle '' update_commit_column_ranges
 }
 
 
