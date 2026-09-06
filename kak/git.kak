@@ -24,13 +24,24 @@ map global git -docstring 'prev hunk' p ':git prev-hunk<ret>'
 
 map global user -docstring 'git mode' g ':enter-user-mode git<ret>'
 
-hook global WinSetOption filetype=git-status %{
-    map global git -docstring 'add file' a %{<a-i><a-w>:git add %reg{dot}<ret>:git status<ret>}
-    map global git -docstring 'reset file' r %{<a-i><a-w>:git reset %reg{dot}<ret>: git status<ret>}
-    hook -once -always window WinSetOption filetype=.* %{
-        unmap global git a
-        unmap global git r
+define-command -hidden git-status-restore-position %{
+    evaluate-commands -save-regs '/' %{
+        set-register / "\Q%reg{e}\E"
+        try %{ execute-keys 'ggn<a-;>;' }
     }
+}
+define-command -hidden git-status-run -docstring 'run a git command on the file under the cursor' -params 1 %{
+    evaluate-commands -draft %{
+        execute-keys '<a-i><a-w>'
+        set-register e "%reg{dot}"
+        git %arg{1} %reg{dot}
+    }
+    git status
+    hook -once -always global BufCloseFifo .* "evaluate-commands -client %val{client} git-status-restore-position"
+}
+hook global WinSetOption filetype=git-status %{
+    map window git -docstring 'add file' a ':git-status-run add<ret>'
+    map window git -docstring 'reset file' r ':git-status-run reset<ret>'
 }
 
 define-command tig -params .. -docstring "Run tig" %{
