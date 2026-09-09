@@ -1,4 +1,4 @@
-def -hidden grep-write-impl -params 4 %{
+define-command -hidden grep-write-impl -params 4 %{
   eval -verbatim -no-hooks -draft -- edit -existing %arg{1}
   eval -buffer %arg{1} %{
     try %{
@@ -18,7 +18,7 @@ def -hidden grep-write-impl -params 4 %{
   eval -no-hooks -buffer %arg{1} "write; delete-buffer"
 }
 
-def grep-write -params ..1 -docstring "
+define-command grep-write -params ..1 -docstring "
 apply changes specified in the current *grep* buffer to their respective file
 " %{
   eval -no-hooks -save-regs 'csif' %{
@@ -51,7 +51,7 @@ apply changes specified in the current *grep* buffer to their respective file
   }
 }
 
-def grep-write-quit -docstring "
+define-command grep-write-quit -docstring "
 apply changes specified in the current *grep* buffer and quit
 " %{
   grep-write;
