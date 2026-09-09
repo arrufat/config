@@ -13,8 +13,8 @@ define-command gemini -params .. -docstring "Query Gemini AI with optional promp
         execute-keys '"gy'
     }
     evaluate-commands %sh{
-        if [ -z "$GEMINI_API_KEY" ]; then
-            echo "fail 'GEMINI_API_KEY not set'"
+        if [ -z "$GOOGLE_API_KEY" ]; then
+            echo "fail 'GOOGLE_API_KEY not set'"
             exit
         fi
 
@@ -26,7 +26,7 @@ define-command gemini -params .. -docstring "Query Gemini AI with optional promp
 
         json_query=$(printf '%s' "$full_query" | jq -Rs .)
         response=$(curl -s --fail -m 60 "https://generativelanguage.googleapis.com/v1beta/models/$kak_opt_gemini_model:generateContent" \
-            -H "x-goog-api-key: $GEMINI_API_KEY" \
+            -H "x-goog-api-key: $GOOGLE_API_KEY" \
             -H 'Content-Type: application/json' \
             -d "{\"contents\":[{\"parts\":[{\"text\":$json_query}]}]}" | \
             jq -r '.candidates[0].content.parts[0].text // empty')
