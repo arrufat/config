@@ -205,6 +205,7 @@ complete-command diff-buffers buffer
 declare-user-mode repl
 map global repl -docstring 'evaluate' e ':repl-send-text<ret>'
 map global repl -docstring 'bash' b ':repl-new bash<ret>'
+map global repl -docstring 'claude' c ':repl-new claude<ret>'
 map global repl -docstring 'julia' j ':repl-new julia<ret>'
 map global repl -docstring 'ipython' p ':repl-new ipython<ret>'
 map global repl -docstring 'qalc' q ':repl-new qalc<ret>'
