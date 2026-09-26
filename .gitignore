@@ -1,5 +1,6 @@
 /*
 !/.gitignore
+!/chrome-flags.conf
 !/fish/
 /fish/fish_variables
 !/fontconfig/
