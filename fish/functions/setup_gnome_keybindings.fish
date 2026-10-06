@@ -44,18 +44,18 @@ function setup_gnome_keybindings
 
     # TClip
     gsettings set "$schema:$base/custom3/" name "Translate selection"
-    gsettings set "$schema:$base/custom3/" command "/home/adria/Projects/tclip/tclip"
+    gsettings set "$schema:$base/custom3/" command "$HOME/Projects/tclip/tclip"
     gsettings set "$schema:$base/custom3/" binding "<Super>t"
 
     gsettings set "$schema:$base/custom4/" name "Translate selection LLM"
-    gsettings set "$schema:$base/custom4/" command "/home/adria/Projects/tclip/tclip -llm"
+    gsettings set "$schema:$base/custom4/" command "$HOME/Projects/tclip/tclip -llm"
     gsettings set "$schema:$base/custom4/" binding "<Control><Super>t"
 
     gsettings set "$schema:$base/custom5/" name "Translate selection append"
-    gsettings set "$schema:$base/custom5/" command "/home/adria/Projects/tclip/tclip -sep '>'"
+    gsettings set "$schema:$base/custom5/" command "$HOME/Projects/tclip/tclip -sep '>'"
     gsettings set "$schema:$base/custom5/" binding "<Shift><Super>t"
 
     gsettings set "$schema:$base/custom6/" name "Translate selection LLM append"
-    gsettings set "$schema:$base/custom6/" command "/home/adria/Projects/tclip/tclip -llm -sep '>'"
+    gsettings set "$schema:$base/custom6/" command "$HOME/Projects/tclip/tclip -llm -sep '>'"
     gsettings set "$schema:$base/custom6/" binding "<Shift><Control><Super>t"
 end
