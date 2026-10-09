@@ -9,6 +9,8 @@ if status is-interactive
 end
 
 set -g -x EDITOR "kak"
+# Kakoune spawns a shell for every %sh{}; dash starts about twice as fast as bash
+set -g -x KAKOUNE_POSIX_SHELL /usr/bin/dash
 
 # Idempotent: safe to re-source, unlike prepending to $PATH
 fish_add_path -g $HOME/.local/bin
