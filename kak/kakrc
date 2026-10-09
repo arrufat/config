@@ -95,10 +95,7 @@ define-command clean-buffer -docstring 'Replace tabs with spaces and trim traili
 
 # Bring back <c-a> and <c-x> from Vim to increment/decrement the number under the cursor
 define-command -hidden -params 2 inc %{ try %{
-    evaluate-commands %sh{
-        [ "$1" = 0 ] && count=1 || count="$1"
-        printf '%s%s' 'exec h"_/\d<ret><a-i>na' "$2($count)<esc>|{<space>cat<semicolon>echo<semicolon>}|bc<ret>"
-    }
+    execute-keys "h""_/\d<ret><a-i>n|c=%arg{1}; [ $c = 0 ] && c=1; echo ""$(cat)%arg{2}$c"" | bc<ret>"
 } catch %{
     execute-keys l
 }}
