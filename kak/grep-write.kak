@@ -25,7 +25,7 @@ apply changes specified in the current *grep* buffer to their respective file
     reg s ""
     reg i ""
     reg f ""
-    reg c %sh{ printf grep-write-impl }
+    reg c grep-write-impl
     eval -save-regs '/"' -draft %{
       # select all lines that match the *find* pattern
       exec '%3s^([^\n]+?):(\d+)(?::\d+)?:([^\n]*)$<ret>'
