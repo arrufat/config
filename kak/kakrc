@@ -151,13 +151,6 @@ define-command nnn -docstring "open nnn" -params .. %{
 }
 complete-command nnn file
 
-# broot
-# ─────
-define-command broot -docstring "open broot" -params .. %{
-    terminal sh -c "EDITOR=%opt{kak_open} KAK_SESSION=%val{session} KAK_CLIENT=%val{client} broot %arg{@}"
-}
-complete-command broot file
-
 # fuzzy finders
 # ─────────────
 define-command find -docstring "find files" -params 1 %{ edit %arg{1} }
