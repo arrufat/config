@@ -4,6 +4,8 @@ function setup_gnome_keybindings
     gsettings set $wm_keybindings close "['<Alt>F4', '<Super>c']"
     gsettings set $wm_keybindings begin-resize "['<Alt>F8', '<Super>r']"
     gsettings set $wm_keybindings toggle-fullscreen "['<Super>f']"
+    gsettings set $wm_keybindings toggle-above "['<Super>u']"
+    gsettings set $wm_keybindings toggle-on-all-workspaces "['<Super>k']"
     gsettings set $wm_keybindings switch-to-workspace-1 "['<Super>Home', '<Super>1']"
     gsettings set $gs_keybindings switch-to-application-1 "[]"
     gsettings set $wm_keybindings move-to-workspace-1 "['<Super><Shift>Home', '<Shift><Super>1']"
