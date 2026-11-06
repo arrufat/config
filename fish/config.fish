@@ -17,3 +17,7 @@ fish_add_path -g $HOME/.local/bin
 
 # Silence the greeting here rather than via `set -U`, so it travels with the repo
 set -g fish_greeting
+
+if test "$TERM" = foot
+    set -g -x FORCE_HYPERLINK 1
+end
